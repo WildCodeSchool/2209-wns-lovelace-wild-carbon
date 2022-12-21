@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { APP_FUNCTIONAL_WIDTH } from "./style-constants";
+import styled, { css } from 'styled-components';
+import { APP_FUNCTIONAL_WIDTH } from './style-constants';
 
 export const baseTitleStyles = css`
   margin: 0 0 0.35em;

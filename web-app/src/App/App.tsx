@@ -1,19 +1,21 @@
-import { gql, useQuery } from "@apollo/client";
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import { MyProfileQuery } from "../gql/graphql";
+import { gql, useQuery } from '@apollo/client';
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { MyProfileQuery } from '../gql/graphql';
 
-import CreateWilder from "../pages/CreateWilder/CreateWilder";
-import Home from "../pages/Home/Home";
+import CreateWilder from '../pages/CreateWilder/CreateWilder';
+import Home from '../pages/Home/Home';
 import {
   CREATE_WILDER_PATH,
   HOME_PATH,
   SIGN_IN_PATH,
   SIGN_UP_PATH,
-} from "../pages/paths";
-import SignIn from "../pages/SignIn/SignIn";
-import SignUp from "../pages/SignUp/SignUp";
+  DONATION_PATH,
+} from '../pages/paths';
+import SignIn from '../pages/SignIn/SignIn';
+import SignUp from '../pages/SignUp/SignUp';
+import Donation from '../pages/Donation/Donation';
 import {
   Container,
   Footer,
@@ -21,7 +23,7 @@ import {
   MainContainer,
   PageTitle,
   PageTitleLink,
-} from "./App.styled";
+} from './App.styled';
 
 const MY_PROFILE = gql`
   query MyProfile {
@@ -46,7 +48,7 @@ function App() {
           ) : (
             <nav>
               <Link to={SIGN_UP_PATH}>Inscription</Link>
-              {" | "}
+              {' | '}
               <Link to={SIGN_IN_PATH}>Connexion</Link>
             </nav>
           )}
@@ -58,6 +60,7 @@ function App() {
           <Route path={CREATE_WILDER_PATH} element={<CreateWilder />} />
           <Route path={SIGN_UP_PATH} element={<SignUp />} />
           <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
+          <Route path={DONATION_PATH} element={<Donation />} />
         </Routes>
       </MainContainer>
       <Footer>
