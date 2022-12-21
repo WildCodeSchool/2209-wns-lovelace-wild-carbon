@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import { MAIN_THEME_COLOR } from "../styles/style-constants";
-import { baseContainerStyles, baseTitleStyles } from "../styles/base-styles";
+import { MAIN_THEME_COLOR } from '../styles/style-constants';
+import { baseContainerStyles, baseTitleStyles } from '../styles/base-styles';
 
 export const Container = styled.div`
   ${baseContainerStyles}
