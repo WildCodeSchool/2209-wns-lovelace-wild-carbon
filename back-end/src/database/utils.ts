@@ -1,11 +1,11 @@
-import { DataSource, EntityTarget } from "typeorm";
+import { DataSource, EntityTarget } from 'typeorm';
 
 const dataSource = new DataSource({
-  type: "postgres",
-  url: process.env.DATABASE_URL,
+  type: 'postgres',
+  // url: process.env.DATABASE_URL,
   synchronize: true,
-  entities: [__dirname + "/../models/**/*.entity.js"],
-  logging: ["query", "error"],
+  // entities: [__dirname + '/../models/**/*.entity.js'],
+  logging: ['query', 'error'],
 });
 
 let initialized = false;
@@ -13,7 +13,7 @@ async function getDatabase() {
   if (!initialized) {
     await dataSource.initialize();
     initialized = true;
-    console.log("Successfully connected to database.");
+    console.log('Successfully connected to database.');
   }
   return dataSource;
 }

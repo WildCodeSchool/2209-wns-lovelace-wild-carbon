@@ -1,11 +1,11 @@
-import 'reflect-metadata'
+import 'reflect-metadata';
 
-import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
-import { ApolloServer } from "apollo-server";
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { ApolloServer } from 'apollo-server';
 
-import { buildSchema } from "type-graphql";
-import CategoryRepository from "./models/Category/Category.repository";
-import CategoryResolver from "./resolvers/Category.resolver";
+import { buildSchema } from 'type-graphql';
+import CategoryRepository from './models/Category/Category.repository';
+import CategoryResolver from './resolvers/Category.resolver';
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -13,7 +13,7 @@ const startServer = async () => {
       resolvers: [CategoryResolver],
     }),
     csrfPrevention: true,
-    cache: "bounded",
+    cache: 'bounded',
     /**
      * What's up with this embed: true option?
      * These are our recommended settings for using AS;
