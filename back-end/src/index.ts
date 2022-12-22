@@ -1,40 +1,20 @@
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
-import { ExpressContext } from "apollo-server-express";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import { buildSchema } from "type-graphql";
+import SpendingRepository from "./models/Spending/Spending.repository";
 
-import SchoolRepository from "./models/School/School.repository";
-import SkillRepository from "./models/Skill/Skill.repository";
-import WilderRepository from "./models/Wilder/Wilder.repository";
-
-import WilderResolver from "./resolvers/Wilder/Wilder.resolver";
-import AppUserResolver from "./resolvers/AppUser/AppUser.resolver";
-import AppUserRepository from "./models/AppUser/AppUser.repository";
-import { getSessionIdInCookie } from "./http-utils";
-import AppUser from "./models/AppUser/AppUser.entity";
+import SpendingResolver from "./resolvers/Spending/Spending.resolver";
 import { initializeDatabaseRepositories } from "./database/utils";
 
-export type GlobalContext = ExpressContext & {
-  user: AppUser | null;
-};
 
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [WilderResolver, AppUserResolver],
-      authChecker: async ({ context }) => {
-        return Boolean(context.user);
-      },
+      resolvers: [SpendingResolver],
+     
     }),
-    context: async (context): Promise<GlobalContext> => {
-      const sessionId = getSessionIdInCookie(context);
-      const user = !sessionId
-        ? null
-        : await AppUserRepository.findBySessionId(sessionId);
-
-      return { res: context.res, req: context.req, user };
-    },
+    
     csrfPrevention: true,
     cache: "bounded",
     /**
@@ -50,10 +30,7 @@ const startServer = async () => {
   // The `listen` method launches a web server.
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
-
-  await SkillRepository.initializeSkills();
-  await SchoolRepository.initializeSchools();
-  await WilderRepository.initializeWilders();
+  await SpendingRepository.initializeSpending();
 
   console.log(`🚀  Server ready at ${url}`);
 };
