@@ -9,6 +9,7 @@ Install dependencies on host system to get autocomplete and other IDE features:
 ```
 cd back-end && npm i && cd ..
 cd web-app && npm i && cd ..
+nex branch test
 ```
 
 ### Run app
