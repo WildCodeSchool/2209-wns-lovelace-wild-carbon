@@ -1,19 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-import "./index.css";
-import App from "./App/App";
-import reportWebVitals from "./reportWebVitals";
+import './index.css';
+import App from './App/App';
+import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
-  uri: "/",
+  uri: '/',
   cache: new InMemoryCache(),
 });
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>

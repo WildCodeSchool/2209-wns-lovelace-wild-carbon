@@ -1,9 +1,14 @@
+import React from 'react';
+import { Routes } from 'react-router-dom';
+
+import Nav from '../components/Nav/Nav';
+
 function App() {
-
   return (
-
-<div>Wild carbon</div>
-
+    <>
+      <Routes></Routes>
+      <Nav />
+    </>
   );
 }
 
