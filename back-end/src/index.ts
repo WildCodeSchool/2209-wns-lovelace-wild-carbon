@@ -6,6 +6,7 @@ import SpendingRepository from "./models/Spending/Spending.repository";
 
 import SpendingResolver from "./resolvers/Spending/Spending.resolver";
 import { initializeDatabaseRepositories } from "./database/utils";
+import CategoryRepository from "./models/Category/Category.repository";
 
 
 const startServer = async () => {
@@ -30,7 +31,9 @@ const startServer = async () => {
   // The `listen` method launches a web server.
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
+  await CategoryRepository.initializeCategories();
   await SpendingRepository.initializeSpending();
+
 
   console.log(`🚀  Server ready at ${url}`);
 };

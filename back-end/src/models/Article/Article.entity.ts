@@ -3,25 +3,25 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   OneToMany,
+  ManyToOne,
+  OneToOne,
 } from "typeorm";
 import Category from "../Category/Category.entity";
+import Spending from "../Spending/Spending.entity";
 
 @Entity()
 @ObjectType()
-export default class Spending {
+export default class Article {
   constructor(
     title: string,
-    date: string,
-    weight: number,
-    category: Category,
+    description: string,
+
 
   ) {
     this.title = title;
-    this.date = date;
-    this.weight = weight;
-    this.category = category;
+    this.description = description;
+
   }
 
   @PrimaryGeneratedColumn("uuid")
@@ -34,13 +34,9 @@ export default class Spending {
 
   @Column()
   @Field()
-  date: string;
+  description: string;
 
-  @Column()
-  @Field()
-  weight: number;
-
-  @ManyToOne(() => Category, (category) => category.spendings, { eager: true })
-  @Field(() => Category)
-  category: Category;
+  // @OneToOne(() => Category, (category) => category.article, { eager: true })
+  // @Field(() => Category)
+  // category: Category;
 }

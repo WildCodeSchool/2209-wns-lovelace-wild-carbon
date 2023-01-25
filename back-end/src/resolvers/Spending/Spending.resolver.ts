@@ -1,4 +1,5 @@
 import { Arg, Args, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import Category from "../../models/Category/Category.entity";
 
 import Spending from "../../models/Spending/Spending.entity";
 import SpendingRepository from "../../models/Spending/Spending.repository";
@@ -13,9 +14,9 @@ export default class SpendingResolver {
 
   @Mutation(() => Spending)
   createSpending(
-    @Args() { title, date, weight }: CreateSpendingArgs
+    @Args() { title, date, weight, categoryName }: CreateSpendingArgs
   ): Promise<Spending> {
-    return SpendingRepository.createSpending(title, date, weight);
+    return SpendingRepository.createSpending(title, date, weight, categoryName);
   }
 
   @Mutation(() => Spending)
@@ -29,4 +30,12 @@ export default class SpendingResolver {
   deleteSpending(@Arg("id") id: string): Promise<Spending> {
     return SpendingRepository.deleteSpending(id);
   }
+
+  //   @Mutation(() => Spending)
+  // addCategoryToSpending(
+  //   @Arg("spendingId") spendingId: string,
+  //   @Arg("categoryId") categoryId: string
+  // ): Promise<Spending> {
+  //   return SpendingRepository.addCategoryToSpending(spendingId, categoryId);
+  // }
 }

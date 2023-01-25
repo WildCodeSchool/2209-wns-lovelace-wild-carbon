@@ -1,5 +1,6 @@
 import { DataSource, EntityTarget } from "typeorm";
 import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
+import CategoryRepository from "../models/Category/Category.repository";
 import SpendingRepository from "../models/Spending/Spending.repository";
 
 const dataSource = new DataSource({
@@ -28,7 +29,7 @@ async function getRepository(entity: EntityTarget<any>) {
 
 async function initializeDatabaseRepositories() {
   await SpendingRepository.initializeRepository();
-
+  await CategoryRepository.initializeRepository();
 }
 
 async function closeConnection() {
