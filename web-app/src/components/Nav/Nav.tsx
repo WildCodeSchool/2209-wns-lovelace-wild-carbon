@@ -6,12 +6,7 @@ import {
   AiOutlineEuroCircle,
 } from 'react-icons/ai';
 import { IoMdAddCircleOutline } from 'react-icons/io';
-import {
-  HOME_PATH,
-  DONATION_PATH,
-  REGISTER_PATH,
-  DASHBOARD_PATH,
-} from '../../pages/paths';
+import { HOME_PATH, DONATION_PATH } from '../../pages/paths';
 
 interface MenuItem {
   name: string;
