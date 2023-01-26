@@ -22,8 +22,8 @@ interface MenuItem {
 const Navigation = () => {
   const Menus: MenuItem[] = [
     { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
-    { name: 'Profil', icon: <AiOutlineUser />, path: REGISTER_PATH },
-    { name: 'Ajouter', icon: <IoMdAddCircleOutline />, path: DASHBOARD_PATH },
+    { name: 'Profil', icon: <AiOutlineUser />, path: '/' },
+    { name: 'Ajouter', icon: <IoMdAddCircleOutline />, path: '/' },
     { name: 'Donner', icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
   ];
   const [active, setActive] = useState(0);
