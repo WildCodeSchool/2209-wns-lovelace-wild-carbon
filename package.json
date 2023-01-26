@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@types/node": "^18.11.17"
+  },
+  "dependencies": {
+    "react-hook-form": "^7.42.1"
   }
 }
