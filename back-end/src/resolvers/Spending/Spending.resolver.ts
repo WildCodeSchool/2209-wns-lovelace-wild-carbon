@@ -9,7 +9,7 @@ import { CreateSpendingArgs, UpdateSpendingArgs } from "./Spending.input";
 export default class SpendingResolver {
   @Query(() => [Spending])
   spendings(): Promise<Spending[]> {
-    return SpendingRepository.getSpending();
+    return SpendingRepository.getSpendings();
   }
 
   @Mutation(() => Spending)
@@ -30,12 +30,4 @@ export default class SpendingResolver {
   deleteSpending(@Arg("id") id: string): Promise<Spending> {
     return SpendingRepository.deleteSpending(id);
   }
-
-  //   @Mutation(() => Spending)
-  // addCategoryToSpending(
-  //   @Arg("spendingId") spendingId: string,
-  //   @Arg("categoryId") categoryId: string
-  // ): Promise<Spending> {
-  //   return SpendingRepository.addCategoryToSpending(spendingId, categoryId);
-  // }
 }

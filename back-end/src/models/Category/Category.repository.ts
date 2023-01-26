@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { getRepository } from "../../database/utils";
 import Category from "./Category.entity";
 import SpendingRepository from "../Spending/Spending.repository";
+import ArticleRepository from "../Article/Article.repository";
 
 export default class CategoryRepository {
   private static repository: Repository<Category>;
@@ -15,6 +16,7 @@ export default class CategoryRepository {
 
   static async initializeCategories(): Promise<void> {
     await SpendingRepository.clearRepository();
+    await ArticleRepository.clearRepository();
     await this.repository.delete({});
     await this.repository.save({
       categoryName: "Avion",

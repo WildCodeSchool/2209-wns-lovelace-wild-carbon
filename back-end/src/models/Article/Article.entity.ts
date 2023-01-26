@@ -3,12 +3,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   ManyToOne,
-  OneToOne,
 } from "typeorm";
 import Category from "../Category/Category.entity";
-import Spending from "../Spending/Spending.entity";
+
 
 @Entity()
 @ObjectType()
@@ -16,12 +14,12 @@ export default class Article {
   constructor(
     title: string,
     description: string,
-
+    category: Category
 
   ) {
     this.title = title;
     this.description = description;
-
+    this.category = category;
   }
 
   @PrimaryGeneratedColumn("uuid")
@@ -36,7 +34,7 @@ export default class Article {
   @Field()
   description: string;
 
-  // @OneToOne(() => Category, (category) => category.article, { eager: true })
-  // @Field(() => Category)
-  // category: Category;
+  @ManyToOne(() => Category, (category) => category.articles, { eager: true, cascade: true })
+  @Field(() => Category)
+  category: Category;
 }

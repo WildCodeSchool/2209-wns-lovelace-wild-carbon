@@ -22,7 +22,7 @@ export default class SpendingRepository extends SpendingDb {
     await this.repository.save([spendingExemple]);
   }
 
-  static async getSpending(): Promise<Spending[]> {
+  static async getSpendings(): Promise<Spending[]> {
     return this.repository.find();
   }
 
@@ -57,7 +57,7 @@ export default class SpendingRepository extends SpendingDb {
   > {
     const existingSpending = await this.repository.findOneBy({ id });
     if (!existingSpending) {
-      throw Error("No existing Spending matching ID.");
+      throw Error("No existing spending matching ID.");
     }
     return this.repository.save({
       id,
@@ -70,27 +70,11 @@ export default class SpendingRepository extends SpendingDb {
   static async deleteSpending(id: string): Promise<Spending> {
     const existingSpending = await this.findSpendingById(id);
     if (!existingSpending) {
-      throw Error("No existing Spending matching ID.");
+      throw Error("No existing spending matching ID.");
     }
     await this.repository.remove(existingSpending);
     // resetting ID because existingSpending loses ID after calling remove
     existingSpending.id = id;
     return existingSpending;
-  }
-
-  static async addCategoryToSpending(
-    spendingId: string,
-    categoryId: string
-  ): Promise<Spending> {
-    const spending = await this.findSpendingById(spendingId);
-    if (!spending) {
-      throw Error("No existing spending matching ID.");
-    }
-    const category = await CategoryRepository.getCategoryById(categoryId);
-    if (!category) {
-      throw Error("No existing category matching ID.");
-    }
-    spending.category = category;
-    return this.repository.save(spending);
   }
 }

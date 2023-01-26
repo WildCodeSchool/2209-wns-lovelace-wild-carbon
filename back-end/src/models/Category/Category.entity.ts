@@ -6,6 +6,7 @@ import {
   OneToMany,
   ManyToOne,
 } from "typeorm";
+import Article from "../Article/Article.entity";
 import Spending from "../Spending/Spending.entity";
 
 @Entity()
@@ -29,4 +30,8 @@ export default class Category {
   @OneToMany(() => Spending, (spending) => spending.category)
   @Field(() => [Spending])
   spendings: Spending[];
+
+  @OneToMany(() => Article, (article) => article.category)
+  @Field(() => [Article])
+  articles: Article[];
 }

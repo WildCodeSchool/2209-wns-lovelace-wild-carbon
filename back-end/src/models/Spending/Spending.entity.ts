@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  OneToMany,
 } from "typeorm";
 import Category from "../Category/Category.entity";
 
