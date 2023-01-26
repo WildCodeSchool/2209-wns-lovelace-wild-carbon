@@ -7,19 +7,18 @@ import {
 } from "typeorm";
 import Category from "../Category/Category.entity";
 
+
 @Entity()
 @ObjectType()
-export default class Spending {
+export default class Article {
   constructor(
     title: string,
-    date: string,
-    weight: number,
-    category: Category,
+    description: string,
+    category: Category
 
   ) {
     this.title = title;
-    this.date = date;
-    this.weight = weight;
+    this.description = description;
     this.category = category;
   }
 
@@ -33,13 +32,9 @@ export default class Spending {
 
   @Column()
   @Field()
-  date: string;
+  description: string;
 
-  @Column()
-  @Field()
-  weight: number;
-
-  @ManyToOne(() => Category, (category) => category.spendings, { eager: true })
+  @ManyToOne(() => Category, (category) => category.articles, { eager: true, cascade: true })
   @Field(() => Category)
   category: Category;
 }

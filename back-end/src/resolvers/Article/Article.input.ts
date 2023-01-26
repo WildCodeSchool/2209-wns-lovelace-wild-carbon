@@ -2,20 +2,15 @@ import { IsUUID, Min, MinLength } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
 
 @ArgsType()
-class CreateSpendingArgs {
+class CreateArticleArgs {
+
   @Field()
-  @MinLength(1, {
-    message: "Le titre doit faire au moins un caractère de long.",
-  })
+  @MinLength(1, { message: "Le titre doit faire au moins un caractère de long." })
   title: string;
 
   @Field()
   @MinLength(1, { message: "Le date doit faire au moins un caractère de long." })
-  date: string;
-
-  @Field()
-  @Min(1, { message: "Le poids de la dépense doit avoir au moins un chiffre." })
-  weight: number;
+  description: string;
 
   @Field()
   @MinLength(1, { message: "La catégorie doit faire au moins un caractère de long." })
@@ -24,10 +19,10 @@ class CreateSpendingArgs {
 }
 
 @ArgsType()
-class UpdateSpendingArgs extends CreateSpendingArgs {
+class UpdateArticleArgs extends CreateArticleArgs {
   @Field(() => ID)
   @IsUUID()
   id: string;
 }
 
-export { CreateSpendingArgs, UpdateSpendingArgs };
+export { CreateArticleArgs, UpdateArticleArgs };
