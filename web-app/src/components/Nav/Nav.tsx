@@ -6,7 +6,11 @@ import {
   AiOutlineEuroCircle,
 } from 'react-icons/ai';
 import { IoMdAddCircleOutline } from 'react-icons/io';
-import { HOME_PATH, DONATION_PATH } from '../../pages/paths';
+import {
+  HOME_PATH,
+  DONATION_PATH,
+  CARBON_SPENDING_PATH,
+} from '../../pages/paths';
 
 interface MenuItem {
   name: string;
@@ -18,7 +22,11 @@ const Navigation = () => {
   const Menus: MenuItem[] = [
     { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
     { name: 'Profil', icon: <AiOutlineUser />, path: '/' },
-    { name: 'Ajouter', icon: <IoMdAddCircleOutline />, path: '/' },
+    {
+      name: 'Ajouter',
+      icon: <IoMdAddCircleOutline />,
+      path: CARBON_SPENDING_PATH,
+    },
     { name: 'Donner', icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
   ];
   const [active, setActive] = useState(0);

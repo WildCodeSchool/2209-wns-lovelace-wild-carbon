@@ -36,11 +36,6 @@ function CarbonSpending() {
   return (
     <>
       <div className="carbonContainer">
-        <div className="title">
-          <h2 className="h3title">Ma depense carbone</h2>
-          <p className="subTitle">Entrez une dépense (en deux clics)</p>
-        </div>
-
         <form className="spendingForm">
           <div className="labelForm">
             <label>

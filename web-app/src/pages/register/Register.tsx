@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
@@ -52,10 +51,6 @@ const Register = () => {
       </form>
     </div>
   );
-=======
-const Register = () => {
-  return <div>Register</div>;
->>>>>>> e80063dd1a9fa60136bbee679ff321f22e2a0d28
 };
 
 export default Register;
