@@ -1,77 +1,17 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import Register from '../../components/Register/Register';
 
-interface FormData {
-  name: string;
-  firstname: string;
-  email: string;
-  password: string;
-}
-
-const Register = () => {
-  const { register, handleSubmit } = useForm<FormData>();
-  const [userInfo, setUserInfo] = useState<FormData>();
-
-  const onSubmit = (data: any) => {
-    setUserInfo(data);
-    console.log(data);
-  };
+const register = () => {
   return (
     <>
-      <h1 className="text-center mt-[5%]">S'inscrire</h1>
-      <p className="text-center mb-5">c’est facile et rapide !</p>
-      <div className="flex justify-center mt-5 items-center  h-[40vh] bg-[#fff] rounded-xl shadow-2xl">
-        <pre>{JSON.stringify(userInfo, undefined, 2)}</pre>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div></div>
-          <div className="flex flex-col text-center mb-5">
-            <label>Nom</label>
-            <input
-              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
-              type="text"
-              placeholder="Nom"
-              {...register('name')}
-            ></input>
-          </div>
-          <div className="flex flex-col text-center mb-5">
-            <label>Prénom</label>
-            <input
-              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
-              type="text"
-              placeholder="Prénom"
-              {...register('firstname')}
-            ></input>
-          </div>
-          <div className="flex flex-col text-center mb-5">
-            <label>Email</label>
-            <input
-              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
-              type="text"
-              placeholder="Email"
-              {...register('email')}
-            ></input>
-          </div>
-          <div className="flex flex-col text-center mb-5">
-            <label>Mot de passe</label>
-            <input
-              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
-              type="text"
-              placeholder="Mot de passe"
-              {...register('password')}
-            ></input>
-          </div>
-          <div className="flex justify-center mt-5">
-            <button
-              className="bg-[#484B8A] px-[30px] py-[15px] rounded-[5px] text-[#fff] font-bold "
-              type="submit"
-            >
-              Créer un compte
-            </button>
-          </div>
-        </form>
-      </div>
+      <h1 className="text-center mt-[5%] font-bold text-[30px] text-[#609F39]">
+        S'inscrire
+      </h1>
+      <p className="text-center mb-5 italic text-[#609F39]">
+        c’est facile et rapide !
+      </p>
+      <Register />
     </>
   );
 };
 
-export default Register;
+export default register;
