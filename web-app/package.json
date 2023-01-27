@@ -19,11 +19,8 @@
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-hook-form": "^7.42.1",
-=======
     "react-icons": "^4.7.1",
->>>>>>> e80063dd1a9fa60136bbee679ff321f22e2a0d28
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",

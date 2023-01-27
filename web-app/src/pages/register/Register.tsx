@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 interface FormData {
   name: string;
@@ -26,36 +25,32 @@ const Register = () => {
         <div></div>
         <div>
           <label>Nom</label>
-          <input type="text" placeholder="Nom" {...register('name')}></input>
+          <input type="text" placeholder="Nom" {...register("name")}></input>
         </div>
         <div>
           <label>Prénom</label>
           <input
             type="text"
             placeholder="Prénom"
-            {...register('firstname')}
+            {...register("firstname")}
           ></input>
         </div>
         <div>
           <label>Email</label>
-          <input type="text" placeholder="Email" {...register('email')}></input>
+          <input type="text" placeholder="Email" {...register("email")}></input>
         </div>
         <div>
           <label>Mot de passe</label>
           <input
             type="text"
             placeholder="Mot de passe"
-            {...register('password')}
+            {...register("password")}
           ></input>
         </div>
         <button type="submit">Créer un compte</button>
       </form>
     </div>
   );
-=======
-const Register = () => {
-  return <div>Register</div>;
->>>>>>> e80063dd1a9fa60136bbee679ff321f22e2a0d28
 };
 
 export default Register;
