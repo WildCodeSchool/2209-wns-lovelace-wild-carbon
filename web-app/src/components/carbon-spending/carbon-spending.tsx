@@ -58,7 +58,14 @@ function CarbonSpending() {
             <h3 className="labelName">Catégories:</h3>
             <div className="categoriesIcons">
               {icons.map((icon) => {
-                return <button className="iconBtn">{icon.icon}</button>;
+                return (
+                  <button
+                    className="iconBtn"
+                    onClick={(event) => event.preventDefault()}
+                  >
+                    {icon.icon}
+                  </button>
+                );
               })}
             </div>
           </div>

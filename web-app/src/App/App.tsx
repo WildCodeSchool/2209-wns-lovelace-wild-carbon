@@ -1,21 +1,15 @@
-<<<<<<< HEAD
-import CarbonSpending from '../components/carbon-spending/carbon-spending';
-
-function App() {
-  return <CarbonSpending />;
-=======
 import {
   HOME_PATH,
   REGISTER_PATH,
   DASHBOARD_PATH,
   DONATION_PATH,
-} from '../pages/paths';
-import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home/Home';
-import Register from '../pages/register/Register';
-import Dashboard from '../pages/dashboard/Dashboard';
-import Donation from '../pages/Donation/Donation';
-import Nav from '../components/Nav/Nav';
+} from "../pages/paths";
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home/Home";
+import Register from "../pages/register/Register";
+import Dashboard from "../pages/dashboard/Dashboard";
+import Donation from "../pages/Donation/Donation";
+import Nav from "../components/Nav/Nav";
 function App() {
   return (
     <>
@@ -28,7 +22,6 @@ function App() {
       <Nav />
     </>
   );
->>>>>>> dev
 }
 
 export default App;

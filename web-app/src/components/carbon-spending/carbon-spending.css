@@ -92,6 +92,10 @@
   cursor: pointer;
 }
 
+.iconBtn:hover {
+  background: #609f39;
+}
+
 .icon {
   width: 31px;
   height: 28px;
@@ -124,7 +128,7 @@
   height: 10px;
   border-radius: 5px;
   /* default color of your track */
-  background: var(--track-color);
+  background: #c3e9ac;
 }
 
 .customSlider-track.customSlider-track-0 {
