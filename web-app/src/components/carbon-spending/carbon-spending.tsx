@@ -1,34 +1,7 @@
 import './carbon-spending.css';
-import { ImAirplane } from 'react-icons/im';
-import { AiFillCar } from 'react-icons/ai';
-import { MdTrain } from 'react-icons/md';
-import { MdConnectedTv } from 'react-icons/md';
-import { IoMdBus } from 'react-icons/io';
-
 import React, { useState } from 'react';
 import Slider from 'react-slider';
-
-interface Icons {
-  icon: JSX.Element;
-}
-
-const icons: Icons[] = [
-  {
-    icon: <ImAirplane className="icon" />,
-  },
-  {
-    icon: <AiFillCar className="icon" />,
-  },
-  {
-    icon: <MdConnectedTv className="icon" />,
-  },
-  {
-    icon: <MdTrain className="icon" />,
-  },
-  {
-    icon: <IoMdBus className="icon" />,
-  },
-];
+import { icons } from './utils';
 
 function CarbonSpending() {
   const [value, setValue] = useState<number>(0);
