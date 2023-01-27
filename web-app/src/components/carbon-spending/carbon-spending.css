@@ -1,8 +1,8 @@
 /* TOUTE LA PAGE */
 
-.carbonContainer {
+.pageContainer {
   background-color: #fefaea;
-  height: 100%;
+  height: 100vh;
 }
 
 /* PARTIE TITRE */
@@ -90,6 +90,9 @@
   width: 51px;
   height: 51px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .iconBtn:hover {

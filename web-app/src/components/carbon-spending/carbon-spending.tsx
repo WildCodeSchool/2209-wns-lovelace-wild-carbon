@@ -35,60 +35,58 @@ function CarbonSpending() {
 
   return (
     <>
-      <div className="carbonContainer">
-        <form className="spendingForm">
-          <div className="labelForm">
-            <label>
-              <div className="labelName">
-                Nom
-                <input className="nameInput" type="text" name="name" />
-              </div>
-              <div className="labelDate">
-                Date
-                <input className="dateInput" type="date" name="date" />
-              </div>
-            </label>
-          </div>
-          <div className="categoryForm">
-            <h3 className="labelName">Catégories:</h3>
-            <div className="categoriesIcons">
-              {icons.map((icon) => {
-                return (
-                  <button
-                    className="iconBtn"
-                    onClick={(event) => event.preventDefault()}
-                  >
-                    {icon.icon}
-                  </button>
-                );
-              })}
+      <form className="spendingForm">
+        <div className="labelForm">
+          <label>
+            <div className="labelName">
+              Nom
+              <input className="nameInput" type="text" name="name" />
             </div>
+            <div className="labelDate">
+              Date
+              <input className="dateInput" type="date" name="date" />
+            </div>
+          </label>
+        </div>
+        <div className="categoryForm">
+          <h3 className="labelName">Catégories:</h3>
+          <div className="categoriesIcons">
+            {icons.map((icon) => {
+              return (
+                <button
+                  className="iconBtn"
+                  onClick={(event) => event.preventDefault()}
+                >
+                  {icon.icon}
+                </button>
+              );
+            })}
           </div>
+        </div>
 
-          <div className="unitForm">
-            <h3 className="labelName">Unités:</h3>
-            <div className="slider">
-              <Slider
-                value={value}
-                onChange={setValue}
-                className="customSlider"
-                trackClassName="customSlider-track"
-                thumbClassName="customSlider-thumb"
-                markClassName="customSlider-mark"
-                marks={100}
-                min={0}
-                max={1000}
-              />
-              <p className="value">{value}Km</p>
-            </div>
+        <div className="unitForm">
+          <h3 className="labelName">Unités:</h3>
+          <div className="slider">
+            <Slider
+              value={value}
+              onChange={setValue}
+              className="customSlider"
+              trackClassName="customSlider-track"
+              thumbClassName="customSlider-thumb"
+              markClassName="customSlider-mark"
+              marks={100}
+              min={0}
+              max={1000}
+            />
+            <p className="value">{value}Km</p>
           </div>
-          <div className="consumeForm">
-            <h3 className="labelName">Consommation:</h3>
-            <p className="consumeTitle">300KG CO2</p>
-            <button className="addSpendingBtn">Ajouter ma dépense</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className="consumeForm">
+          <h3 className="labelName">Consommation:</h3>
+          <p className="consumeTitle">300KG CO2</p>
+          <button className="addSpendingBtn">Ajouter ma dépense</button>
+        </div>
+      </form>
     </>
   );
 }
