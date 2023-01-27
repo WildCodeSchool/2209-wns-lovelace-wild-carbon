@@ -14,19 +14,19 @@ interface Icons {
 
 const icons: Icons[] = [
   {
-    icon: <ImAirplane />,
+    icon: <ImAirplane className="icon" />,
   },
   {
-    icon: <AiFillCar />,
+    icon: <AiFillCar className="icon" />,
   },
   {
-    icon: <MdConnectedTv />,
+    icon: <MdConnectedTv className="icon" />,
   },
   {
-    icon: <MdTrain />,
+    icon: <MdTrain className="icon" />,
   },
   {
-    icon: <IoMdBus />,
+    icon: <IoMdBus className="icon" />,
   },
 ];
 
@@ -55,7 +55,7 @@ function CarbonSpending() {
             </label>
           </div>
           <div className="categoryForm">
-            <h3>Catégories:</h3>
+            <h3 className="labelName">Catégories:</h3>
             <div className="categoriesIcons">
               {icons.map((icon) => {
                 return <button className="iconBtn">{icon.icon}</button>;
@@ -64,7 +64,7 @@ function CarbonSpending() {
           </div>
 
           <div className="unitForm">
-            <h3>Unités:</h3>
+            <h3 className="labelName">Unités:</h3>
             <div className="slider">
               <Slider
                 value={value}
@@ -81,7 +81,7 @@ function CarbonSpending() {
             </div>
           </div>
           <div className="consumeForm">
-            <h3>Consommation:</h3>
+            <h3 className="labelName">Consommation:</h3>
             <p className="consumeTitle">300KG CO2</p>
             <button className="addSpendingBtn">Ajouter ma dépense</button>
           </div>

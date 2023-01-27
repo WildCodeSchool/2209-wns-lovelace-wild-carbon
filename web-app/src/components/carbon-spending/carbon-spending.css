@@ -1,10 +1,5 @@
 /* TOUTE LA PAGE */
 
-* {
-  font-style: normal;
-  color: #609f39;
-}
-
 .carbonContainer {
   background-color: #fefaea;
   height: 100%;
@@ -20,12 +15,12 @@
 
 .h3title {
   margin: 0;
-  color: #609f39;
+  color: var(--font-color);
 }
 
 .subTitle {
   margin: 0;
-  color: #609f39;
+  color: var(--font-color);
 }
 
 /* PARTIE FORMULAIRE TITRE ET DATE */
@@ -34,6 +29,14 @@
   width: 75%;
   display: flex;
   flex-direction: column;
+}
+
+.labelName {
+  color: var(--font-color);
+}
+
+.labelDate {
+  color: var(--font-color);
 }
 
 /* PARTIE CATEGORIES */
@@ -86,15 +89,25 @@
   border: transparent;
   width: 51px;
   height: 51px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 31px;
+  height: 28px;
 }
 
 /* SLIDER */
 
 :root {
+  /* PARTIE SLIDER */
   --main-color: rgb(104, 117, 217);
   --main-color-hover: rgb(104, 117, 217, 0.2);
   --track-color: #ddd;
   --mark-color: #aaaaaa;
+  /* AUTRE PARTIE */
+  --font-color: #609f39;
+  --font-style: normal;
 }
 
 .customSlider {
@@ -108,7 +121,8 @@
   /* Top value to align your track to the center of your thumb */
   top: 8px;
   /* thickness of the track */
-  height: 4px;
+  height: 10px;
+  border-radius: 5px;
   /* default color of your track */
   background: var(--track-color);
 }
@@ -136,6 +150,10 @@
 
 .customSlider-mark {
   cursor: pointer;
+}
+
+.value {
+  margin-top: 30px;
 }
 
 /* MISE EN PAGE DE LA PARTIE SLIDER */
