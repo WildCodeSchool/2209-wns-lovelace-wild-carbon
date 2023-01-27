@@ -16,6 +16,11 @@ class CreateSpendingArgs {
   @Field()
   @Min(1, { message: "Le poids de la dépense doit avoir au moins un chiffre." })
   weight: number;
+
+  @Field()
+  @MinLength(1, { message: "La catégorie doit faire au moins un caractère de long." })
+  categoryName: string;
+
 }
 
 @ArgsType()
