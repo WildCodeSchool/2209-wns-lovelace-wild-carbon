@@ -1,10 +1,7 @@
+import CarbonSpending from '../components/carbon-spending/carbon-spending';
+
 function App() {
-
-  return (
-
-<div>Wild carbon</div>
-
-  );
+  return <CarbonSpending />;
 }
 
 export default App;
