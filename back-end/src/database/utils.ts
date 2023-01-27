@@ -1,10 +1,9 @@
 import { DataSource, EntityTarget } from "typeorm";
 import { DATABASE_URL, NODE_ENV, TEST_DATABASE_URL } from "../config";
-import AppUserRepository from "../models/AppUser/AppUser.repository";
-import SessionRepository from "../models/AppUser/Session.repository";
-import SchoolRepository from "../models/School/School.repository";
-import SkillRepository from "../models/Skill/Skill.repository";
-import WilderRepository from "../models/Wilder/Wilder.repository";
+import Article from "../models/Article/Article.entity";
+import ArticleRepository from "../models/Article/Article.repository";
+import CategoryRepository from "../models/Category/Category.repository";
+import SpendingRepository from "../models/Spending/Spending.repository";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -31,11 +30,9 @@ async function getRepository(entity: EntityTarget<any>) {
 }
 
 async function initializeDatabaseRepositories() {
-  await SkillRepository.initializeRepository();
-  await SchoolRepository.initializeRepository();
-  await WilderRepository.initializeRepository();
-  await AppUserRepository.initializeRepository();
-  await SessionRepository.initializeRepository();
+  await SpendingRepository.initializeRepository();
+  await ArticleRepository.initializeRepository();
+  await CategoryRepository.initializeRepository();
 }
 
 async function closeConnection() {
