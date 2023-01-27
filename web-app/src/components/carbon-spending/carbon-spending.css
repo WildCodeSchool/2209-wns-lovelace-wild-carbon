@@ -3,6 +3,7 @@
 .pageContainer {
   background-color: #fefaea;
   height: 100vh;
+  margin-top: 70px;
 }
 
 /* PARTIE TITRE */
@@ -11,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 
 .h3title {
@@ -29,6 +31,7 @@
   width: 75%;
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 .labelName {
@@ -45,6 +48,7 @@
   width: 75%;
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 .categoriesIcons {
@@ -58,6 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
 
 .labelName {
@@ -169,6 +174,7 @@
   display: flex;
   flex-direction: column;
   width: 75%;
+  margin-top: 30px;
 }
 
 .slider {
@@ -183,6 +189,7 @@
   display: flex;
   flex-direction: column;
   width: 75%;
+  margin-top: 30px;
 }
 
 .consumeTitle {
@@ -200,4 +207,5 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  margin-top: 30px;
 }
