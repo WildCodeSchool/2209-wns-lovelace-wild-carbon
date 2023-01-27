@@ -11,10 +11,12 @@ import Dashboard from '../pages/dashboard/Dashboard';
 import Donation from '../pages/Donation/Donation';
 import { useLocation } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
+import Header from '../components/Header/Header';
 function App() {
   const location = useLocation();
   return (
     <>
+      <Header />
       <Routes>
         <Route path={HOME_PATH} element={<Home />} />
         <Route path={DASHBOARD_PATH} element={<Dashboard />} />
