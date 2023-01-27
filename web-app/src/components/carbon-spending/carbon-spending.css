@@ -48,6 +48,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 10px;
 }
 
 .spendingForm {
@@ -79,9 +80,10 @@
 }
 
 .iconBtn {
-  background-color: #fefaea;
-  border-color: transparent;
+  background: #c3e9ac;
+  border-radius: 5px;
   padding: 0;
+  border: transparent;
   width: 51px;
   height: 51px;
 }

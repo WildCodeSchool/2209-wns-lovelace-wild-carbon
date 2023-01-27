@@ -10,29 +10,23 @@ import Slider from 'react-slider';
 
 interface Icons {
   icon: JSX.Element;
-  alt: string;
 }
 
 const icons: Icons[] = [
   {
     icon: <ImAirplane />,
-    alt: 'icone avion',
   },
   {
     icon: <AiFillCar />,
-    alt: 'icone voiture',
   },
   {
     icon: <MdConnectedTv />,
-    alt: 'icone multimedia',
   },
   {
     icon: <MdTrain />,
-    alt: 'icone train',
   },
   {
     icon: <IoMdBus />,
-    alt: 'icone bus',
   },
 ];
 
