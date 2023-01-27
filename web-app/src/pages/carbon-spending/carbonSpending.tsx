@@ -1,5 +1,6 @@
-import CarbonSpending from 'components/carbon-spending/carbon-spending';
+import CarbonSpending from '../../components/carbon-spending/carbon-spending';
 import '../../components/carbon-spending/carbon-spending.css';
+import React from 'react';
 
 function carbonSpending() {
   return (
