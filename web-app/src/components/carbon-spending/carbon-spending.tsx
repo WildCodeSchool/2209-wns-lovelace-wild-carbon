@@ -39,7 +39,7 @@ function CarbonSpending() {
         <div className="labelForm">
           <label>
             <div className="labelName">
-              Nom
+              Libéllé
               <input className="nameInput" type="text" name="name" />
             </div>
             <div className="labelDate">

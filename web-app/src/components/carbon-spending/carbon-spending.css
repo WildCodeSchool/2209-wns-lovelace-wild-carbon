@@ -62,7 +62,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
 }
 
 .labelName {
@@ -197,6 +196,7 @@
 }
 
 .addSpendingBtn {
+  margin-top: 30px;
   align-self: center;
   width: 75%;
   width: 281px;
