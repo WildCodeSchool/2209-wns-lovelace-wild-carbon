@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
 interface FormData {
   name: string;

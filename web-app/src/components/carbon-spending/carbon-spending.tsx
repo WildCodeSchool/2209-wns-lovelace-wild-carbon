@@ -1,99 +1,75 @@
-import './carbon-spending.css';
-import { ImAirplane } from 'react-icons/im';
-import { AiFillCar } from 'react-icons/ai';
-import { MdTrain } from 'react-icons/md';
-import { MdConnectedTv } from 'react-icons/md';
-import { IoMdBus } from 'react-icons/io';
-
-import React, { useState } from 'react';
-import Slider from 'react-slider';
-
-interface Icons {
-  icon: JSX.Element;
-}
-
-const icons: Icons[] = [
-  {
-    icon: <ImAirplane className="icon" />,
-  },
-  {
-    icon: <AiFillCar className="icon" />,
-  },
-  {
-    icon: <MdConnectedTv className="icon" />,
-  },
-  {
-    icon: <MdTrain className="icon" />,
-  },
-  {
-    icon: <IoMdBus className="icon" />,
-  },
-];
+import "./carbon-spending.css";
+import React, { useState } from "react";
+import { TRANSPORTS_PARAMS } from "./utils";
+import SliderComponent from "./slider";
 
 function CarbonSpending() {
+  const [selectedIcon, setSelectedIcon] = useState<number>(0);
   const [value, setValue] = useState<number>(0);
+
+  const handleSelectIcons = (id: number) => {
+    setSelectedIcon(id);
+    setValue(0);
+  };
 
   return (
     <>
-      <div className="carbonContainer">
-        <div className="title">
-          <h2 className="h3title">Ma depense carbone</h2>
-          <p className="subTitle">Entrez une dépense (en deux clics)</p>
+      <form className="spendingForm">
+        <div className="labelForm">
+          <label>
+            <div className="labelName">
+              Libéllé
+              <input className="nameInput" type="text" name="name" />
+            </div>
+            <div className="labelDate">
+              Date
+              <input className="dateInput" type="date" name="date" />
+            </div>
+          </label>
         </div>
-
-        <form className="spendingForm">
-          <div className="labelForm">
-            <label>
-              <div className="labelName">
-                Nom
-                <input className="nameInput" type="text" name="name" />
-              </div>
-              <div className="labelDate">
-                Date
-                <input className="dateInput" type="date" name="date" />
-              </div>
-            </label>
-          </div>
-          <div className="categoryForm">
-            <h3 className="labelName">Catégories:</h3>
-            <div className="categoriesIcons">
-              {icons.map((icon) => {
-                return (
+        <div className="categoryForm">
+          <h3 className="labelName">Catégories:</h3>
+          <div className="categoriesIcons">
+            {TRANSPORTS_PARAMS.map((el) => {
+              return (
+                <div>
                   <button
                     className="iconBtn"
-                    onClick={(event) => event.preventDefault()}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleSelectIcons(el.id);
+                    }}
+                    key={el.id}
                   >
-                    {icon.icon}
+                    {el.icon}
                   </button>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-
+        </div>
+        {selectedIcon ? (
           <div className="unitForm">
-            <h3 className="labelName">Unités:</h3>
-            <div className="slider">
-              <Slider
-                value={value}
-                onChange={setValue}
-                className="customSlider"
-                trackClassName="customSlider-track"
-                thumbClassName="customSlider-thumb"
-                markClassName="customSlider-mark"
-                marks={100}
-                min={0}
-                max={1000}
-              />
-              <p className="value">{value}Km</p>
-            </div>
+            {TRANSPORTS_PARAMS.filter((item) => item.id === selectedIcon).map(
+              (el) => {
+                return (
+                  <SliderComponent
+                    value={value}
+                    setValue={setValue}
+                    min={el.min}
+                    max={el.max}
+                    idicon={selectedIcon}
+                  />
+                );
+              }
+            )}
           </div>
-          <div className="consumeForm">
-            <h3 className="labelName">Consommation:</h3>
-            <p className="consumeTitle">300KG CO2</p>
-            <button className="addSpendingBtn">Ajouter ma dépense</button>
-          </div>
-        </form>
-      </div>
+        ) : (
+          ""
+        )}
+
+        <button className="addSpendingBtn">Ajouter ma dépense</button>
+      </form>
     </>
   );
 }
