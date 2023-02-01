@@ -1,96 +1,125 @@
-import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
-interface FormData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { gql, useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { SignInMutation, SignInMutationVariables } from '../../gql/graphql';
+import { getErrorMessage } from '../../utils';
+import { HOME_PATH } from '../../pages/paths';
 
+const SIGN_IN = gql`
+  mutation SignIn($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
+      id
+      email
+    }
+  }
+`;
 const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<FormData>({ mode: 'onTouched' });
-  const [userInfo, setUserInfo] = useState<FormData>();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [passwordEye, setPasswordEye] = useState(false);
-  const [passwordConfirmEye, setPasswordConfirmEye] = useState(false);
+  // const [passwordConfirmEye, setPasswordConfirmEye] = useState(false);
+
+  // const [captcha, setCaptcha] = useState(false);
+  // const key = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
+  // const captchakey = '6LforD4kAAAAAM-bTit1LOEvKeeoW5rlL2d-qktV';
+  // const onChange = () => {
+  //   console.log('changed');
+  //   setCaptcha(true);
+  // };
 
   const handlePassword = () => {
     setPasswordEye(!passwordEye);
   };
 
-  const handleConfirmPassword = () => {
-    setPasswordConfirmEye(!passwordConfirmEye);
-  };
+  // const handleConfirmPassword = () => {
+  //   setPasswordConfirmEye(!passwordConfirmEye);
+  // };
 
-  const onSubmit = (data: any) => {
-    setUserInfo(data);
-    console.log(data);
-  };
+  const [signIn] = useMutation<SignInMutation, SignInMutationVariables>(
+    SIGN_IN
+  );
+  const navigate = useNavigate();
 
-  const password = watch('password');
+  const submit = async () => {
+    try {
+      await signIn({
+        variables: { email, password },
+      });
+      toast.success(`Vous vous êtes connecté avec succès.`);
+      navigate(HOME_PATH);
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    }
+  };
 
   return (
     <>
       <div className="flex justify-center items-center  h-[65vh] mx-[5%] bg-[#fff] rounded-xl shadow-2xl mt-[7%]">
-        <pre>{JSON.stringify(userInfo, undefined, 2)}</pre>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={async (event) => {
+            event.preventDefault();
+            await submit();
+          }}
+        >
           <div></div>
-
           <div className="flex flex-col  mb-5">
             <input
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
-                errors.email &&
-                'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
-              type="text"
+              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
+              type="email"
               placeholder="dave.lopper@test.com"
-              {...register('email', {
-                required: "L'email est requis",
-                pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                  message: "L'email doit etre au bon format",
-                },
-              })}
+              required
+              autoComplete="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+              pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
             ></input>
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}*</p>
-            )}
           </div>
           <div className="flex flex-col  mb-5">
             <input
               type={passwordEye === false ? 'password' : 'text'}
               placeholder="Mot de passe"
-              {...register('password', {
-                required: 'Le mot de passe est requis',
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                  message:
-                    'Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et au moins 6 caractères',
-                },
-                minLength: {
-                  value: 6,
-                  message:
-                    'Le mot de passe doit contenir au moins 6 caractères',
-                },
-              })}
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] cursor-pointer ${
-                errors.password &&
-                'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
+              required
+              autoComplete="current-password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+              pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/"
+              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
+
+              // {...register('password', {
+              //   required: 'Le mot de passe est requis',
+              //   pattern: {
+              //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+              //     message:
+              //       'Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et au moins 6 caractères',
+              //   },
+              //   minLength: {
+              //     value: 6,
+              //     message:
+              //       'Le mot de passe doit contenir au moins 6 caractères',
+              //   },
+              // })}
+              // className={`bg-[#C3E9AC] rounded-[5px] p-[10px] cursor-pointer ${
+              //   errors.password &&
+              //   'focus:border-red-500 focus:ring-red-500 border-red-500'
+              // }`}
             ></input>
-            {errors.password && (
-              <span className="text-sm text-red-500 ">
-                {errors.password.message}*
-              </span>
-            )}{' '}
-            <div className=" cursor-pointer text-xl absolute right-16 top-[324px]">
+
+            <div className=" cursor-pointer text-xl absolute right-16 top-[355px]">
               {passwordEye === false ? (
                 <FaEyeSlash onClick={handlePassword} />
               ) : (
@@ -98,26 +127,30 @@ const SignIn = () => {
               )}
             </div>
           </div>
-
-          <div className="flex flex-col  mb-5">
+          {/* <div className="flex flex-col  mb-5">
             <input
               type={passwordConfirmEye === false ? 'password' : 'text'}
-              placeholder="Confirm Password"
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
-                errors.confirmPassword &&
-                'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
-              {...register('confirmPassword', {
-                required: 'Champs requis',
-                validate: (value) =>
-                  value === password || "Le mot de passe n'est pas identique",
-              })}
+              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
+              placeholder="dave.lopper@test.com"
+              required
+              id="passwordConfirmation"
+              name="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={(event) => {
+                setPasswordConfirmation(event.target.value);
+              }}
+
+              // className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
+              //   errors.confirmPassword &&
+              //   'focus:border-red-500 focus:ring-red-500 border-red-500'
+              // }`}
+              // {...register('confirmPassword', {
+              //   required: 'Champs requis',
+              //   validate: (value) =>
+              //     value === password || "Le mot de passe n'est pas identique",
+              // })}
             ></input>
-            {errors.confirmPassword && (
-              <span className="text-sm text-red-500 ">
-                {errors.confirmPassword.message}*
-              </span>
-            )}{' '}
+
             <div className="cursor-pointer text-xl absolute right-16 top-[387px]">
               {passwordConfirmEye === false ? (
                 <FaEyeSlash onClick={handleConfirmPassword} />
@@ -125,8 +158,8 @@ const SignIn = () => {
                 <FaEye onClick={handleConfirmPassword} />
               )}
             </div>
-          </div>
-
+          </div> */}
+          {/* <ReCAPTCHA sitekey={captchakey} onChange={onChange} />, */}
           <div className="flex flex-col items-center mt-5">
             <button
               className="bg-[#609F39] w-full py-[15px] rounded-[5px] text-[#fff] font-bold text-[20px]"

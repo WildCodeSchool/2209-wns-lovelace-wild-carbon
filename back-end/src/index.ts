@@ -1,25 +1,41 @@
-import "reflect-metadata";
-import { ApolloServer } from "apollo-server";
-import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
-import { buildSchema } from "type-graphql";
-import SpendingRepository from "./models/Spending/Spending.repository";
+import 'reflect-metadata';
+import { ApolloServer } from 'apollo-server';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { buildSchema } from 'type-graphql';
+import SpendingRepository from './models/Spending/Spending.repository';
+import { ExpressContext } from 'apollo-server-express';
+import SpendingResolver from './resolvers/Spending/Spending.resolver';
+import { initializeDatabaseRepositories } from './database/utils';
+import CategoryRepository from './models/Category/Category.repository';
+import ArticleRepository from './models/Article/Article.repository';
+import ArticleResolver from './resolvers/Article/Article.resolver';
+import AppUserResolver from './resolvers/AppUser/AppUser.resolver';
+import AppUserRepository from './models/AppUser/AppUser.repository';
+import { getSessionIdInCookie } from './http-utils';
+import AppUser from './models/AppUser/AppUser.entity';
 
-import SpendingResolver from "./resolvers/Spending/Spending.resolver";
-import { initializeDatabaseRepositories } from "./database/utils";
-import CategoryRepository from "./models/Category/Category.repository";
-import ArticleRepository from "./models/Article/Article.repository";
-import ArticleResolver from "./resolvers/Article/Article.resolver";
-
+export type GlobalContext = ExpressContext & {
+  user: AppUser | null;
+};
 
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [SpendingResolver, ArticleResolver],
-     
+      resolvers: [SpendingResolver, ArticleResolver, AppUserResolver],
+      authChecker: async ({ context }) => {
+        return Boolean(context.user);
+      },
     }),
-    
+    context: async (context): Promise<GlobalContext> => {
+      const sessionId = getSessionIdInCookie(context);
+      const user = !sessionId
+        ? null
+        : await AppUserRepository.findBySessionId(sessionId);
+
+      return { res: context.res, req: context.req, user };
+    },
     csrfPrevention: true,
-    cache: "bounded",
+    cache: 'bounded',
     /**
      * What's up with this embed: true option?
      * These are our recommended settings for using AS;
@@ -36,7 +52,6 @@ const startServer = async () => {
   await CategoryRepository.initializeCategories();
   await SpendingRepository.initializeSpending();
   await ArticleRepository.initializeArticles();
-
 
   console.log(`🚀  Server ready at ${url}`);
 };
