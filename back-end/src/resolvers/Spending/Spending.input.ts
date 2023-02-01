@@ -11,7 +11,11 @@ class CreateSpendingArgs {
 
   @Field()
   @MinLength(1, { message: "Le date doit faire au moins un caractère de long." })
-  date: string;
+  date: Date;
+
+  @Field()
+  @Min(1, {message: "L'unité calculée doit à avoir au moins un chiffre."})
+  unit: number;
 
   @Field()
   @Min(1, { message: "Le poids de la dépense doit avoir au moins un chiffre." })
