@@ -48,7 +48,7 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
       await signIn({
         variables: { email, password },
       });
-      toast.success('Vous vous êtes connecté avec succès.');
+      toast.success('Vous êtes bien connecté!');
       onSuccess();
       navigate(DASHBOARD_PATH);
     } catch (error) {

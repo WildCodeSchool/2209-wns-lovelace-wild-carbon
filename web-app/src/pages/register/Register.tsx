@@ -59,9 +59,7 @@ const Register = ({ onSuccess }: { onSuccess: () => {} }) => {
           password,
         },
       });
-      toast.success(
-        `Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.`
-      );
+      toast.success(`${firstName}, votre compte a bien été créé!`);
       navigate(SIGN_IN_PATH);
     } catch (error) {
       toast.error(getErrorMessage(error));
