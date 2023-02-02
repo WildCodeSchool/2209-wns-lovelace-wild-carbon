@@ -65,7 +65,18 @@ function App() {
       </main>
       {location.pathname !== REGISTER_PATH &&
         location.pathname !== SIGN_IN_PATH && <Nav />}
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ marginBottom: '80px' }}
+      />
     </>
   );
 }
