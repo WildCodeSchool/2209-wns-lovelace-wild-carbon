@@ -7,6 +7,9 @@ import {
   CreateSpendingMutation,
   CreateSpendingMutationVariables,
 } from "../../gql/graphql";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getErrorMessage } from "utils";
 
 const CREATE_SPENDING = gql`
   mutation CreateSpending(
@@ -63,13 +66,14 @@ function CarbonSpending() {
           categoryName,
         },
       });
+      toast.success(`Votre dépense "${title}" a été créé avec succès.`);
       setTitle("");
       setDate("");
       setUnit(0);
       setSelectedIcon(0);
       setCategoryName("");
     } catch (error) {
-      console.error("erreur");
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -111,6 +115,7 @@ function CarbonSpending() {
                 onChange={(event) => {
                   setTitle(event.target.value);
                 }}
+                required
               />
             </div>
             <div className="labelDate">
@@ -123,6 +128,7 @@ function CarbonSpending() {
                 onChange={(event) => {
                   setDate(event.target.value);
                 }}
+                required
               />
             </div>
           </label>

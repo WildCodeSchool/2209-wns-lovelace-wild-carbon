@@ -7,7 +7,7 @@ interface Titles {
 
 function Title({ title, subtitle }: Titles) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center text-[#609f39]">
       <h2 className="font-semibold text-[25px]">{title}</h2>
       <p className="text-base">{subtitle}</p>
     </div>
