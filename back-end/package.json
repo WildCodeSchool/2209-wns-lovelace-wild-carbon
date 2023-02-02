@@ -17,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.13.2",
     "cookie": "^0.5.0",
+    "dayjs": "^1.11.7",
     "debug": "^4.3.4",
     "graphql": "^15.8.0",
     "pg": "^8.8.0",

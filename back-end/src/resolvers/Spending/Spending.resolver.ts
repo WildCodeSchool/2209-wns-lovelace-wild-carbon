@@ -16,6 +16,7 @@ export default class SpendingResolver {
   createSpending(
     @Args() { title, date, unit, weight, categoryName }: CreateSpendingArgs
   ): Promise<Spending> {
+    console.log("dateee", date)
     return SpendingRepository.createSpending(title, date, unit, weight, categoryName);
   }
 

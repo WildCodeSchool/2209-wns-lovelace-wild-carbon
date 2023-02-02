@@ -46,8 +46,6 @@ function CarbonSpending() {
     CreateSpendingMutationVariables
   >(CREATE_SPENDING);
 
-  const formatDate = new Date(date);
-
   const handleSelectCategory = (id: number, category: string) => {
     setSelectedIcon(id);
     setCategoryName(category);
@@ -59,7 +57,7 @@ function CarbonSpending() {
       await createSpending({
         variables: {
           title,
-          date: formatDate,
+          date: new Date(date),
           unit,
           weight,
           categoryName,
@@ -89,6 +87,8 @@ function CarbonSpending() {
       : 0;
 
   const weight = parseInt(roundedValue.toFixed(0));
+
+  console.log(date);
 
   return (
     <>
