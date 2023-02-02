@@ -13,7 +13,7 @@ export default class AppUserRepository extends AppUserDb {
     firstName: string,
     lastName: string
   ): Promise<AppUser> {
-    const user = new AppUser(firstName, lastName, email, hashSync(password));
+    const user = new AppUser(email, hashSync(password), firstName, lastName);
     return this.saveUser(user);
   }
 

@@ -6,15 +6,15 @@ import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 @ObjectType()
 export default class AppUser {
   constructor(
-    firstName: string,
-    lastName: string,
     email: string,
-    hashedPassword: string
+    hashedPassword: string,
+    firstName: string,
+    lastName: string
   ) {
-    this.firstName = firstName;
-    this.lastName = lastName;
     this.email = email;
     this.hashedPassword = hashedPassword;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   @PrimaryGeneratedColumn('uuid')

@@ -10,14 +10,13 @@ import { SignInMutation, SignInMutationVariables } from '../../gql/graphql';
 import { getErrorMessage } from '../../utils';
 import { DASHBOARD_PATH, REGISTER_PATH } from '../paths';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../components/Loader/Loader';
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
     signIn(email: $email, password: $password) {
       id
       email
-      firstName
-      lastName
     }
   }
 `;
@@ -38,9 +37,10 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
     setPasswordEye(!passwordEye);
   };
 
-  const [signIn] = useMutation<SignInMutation, SignInMutationVariables>(
-    SIGN_IN
-  );
+  const [signIn, { loading }] = useMutation<
+    SignInMutation,
+    SignInMutationVariables
+  >(SIGN_IN);
   const navigate = useNavigate();
 
   const submit = async () => {
@@ -59,7 +59,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   return (
     <>
       <div>
-        {' '}
         <h1 className="text-center mt-[12%] font-bold text-[30px] text-[#609F39]">
           Wild Carbon
         </h1>
@@ -74,7 +73,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
             await submit();
           }}
         >
-          <div></div>
           <div className="flex flex-col  mb-5">
             <input
               className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
@@ -88,7 +86,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
               onChange={(event) => {
                 setEmail(event.target.value);
               }}
-              pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
             ></input>
           </div>
           <div className="flex flex-col  mb-5">
@@ -103,7 +100,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
-              pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/"
               className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
             ></input>
 
@@ -118,10 +114,10 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
           {/* <ReCAPTCHA sitekey={captchakey} onChange={onChange} />, */}
           <div className="flex flex-col items-center mt-5">
             <button
+              disabled={loading}
               className="bg-[#609F39] w-full py-[15px] rounded-[5px] text-[#fff] font-bold text-[20px]"
-              type="submit"
             >
-              Se connecter
+              {loading ? <Loader /> : 'Se connecter'}
             </button>
 
             <div className="mt-5 font-bold  text-[#609F39]">
