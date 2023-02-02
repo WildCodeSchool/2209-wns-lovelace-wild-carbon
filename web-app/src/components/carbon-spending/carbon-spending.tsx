@@ -65,6 +65,11 @@ function CarbonSpending() {
           categoryName,
         },
       });
+      setTitle("");
+      setDate("");
+      setUnit(0);
+      setSelectedIcon(0);
+      setCategoryName("");
     } catch (error) {
       console.error("erreur");
     }
@@ -87,7 +92,13 @@ function CarbonSpending() {
 
   return (
     <>
-      <form className="spendingForm">
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await submit();
+        }}
+        className="spendingForm"
+      >
         <div className="labelForm">
           <label>
             <div className="labelName">
@@ -96,6 +107,7 @@ function CarbonSpending() {
                 className="nameInput"
                 type="text"
                 name="name"
+                value={title}
                 onChange={(event) => {
                   setTitle(event.target.value);
                 }}
@@ -107,6 +119,7 @@ function CarbonSpending() {
                 className="dateInput"
                 type="date"
                 name="date"
+                value={date}
                 onChange={(event) => {
                   setDate(event.target.value);
                 }}
@@ -127,6 +140,7 @@ function CarbonSpending() {
                       handleSelectCategory(el.id, el.category);
                     }}
                     key={el.id}
+                    value={selectedIcon}
                   >
                     {el.icon}
                   </button>
@@ -156,9 +170,7 @@ function CarbonSpending() {
           ""
         )}
 
-        <button className="addSpendingBtn" onClick={submit}>
-          Ajouter ma dépense
-        </button>
+        <button className="addSpendingBtn">Ajouter ma dépense</button>
       </form>
     </>
   );
