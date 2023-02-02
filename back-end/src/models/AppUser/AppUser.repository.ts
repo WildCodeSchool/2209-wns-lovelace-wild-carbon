@@ -7,8 +7,13 @@ import Session from './Session.entity';
 export const INVALID_CREDENTIALS_ERROR_MESSAGE = 'Identifiants incorrects.';
 
 export default class AppUserRepository extends AppUserDb {
-  static createUser(email: string, password: string): Promise<AppUser> {
-    const user = new AppUser(email, hashSync(password));
+  static createUser(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ): Promise<AppUser> {
+    const user = new AppUser(firstName, lastName, email, hashSync(password));
     return this.saveUser(user);
   }
 
@@ -35,10 +40,6 @@ export default class AppUserRepository extends AppUserDb {
     return { user, session };
   }
 
-  static getUsers(): Promise<AppUser[]> {
-    return this.repository.find();
-  }
-
   static async signOut(id: string): Promise<AppUser> {
     const user = await this.getUserById(id);
 
@@ -48,6 +49,10 @@ export default class AppUserRepository extends AppUserDb {
     await SessionRepository.deleteSession(user);
 
     return user;
+  }
+
+  static getUsers(): Promise<AppUser[]> {
+    return this.repository.find();
   }
 
   static async findBySessionId(sessionId: string): Promise<AppUser | null> {

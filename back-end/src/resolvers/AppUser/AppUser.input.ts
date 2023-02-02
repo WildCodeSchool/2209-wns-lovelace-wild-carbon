@@ -1,4 +1,4 @@
-import { IsEmail, Matches, MaxLength } from 'class-validator';
+import { IsEmail, Matches, MaxLength, MinLength } from 'class-validator';
 import { ArgsType, Field } from 'type-graphql';
 
 const passwordRegExp = new RegExp(
@@ -24,6 +24,16 @@ export class SignInArgs {
 
 @ArgsType()
 export class UserCreationArgs {
+  @Field()
+  @MinLength(1, {
+    message: 'Le prénom doit faire au moins un caractère de long.',
+  })
+  firstName: string;
+
+  @Field()
+  @MinLength(1, { message: 'Le nom doit faire au moins un caractère de long.' })
+  lastName: string;
+
   @Field()
   @IsEmail()
   @MaxLength(255, {

@@ -28,9 +28,9 @@ export default class AppUserResolver {
   @Mutation(() => AppUser)
   createUser(
     @Args()
-    { email, password }: UserCreationArgs
+    { firstName, lastName, email, password }: UserCreationArgs
   ): Promise<AppUser> {
-    return AppUserRepository.createUser(email, password);
+    return AppUserRepository.createUser(firstName, lastName, email, password);
   }
 
   @Mutation(() => AppUser)

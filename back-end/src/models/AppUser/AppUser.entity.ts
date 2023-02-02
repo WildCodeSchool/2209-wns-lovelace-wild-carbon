@@ -5,7 +5,14 @@ import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 @Entity()
 @ObjectType()
 export default class AppUser {
-  constructor(email: string, hashedPassword: string) {
+  constructor(
+    firstName: string,
+    lastName: string,
+    email: string,
+    hashedPassword: string
+  ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
     this.hashedPassword = hashedPassword;
   }
@@ -13,6 +20,14 @@ export default class AppUser {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
   id: string;
+
+  @Column()
+  @Field()
+  firstName: string;
+
+  @Column()
+  @Field()
+  lastName: string;
 
   @Column()
   @Field()

@@ -4,8 +4,7 @@ import Session from './Session.entity';
 
 export default class SessionRepository extends SessionDb {
   static createSession(user: AppUser): Promise<Session> {
-    const createdAt = new Date();
-    const session = new Session(user, createdAt);
+    const session = new Session(user);
 
     return this.saveSession(session);
   }
@@ -13,7 +12,6 @@ export default class SessionRepository extends SessionDb {
   static async deleteSession(user: AppUser): Promise<Session> {
     const session = (await this.repository.findOne({
       where: { user: user },
-      order: { createdAt: 'DESC' },
     })) as Session;
 
     return this.removeSession(session);
