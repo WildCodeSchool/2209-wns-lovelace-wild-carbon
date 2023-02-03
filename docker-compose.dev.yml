@@ -9,7 +9,7 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./back-end/src:/app/src
+      - ./back-end:/app
       - /app/node_modules
     depends_on:
       - database

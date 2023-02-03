@@ -28,7 +28,10 @@ export default class CategoryRepository {
       categoryName: "Voiture",
     });
     await this.repository.save({
-      categoryName: "Chauffage",
+      categoryName: "Bus",
+    });
+        await this.repository.save({
+      categoryName: "Multimédia",
     });
   }
 
