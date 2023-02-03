@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Slider from "react-slider";
+import React from 'react';
+import Slider from 'react-slider';
 
 interface Value {
   value: number;
@@ -29,7 +29,7 @@ function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
           max={max}
         />
         <p className="value">
-          {value} {idicon === 3 ? "kWh" : "km"}
+          {value} {idicon === 3 ? 'kWh' : 'km'}
         </p>
       </div>
       <div className="flex flex-col mt-[30px]">
