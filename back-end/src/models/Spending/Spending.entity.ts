@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Field, ID, ObjectType } from "type-graphql";
 import {
   Entity,
@@ -5,6 +6,7 @@ import {
   Column,
   ManyToOne,
 } from "typeorm";
+
 import Category from "../Category/Category.entity";
 
 @Entity()
@@ -12,13 +14,16 @@ import Category from "../Category/Category.entity";
 export default class Spending {
   constructor(
     title: string,
-    date: string,
+    date: Date,    
+    unit: number,
     weight: number,
     category: Category,
+
 
   ) {
     this.title = title;
     this.date = date;
+    this.unit = unit;
     this.weight = weight;
     this.category = category;
   }
@@ -33,7 +38,16 @@ export default class Spending {
 
   @Column()
   @Field()
-  date: string;
+  date: Date;
+
+  @Field(() => String)
+  localizedDate() {
+  return dayjs(this.date).format('DD/MM/YYYY') 
+}
+
+  @Column()
+  @Field()
+  unit: number;
 
   @Column()
   @Field()

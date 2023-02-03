@@ -12,10 +12,13 @@ export default class SpendingRepository extends SpendingDb {
       "Train"
     )) as Category;
 
+    const dateExemple = new Date("2022-06-12");
+
     const spendingExemple = new Spending(
       "Voyage Paris - Amsterdam",
-      "15-06-2022",
-      980,
+      dateExemple,
+      1000,
+      200,
       trainCategory
     );
 
@@ -28,7 +31,8 @@ export default class SpendingRepository extends SpendingDb {
 
   static async createSpending(
     title: string,
-    date: string,
+    date: Date,
+    unit: number,
     weight: number,
     categoryName: string
   ): Promise<Spending> {
@@ -36,6 +40,7 @@ export default class SpendingRepository extends SpendingDb {
     const newSpending = this.repository.create({
       title,
       date,
+      unit,
       weight,
       category: category || undefined,
     });
@@ -46,12 +51,14 @@ export default class SpendingRepository extends SpendingDb {
   static async updateSpending(
     id: string,
     title: string,
-    date: string,
+    date: Date,
+    unit: number,
     weight: number
   ): Promise<
     {
       title: string;
-      date: string;
+      date: Date;
+      unit: number;
       weight: number;
     } & Spending
   > {
@@ -63,6 +70,7 @@ export default class SpendingRepository extends SpendingDb {
       id,
       title,
       date,
+      unit,
       weight,
     });
   }

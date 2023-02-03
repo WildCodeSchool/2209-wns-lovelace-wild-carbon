@@ -4,6 +4,7 @@ import {
   DASHBOARD_PATH,
   DONATION_PATH,
   SIGN_IN_PATH,
+  CARBON_SPENDING_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
@@ -18,18 +19,33 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-
-const MY_PROFILE = gql`
-  query MyProfile {
-    myProfile {
-      email
-    }
-  }
-`;
+import CarbonSpending from 'components/carbon-spending/carbon-spending';
+import { useState } from 'react';
+import AlreadyLoggedIn from '../pages/alreadyLog/AlreadyLoggedIn';
+import Protected from 'pages/alreadyLog/Protected';
 
 function App() {
+  const MY_PROFILE = gql`
+    query MyProfile {
+      myProfile {
+        email
+      }
+    }
+  `;
+  const [isLogged, setIsLogged] = useState(false);
+
+  const { loading, refetch, data } = useQuery<MyProfileQuery>(MY_PROFILE, {
+    onCompleted: (data) => {
+      if (data.myProfile) {
+        setIsLogged(true);
+      }
+    },
+    onError: () => {
+      setIsLogged(false);
+    },
+  });
+
   const location = useLocation();
-  const { data, refetch } = useQuery<MyProfileQuery>(MY_PROFILE);
   return (
     <>
       <Header />
@@ -54,13 +70,47 @@ function App() {
       <main>
         <Routes>
           <Route path={HOME_PATH} element={<Home />} />
-          <Route path={DASHBOARD_PATH} element={<Dashboard />} />
-          <Route path={DONATION_PATH} element={<Donation />} />
+          <Route
+            path={DASHBOARD_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Dashboard />
+              </Protected>
+            }
+          />
+          <Route
+            path={DONATION_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Donation />
+              </Protected>
+            }
+          />
+          <Route
+            path={CARBON_SPENDING_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <CarbonSpending />
+              </Protected>
+            }
+          />
+
           <Route
             path={REGISTER_PATH}
-            element={<Register onSuccess={refetch} />}
+            element={
+              <AlreadyLoggedIn isLoggedIn={isLogged}>
+                <Register onSuccess={refetch} />
+              </AlreadyLoggedIn>
+            }
           />
-          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
+          <Route
+            path={SIGN_IN_PATH}
+            element={
+              <AlreadyLoggedIn isLoggedIn={isLogged}>
+                <SignIn onSuccess={refetch} />
+              </AlreadyLoggedIn>
+            }
+          />
         </Routes>
       </main>
       {location.pathname !== REGISTER_PATH &&

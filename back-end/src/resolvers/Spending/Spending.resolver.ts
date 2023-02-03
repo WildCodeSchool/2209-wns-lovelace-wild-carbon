@@ -14,16 +14,17 @@ export default class SpendingResolver {
 
   @Mutation(() => Spending)
   createSpending(
-    @Args() { title, date, weight, categoryName }: CreateSpendingArgs
+    @Args() { title, date, unit, weight, categoryName }: CreateSpendingArgs
   ): Promise<Spending> {
-    return SpendingRepository.createSpending(title, date, weight, categoryName);
+    console.log("dateee", date)
+    return SpendingRepository.createSpending(title, date, unit, weight, categoryName);
   }
 
   @Mutation(() => Spending)
   updateSpending(
-    @Args() { id, title, date, weight }: UpdateSpendingArgs
+    @Args() { id, title, date, unit, weight }: UpdateSpendingArgs
   ): Promise<Spending> {
-    return SpendingRepository.updateSpending(id, title, date, weight);
+    return SpendingRepository.updateSpending(id, title, date, unit, weight);
   }
 
   @Mutation(() => Spending)
