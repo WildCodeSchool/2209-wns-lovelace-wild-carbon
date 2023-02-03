@@ -1,4 +1,4 @@
-import { IsUUID, Min, MinLength } from "class-validator";
+import { IsDate, IsUUID, Min, MinDate, MinLength } from "class-validator";
 import { ArgsType, Field, ID } from "type-graphql";
 
 @ArgsType()
@@ -10,8 +10,12 @@ class CreateSpendingArgs {
   title: string;
 
   @Field()
-  @MinLength(1, { message: "Le date doit faire au moins un caractère de long." })
-  date: string;
+  @IsDate()
+  date: Date;
+
+  @Field()
+  @Min(1, {message: "L'unité calculée doit à avoir au moins un chiffre."})
+  unit: number;
 
   @Field()
   @Min(1, { message: "Le poids de la dépense doit avoir au moins un chiffre." })
