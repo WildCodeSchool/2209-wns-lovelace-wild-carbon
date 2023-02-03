@@ -1,4 +1,3 @@
-import "./carbon-spending.css";
 import React, { useState } from "react";
 import { TRANSPORTS_PARAMS } from "./utils";
 import SliderComponent from "./slider";
@@ -92,8 +91,6 @@ function CarbonSpending() {
 
   const weight = parseInt(roundedValue.toFixed(0));
 
-  console.log(date);
-
   return (
     <>
       <form
@@ -101,14 +98,14 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="spendingForm"
+        className="flex flex-col items-center"
       >
-        <div className="labelForm">
+        <div className="flex flex-col w-3/4 mt-[30px]">
           <label>
-            <div className="labelName">
-              Libéllé
+            <div className="flex flex-col text-[#609f39] mb-5 ">
+              <label className="font-medium text-[18px]">Libéllé</label>
               <input
-                className="nameInput"
+                className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="text"
                 name="name"
                 value={title}
@@ -118,10 +115,10 @@ function CarbonSpending() {
                 required
               />
             </div>
-            <div className="labelDate">
-              Date
+            <div className="flex flex-col text-[#609f39]">
+              <label className="font-medium text-[18px]">Date</label>
               <input
-                className="dateInput"
+                className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="date"
                 name="date"
                 value={date}
@@ -133,17 +130,23 @@ function CarbonSpending() {
             </div>
           </label>
         </div>
-        <div className="categoryForm">
-          <h3 className="labelName">Catégories:</h3>
-          <div className="categoriesIcons">
+        <div className="w-9/12 flex flex-col mt-[30px]">
+          <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
+            Catégories:
+          </h3>
+          <div className="flex flex-row justify-center gap-[10px]">
             {TRANSPORTS_PARAMS.map((el) => {
               return (
                 <div>
                   <button
-                    className="iconBtn"
+                    className="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
                     onClick={(event) => {
                       event.preventDefault();
-                      handleSelectCategory(el.id, el.category);
+                      if (selectedIcon === el.id) {
+                        setSelectedIcon(0);
+                      } else {
+                        handleSelectCategory(el.id, el.category);
+                      }
                     }}
                     key={el.id}
                     value={selectedIcon}
@@ -155,8 +158,8 @@ function CarbonSpending() {
             })}
           </div>
         </div>
-        {selectedIcon ? (
-          <div className="unitForm">
+        {selectedIcon !== 0 ? (
+          <div className="flex flex-col w-9/12 mt-[30px]">
             {TRANSPORTS_PARAMS.filter((item) => item.id === selectedIcon).map(
               (el) => {
                 return (
@@ -176,7 +179,9 @@ function CarbonSpending() {
           ""
         )}
 
-        <button className="addSpendingBtn">Ajouter ma dépense</button>
+        <button className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">
+          Ajouter ma dépense
+        </button>
       </form>
     </>
   );

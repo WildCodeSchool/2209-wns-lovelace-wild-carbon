@@ -113,7 +113,7 @@
 :root {
   /* PARTIE SLIDER */
   --main-color: rgb(104, 117, 217);
-  --main-color-hover: rgb(104, 117, 217, 0.2);
+  --main-color-hover: #6875d933;
   --track-color: #ddd;
   --mark-color: #aaaaaa;
   /* AUTRE PARTIE */
