@@ -11,7 +11,7 @@ const Protected = (props: PropsType) => {
   const { isLoggedIn, children, loading } = props;
   if (loading) return <div>Loading...</div>;
   if (!isLoggedIn) {
-    toast.error('You must sign in to access this page', {
+    toast.error('Vous devez être connecté pour acceder à cette page', {
       position: toast.POSITION.BOTTOM_RIGHT,
       toastId: 'notLoggedIn',
     });

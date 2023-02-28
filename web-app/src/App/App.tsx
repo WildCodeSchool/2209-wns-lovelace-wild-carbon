@@ -5,6 +5,7 @@ import {
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
+  PROFILE_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
@@ -15,7 +16,7 @@ import SignIn from '../pages/signin/SignIn';
 import { useLocation } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
@@ -23,6 +24,8 @@ import CarbonSpending from 'components/carbon-spending/carbon-spending';
 import { useState } from 'react';
 import AlreadyLoggedIn from '../pages/alreadyLog/AlreadyLoggedIn';
 import Protected from 'pages/alreadyLog/Protected';
+import Profile from 'pages/profile/Profile';
+// import LogOutButton from 'components/logOutButton/LogOutButton';
 
 function App() {
   const MY_PROFILE = gql`
@@ -67,6 +70,9 @@ function App() {
           </nav>
         )}
       </div>
+      {/* <Protected isLoggedIn={isLogged} loading={loading}>
+        <LogOutButton />
+      </Protected> */}
       <main>
         <Routes>
           <Route path={HOME_PATH} element={<Home />} />
@@ -91,6 +97,14 @@ function App() {
             element={
               <Protected isLoggedIn={isLogged} loading={loading}>
                 <CarbonSpending />
+              </Protected>
+            }
+          />
+          <Route
+            path={PROFILE_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Profile />
               </Protected>
             }
           />

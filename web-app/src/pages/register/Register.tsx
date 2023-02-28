@@ -40,7 +40,7 @@ const Register = ({ onSuccess }: { onSuccess: () => {} }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
   useState(false);
 
   const [createUser, { loading }] = useMutation<
@@ -125,8 +125,8 @@ const Register = ({ onSuccess }: { onSuccess: () => {} }) => {
               type="email"
               required
               autoComplete="email"
-              id="emailAddress"
-              name="emailAddress"
+              id="email"
+              name="email"
               placeholder="dave.lopper@dev.com"
               className="bg-[#C3E9AC] rounded-[5px] p-[10px] mb-5"
               value={email}

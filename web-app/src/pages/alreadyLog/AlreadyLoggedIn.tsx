@@ -10,7 +10,7 @@ type PropsType = {
 const AlreadyLoggedIn = (props: PropsType) => {
   const { isLoggedIn, children } = props;
   if (isLoggedIn) {
-    toast.error('You must logout to access this page', {
+    toast.error('Vous devez être connecté pour acceder à cette page', {
       position: toast.POSITION.BOTTOM_RIGHT,
       toastId: 'alreadyLoggedIn',
     });
