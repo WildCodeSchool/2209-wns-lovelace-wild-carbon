@@ -34,7 +34,7 @@ export default class Article {
   @Field()
   description: string;
 
-  @ManyToOne(() => Category, (category) => category.articles, { eager: true })
+  @ManyToOne(() => Category, (category) => category.articles, { eager: true, onDelete: "CASCADE" })
   @Field(() => Category)
   category: Category;
 }
