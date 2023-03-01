@@ -22,16 +22,16 @@ import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
 import CarbonSpending from 'components/carbon-spending/carbon-spending';
 import { useState } from 'react';
-import AlreadyLoggedIn from '../pages/alreadyLog/AlreadyLoggedIn';
 import Protected from 'pages/alreadyLog/Protected';
 import Profile from 'pages/profile/Profile';
-// import LogOutButton from 'components/logOutButton/LogOutButton';
+import LogOutButton from 'components/logOutButton/LogOutButton';
 
 function App() {
   const MY_PROFILE = gql`
     query MyProfile {
       myProfile {
         email
+        id
       }
     }
   `;
@@ -70,9 +70,9 @@ function App() {
           </nav>
         )}
       </div>
-      {/* <Protected isLoggedIn={isLogged} loading={loading}>
-        <LogOutButton />
-      </Protected> */}
+      <Protected isLoggedIn={isLogged} loading={loading}>
+        <LogOutButton userData={data} />
+      </Protected>
       <main>
         <Routes>
           <Route path={HOME_PATH} element={<Home />} />
@@ -111,20 +111,9 @@ function App() {
 
           <Route
             path={REGISTER_PATH}
-            element={
-              <AlreadyLoggedIn isLoggedIn={isLogged}>
-                <Register onSuccess={refetch} />
-              </AlreadyLoggedIn>
-            }
+            element={<Register onSuccess={refetch} />}
           />
-          <Route
-            path={SIGN_IN_PATH}
-            element={
-              <AlreadyLoggedIn isLoggedIn={isLogged}>
-                <SignIn onSuccess={refetch} />
-              </AlreadyLoggedIn>
-            }
-          />
+          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
         </Routes>
       </main>
       {location.pathname !== REGISTER_PATH &&

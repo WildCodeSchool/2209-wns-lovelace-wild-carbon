@@ -12,13 +12,7 @@ const SIGN_OUT = gql`
   }
 `;
 
-const LogOutButton = ({
-  userData,
-  onSuccess,
-}: {
-  userData: any;
-  onSuccess: () => {};
-}) => {
+const LogOutButton = ({ userData }: { userData: any }) => {
   const navigate = useNavigate();
 
   const [signOut] = useMutation<SignOutMutation, SignOutMutationVariables>(
@@ -26,7 +20,6 @@ const LogOutButton = ({
     {
       onCompleted: () => {
         toast.success('Vous êtes bien déconnecté.');
-        onSuccess();
         navigate(HOME_PATH);
       },
       onError: (error) => {
@@ -38,7 +31,7 @@ const LogOutButton = ({
   const handleDisconnect = async (user: any) => {
     signOut({
       variables: {
-        signOutId: user.id,
+        signOutId: userData.myProfile.id,
       },
     });
   };
@@ -46,7 +39,7 @@ const LogOutButton = ({
   return (
     <div>
       <div>
-        <p>Connecté avec l'adresse email : {userData.email}</p>
+        <p>Connecté avec l'adresse email : {userData.myProfile.email}</p>
         <button
           onClick={() => {
             handleDisconnect(userData);

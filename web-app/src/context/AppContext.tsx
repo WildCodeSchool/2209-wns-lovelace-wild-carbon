@@ -45,3 +45,59 @@ export function ContextProvider({ children }: any) {
     </AppContext.Provider>
   );
 }
+
+// import { gql, useQuery } from '@apollo/client';
+// import { createContext, useState } from 'react';
+// import { MyProfileQuery } from '../gql/graphql';
+
+// const USER_PROFILE = gql`
+//   query MyProfileQuery {
+//     myProfile {
+//       id
+//       email
+//       firstName
+//       lastName
+//     }
+//   }
+// `;
+
+// type UserContextType = {
+//   userData: any;
+//   isAuthenticated: boolean;
+//   loading: boolean;
+//   refetch: () => {};
+// };
+
+// export const AppContext = createContext<UserContextType | null>(null);
+
+// export function ContextProvider({ children }: any) {
+//   const [isAuthenticated, setIsUserAuthenticated] = useState(false);
+//   const [userData, setUserData] = useState({});
+
+//   const { loading, refetch } = useQuery<MyProfileQuery>(USER_PROFILE, {
+//     notifyOnNetworkStatusChange: true,
+//     onCompleted: (data) => {
+//       if (data.myProfile) {
+//         setIsUserAuthenticated(true);
+//         setUserData(data.myProfile);
+//       }
+//     },
+//     onError: () => {
+//       setIsUserAuthenticated(false);
+//     },
+//   });
+//   console.log(userData);
+
+//   return (
+//     <AppContext.Provider
+//       value={{
+//         userData,
+//         isAuthenticated,
+//         loading,
+//         refetch,
+//       }}
+//     >
+//       {children}
+//     </AppContext.Provider>
+//   );
+// }
