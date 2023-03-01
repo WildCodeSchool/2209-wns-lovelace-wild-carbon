@@ -34,7 +34,10 @@ const ArticlesRaw = () => {
     <>
       <div className="h-[95vh]">
         {data.map((c: CardData) => (
-          <div key={c.id} className="bg-[#fff] mb-5 mx-5 p-[30px] rounded-xl ">
+          <div
+            key={c.id}
+            className="bg-[#fff] hover:bg-[#f8efe2] duration-300 ease-in-out mb-5 mx-5 p-[30px] rounded-xl "
+          >
             <div className="flex justify-center">
               <div className="font-bold text-center mb-5 text-[20px] mr-[15px]">
                 {c.title}
@@ -45,7 +48,7 @@ const ArticlesRaw = () => {
         ))}
         <Link to={'/register'}>
           <div className="flex justify-center ">
-            <button className="bg-[#484B8A] text-[#fff] text-[22px] font-bold rounded-lg w-[75%] py-[10px] mt-5">
+            <button className="bg-[#484B8A] hover:bg-[#31335e] duration-300 ease-in-out	 text-[#fff] text-[22px] font-bold rounded-lg w-[75%] py-[10px] mt-5">
               S'engager
             </button>
           </div>
