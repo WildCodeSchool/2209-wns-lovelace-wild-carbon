@@ -1,9 +1,9 @@
-import Register from "../../components/Register/Register";
+import Register from '../../components/Register/Register';
 
 const register = () => {
   return (
     <>
-      <h1 className="text-center mt-[12%] font-bold text-[30px] text-[#609F39]">
+      <h1 className="text-center mt-[23%] font-bold text-[30px] text-[#609F39]">
         S'inscrire
       </h1>
       <p className="text-center mb-5 italic text-[#609F39]">

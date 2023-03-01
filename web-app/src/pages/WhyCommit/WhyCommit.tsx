@@ -4,7 +4,7 @@ import ArticlesRaw from 'components/whyCommit/ArticlesRaw';
 const WhyCommit = () => {
   return (
     <div>
-      <div className="my-[30px]">
+      <div className="mt-[100px] mb-[30px]">
         <Title
           title={"Pourquoi s'engager ?"}
           subtitle={"C'est simple et rapide !"}

@@ -24,7 +24,6 @@ function App() {
   return (
     <>
       <Header />
-
       <Routes>
         <Route path={HOME_PATH} element={<Home />} />
         <Route path={DASHBOARD_PATH} element={<Dashboard />} />
@@ -45,7 +44,8 @@ function App() {
         pauseOnHover
         style={{ marginBottom: '80px' }}
       />
-      {location.pathname !== REGISTER_PATH && <Nav />}
+      {location.pathname !== REGISTER_PATH &&
+        location.pathname !== WHYCOMMIT_PATH && <Nav />}{' '}
     </>
   );
 }
