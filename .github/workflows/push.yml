@@ -1,12 +1,12 @@
-name: hello
+name: build-and-test
 
 on: push
 
 jobs:
-  hello:
+  back-end:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      - name: Say hello
-        run: echo 'Hello from GitHub'
+      - name: Build and test back end
+        run: docker compose -f docker-compose.ci.back-end.yml up --build --exit-code-from back-end
