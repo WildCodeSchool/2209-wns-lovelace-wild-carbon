@@ -32,6 +32,8 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
     setSelectedSpending(spending);
   };
 
+  console.log(spendingData);
+
   return (
     <>
       <div className="mt-6  mb-8 px-8">

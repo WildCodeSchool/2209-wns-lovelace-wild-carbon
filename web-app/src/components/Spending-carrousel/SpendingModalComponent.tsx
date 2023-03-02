@@ -1,5 +1,7 @@
 import React from 'react';
 import { Spending } from './SpendingCarrouselComponent';
+import { RiCloseCircleLine } from 'react-icons/ri';
+import CategoryIcon from './CategoryIcon';
 
 type PropType = Spending & {
   closeModal: () => void;
@@ -15,20 +17,40 @@ const SpendingModalComponent = ({
   category,
   closeModal,
 }: PropType) => {
+  const unitDetail = () => {
+    if (category.categoryName === 'Multimédia') {
+      return <div>Donnée renseignée: {unit} Killowatt</div>;
+    } else {
+      return <div>Donnée renseignée: {unit}Km</div>;
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50"
       style={{ backdropFilter: 'blur(3px)' }}
     >
       <div className="bg-white w-full max-w-2xl mx-auto rounded-lg shadow-lg">
-        <div className="p-6">{title}</div>
-        <div className="bg-gray-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div className="flex justify-between mt-8">
+          <h2 className="ml-2 font-bold">{title}</h2>
           <button
             onClick={closeModal}
-            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+            className="ml-2 mr-4 hover:bg-[#609f39] bg-[#c3e9ac] rounded-lg p-0 w-[21px] h-[21px] flex justify-center items-center border-transparent "
           >
-            Fermer
+            <RiCloseCircleLine />
           </button>
+        </div>
+        <div className="ml-2 mt-2">Date: {localizedDate}</div>
+        <div className="flex justify-between ">
+          <div className="ml-2 mt-2">Catégorie: {category.categoryName}</div>
+          <div className="ml-2 mt-2 mr-4 bg-[#c3e9ac] rounded p-0 w-[41px] h-[41px] flex justify-center items-center border-transparent ">
+            <CategoryIcon categoryName={category.categoryName} />
+          </div>
+        </div>
+
+        <div className="ml-2 mt-2">{unitDetail()}</div>
+        <div className="ml-2 mt-2 mb-8">
+          Quantité de Co2 rejeté dans l'atmosphère: {weight}Kg
         </div>
       </div>
     </div>

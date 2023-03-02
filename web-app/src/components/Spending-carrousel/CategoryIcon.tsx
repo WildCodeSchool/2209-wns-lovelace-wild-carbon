@@ -32,7 +32,7 @@ const CategoryIcon = ({ categoryName }: { categoryName: string }) => {
       </p>
     );
   }
-  if (categoryName === 'Multimedia') {
+  if (categoryName === 'Multimédia') {
     return (
       <p>
         <MdConnectedTv className="w-8 h-8" />
