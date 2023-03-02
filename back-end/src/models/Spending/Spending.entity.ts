@@ -53,7 +53,7 @@ export default class Spending {
   @Field()
   weight: number;
 
-  @ManyToOne(() => Category, (category) => category.spendings, { eager: true })
+  @ManyToOne(() => Category, (category) => category.spendings, { eager: true, onDelete: "CASCADE" })
   @Field(() => Category)
   category: Category;
 }

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TRANSPORTS_PARAMS } from './utils';
-import SliderComponent from './slider';
 import { gql, useMutation } from '@apollo/client';
 import {
   CreateSpendingMutation,
@@ -9,6 +8,7 @@ import {
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getErrorMessage } from 'utils';
+import CarbonValue from './slider';
 
 const CREATE_SPENDING = gql`
   mutation CreateSpending(
@@ -76,11 +76,11 @@ function CarbonSpending() {
     }
   };
 
-  const roundedValue =
-    selectedIcon === 2
-      ? unit * 0.1482
-      : selectedIcon === 1
+  const weightCalculation =
+    selectedIcon === 1
       ? unit * 0.3
+      : selectedIcon === 2
+      ? unit * 0.1482
       : selectedIcon === 3
       ? unit * 0.014
       : selectedIcon === 4
@@ -89,7 +89,7 @@ function CarbonSpending() {
       ? unit * 0.185
       : 0;
 
-  const weight = parseInt(roundedValue.toFixed(0));
+  const weight = parseInt(weightCalculation.toFixed(0));
 
   return (
     <>
@@ -163,7 +163,7 @@ function CarbonSpending() {
             {TRANSPORTS_PARAMS.filter((item) => item.id === selectedIcon).map(
               (el) => {
                 return (
-                  <SliderComponent
+                  <CarbonValue
                     value={unit}
                     setValue={setUnit}
                     min={el.min}
