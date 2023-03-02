@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getErrorMessage } from "utils";
 import CarbonValue from "./slider";
 
-const CREATE_SPENDING = gql`
+export const CREATE_SPENDING = gql`
   mutation CreateSpending(
     $title: String!
     $date: DateTime!
@@ -75,6 +75,8 @@ function CarbonSpending() {
       toast.error(getErrorMessage(error));
     }
   };
+
+  console.log(date, categoryName);
 
   const weightCalculation =
     selectedIcon === 1
