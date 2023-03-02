@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-// import ReCAPTCHA from 'react-google-recaptcha';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -24,14 +23,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordEye, setPasswordEye] = useState(false);
-
-  // const [captcha, setCaptcha] = useState(false);
-  // const key = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
-  // const captchakey = '6LforD4kAAAAAM-bTit1LOEvKeeoW5rlL2d-qktV';
-  // const onChange = () => {
-  //   console.log('changed');
-  //   setCaptcha(true);
-  // };
 
   const handlePassword = () => {
     setPasswordEye(!passwordEye);
@@ -111,7 +102,6 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
               )}
             </div>
           </div>
-          {/* <ReCAPTCHA sitekey={captchakey} onChange={onChange} />, */}
           <div className="flex flex-col items-center mt-5">
             <button
               disabled={loading}
