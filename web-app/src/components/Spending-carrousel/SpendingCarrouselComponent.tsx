@@ -11,6 +11,8 @@ interface SpendingCarouselComponentProps {
   spendingData?: Get_SpendingQuery;
 }
 
+export type Spending = Get_SpendingQuery['spendings'][number];
+
 const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
   spendingData,
 }) => {
@@ -22,7 +24,13 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
     slidesToScroll: 1,
   };
 
-  const [showModal, setShowModal] = useState(false);
+  const [selectedSpending, setSelectedSpending] = useState<
+    Spending | undefined
+  >(undefined);
+
+  const selectSpending = (spending: Spending) => {
+    setSelectedSpending(spending);
+  };
 
   return (
     <>
@@ -49,7 +57,7 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
                     <p className="text-gray-600 text-sm mb-2">
                       Co2 rejeté dans l'atmosphère: {spending.weight}Kg
                     </p>
-                    <button onClick={() => setShowModal(true)}>
+                    <button onClick={() => selectSpending(spending)}>
                       <FcPlus />
                     </button>
                   </div>
@@ -59,14 +67,13 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
           })}
         </Slider>
       </div>
-      {showModal && (
+      {selectedSpending && (
         <SpendingModalComponent
-          setShowModal={setShowModal}
-          spendingData={spendingData}
+          {...selectedSpending}
+          closeModal={() => setSelectedSpending(undefined)}
         />
       )}
     </>
   );
 };
-
 export default SpendingCarouselComponent;

@@ -16,7 +16,6 @@ const Dashboard = () => {
       <div className="flex justify-center mt-px">
         <div className="h-0.5 w-3/4 bg-[#CAC5C5]"></div>
       </div>
-
       <DoughnutComponent />
     </>
   );
