@@ -11,7 +11,7 @@ jobs:
       - name: Build and test back end
         run: docker compose -f docker-compose.ci.back-end.yml up --build --exit-code-from back-end
 
-   web-app:
+  web-app:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
