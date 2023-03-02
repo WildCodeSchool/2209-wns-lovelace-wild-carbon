@@ -43,7 +43,7 @@ function CarbonSpending() {
   const [title, setTitle] = useState<string>("");
   const [categoryName, setCategoryName] = useState<string>("");
 
-  const [createSpending, { loading }] = useMutation<
+  const [createSpending] = useMutation<
     CreateSpendingMutation,
     CreateSpendingMutationVariables
   >(CREATE_SPENDING);
