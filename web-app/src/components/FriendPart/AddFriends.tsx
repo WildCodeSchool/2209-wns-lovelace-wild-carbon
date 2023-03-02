@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import nodemailer from 'nodemailer';
+// import React, { useState } from 'react';
+// import nodemailer from 'nodemailer';
 
 const AddFriends: React.FC = () => {
   //   const [email, setEmail] = useState('');
