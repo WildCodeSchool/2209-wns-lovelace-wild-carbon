@@ -1,21 +1,23 @@
-import React from "react";
+import React from 'react';
 import {
   HOME_PATH,
   REGISTER_PATH,
   DASHBOARD_PATH,
   DONATION_PATH,
   CARBON_SPENDING_PATH,
-} from "../pages/paths";
-import { Routes, Route } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import Register from "../pages/register/Register";
-import Dashboard from "../pages/dashboard/Dashboard";
-import Donation from "../pages/Donation/Donation";
-import { useLocation } from "react-router-dom";
-import Nav from "../components/Nav/Nav";
-import CarbonSpending from "../pages/carbon-spending/carbonSpending";
-import Header from "../components/Header/Header";
-import { ToastContainer } from "react-toastify";
+  FRIENDSHIP_PATH,
+} from '../pages/paths';
+import { Routes, Route } from 'react-router-dom';
+import Home from '../pages/Home/Home';
+import Register from '../pages/register/Register';
+import Dashboard from '../pages/dashboard/Dashboard';
+import Donation from '../pages/Donation/Donation';
+import { useLocation } from 'react-router-dom';
+import Nav from '../components/Nav/Nav';
+import CarbonSpending from '../pages/carbon-spending/carbonSpending';
+import Header from '../components/Header/Header';
+import { ToastContainer } from 'react-toastify';
+import FriendShip from 'pages/friendShip/FriendShip';
 function App() {
   const location = useLocation();
   return (
@@ -28,6 +30,7 @@ function App() {
         <Route path={REGISTER_PATH} element={<Register />} />
         <Route path={DONATION_PATH} element={<Donation />} />
         <Route path={CARBON_SPENDING_PATH} element={<CarbonSpending />} />
+        <Route path={FRIENDSHIP_PATH} element={<FriendShip />} />
       </Routes>
       <ToastContainer
         position="bottom-right"
@@ -39,7 +42,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        style={{ marginBottom: "80px" }}
+        style={{ marginBottom: '80px' }}
       />
       {location.pathname !== REGISTER_PATH && <Nav />}
     </>
