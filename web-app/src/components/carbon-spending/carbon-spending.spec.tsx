@@ -14,8 +14,8 @@ const renderCreateSpending = (
   mocks: MockedResponse<CreateSpendingMutation>[] = []
 ) => {
   return render(
-    <MockedProvider mocks={}>
-      <div></div>
+    <MockedProvider mocks={mocks}>
+      <CarbonSpending />
     </MockedProvider>
   );
 };
