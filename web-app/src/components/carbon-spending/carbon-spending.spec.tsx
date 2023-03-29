@@ -20,15 +20,15 @@ const renderCreateSpending = (
   );
 };
 
-// const fillFormAndSubmit = () => {
-//   fireEvent.change(screen.getByRole("textbox", { name: "Libellé" }), {
-//     target: { value: "Test voyage" },
-//   });
-//   fireEvent.change(screen.getByRole("textbox", { name: "Date" }), {
-//     target: { value: "" },
-//   });
-//   fireEvent.submit(screen.getByRole("form"));
-// };
+const fillFormAndSubmit = () => {
+  fireEvent.change(screen.getByRole("textbox", { name: "Libellé" }), {
+    target: { value: "Test voyage" },
+  });
+  fireEvent.change(screen.getByRole("textbox", { name: "Date" }), {
+    target: { value: "" },
+  });
+  fireEvent.submit(screen.getByRole("form"));
+};
 
 // describe("CreateSpending", () => {
 //   it("renders correctly", () => {
