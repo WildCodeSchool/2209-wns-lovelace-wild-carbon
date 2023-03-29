@@ -1,4 +1,3 @@
-import React from 'react';
 import Slider from 'react-slider';
 
 interface Value {
@@ -10,7 +9,7 @@ interface Value {
   idicon: number;
 }
 
-function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
+function CarbonValue({ value, setValue, min, max, result, idicon }: Value) {
   return (
     <>
       <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
@@ -45,4 +44,4 @@ function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
   );
 }
 
-export default SliderComponent;
+export default CarbonValue;
