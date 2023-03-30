@@ -50,8 +50,8 @@ const startServer = async () => {
   // The `listen` method launches a web server.
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
+  await CategoryRepository.initializeCategories();
   if (!IS_PRODUCTION) {
-    await CategoryRepository.initializeCategories();
     await SpendingRepository.initializeSpending();
     await ArticleRepository.initializeArticles();
   }
