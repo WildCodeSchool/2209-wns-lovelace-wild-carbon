@@ -8,10 +8,10 @@ import {
 } from 'react-icons/ai';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import {
-  HOME_PATH,
   DONATION_PATH,
   CARBON_SPENDING_PATH,
   PROFILE_PATH,
+  HOME_PATH,
 } from '../../pages/paths';
 
 interface MenuItem {
