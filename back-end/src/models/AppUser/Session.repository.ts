@@ -11,7 +11,7 @@ export default class SessionRepository extends SessionDb {
 
   static async deleteSession(user: AppUser): Promise<Session> {
     const session = (await this.repository.findOne({
-      where: { user: user },
+      where: { user: { id: user.id } },
     })) as Session;
 
     return this.removeSession(session);

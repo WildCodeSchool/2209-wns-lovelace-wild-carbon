@@ -1,6 +1,13 @@
 import { IsEmail } from 'class-validator';
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Index,
+  OneToMany,
+} from 'typeorm';
+import Spending from '../Spending/Spending.entity';
 
 @Entity()
 @ObjectType()
@@ -37,4 +44,8 @@ export default class AppUser {
 
   @Column()
   hashedPassword: string;
+
+  @OneToMany(() => Spending, (spending) => spending.user)
+  @Field(() => [Spending])
+  spendings: Spending[];
 }

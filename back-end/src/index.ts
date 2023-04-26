@@ -51,10 +51,6 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
   await CategoryRepository.initializeCategories();
-  if (!IS_PRODUCTION) {
-    await SpendingRepository.initializeSpending();
-    await ArticleRepository.initializeArticles();
-  }
 
   console.log(`🚀  Server ready at ${url}`);
 };
