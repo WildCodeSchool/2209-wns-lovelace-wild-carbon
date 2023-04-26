@@ -1,4 +1,4 @@
-import Slider from "react-slider";
+import Slider from 'react-slider';
 
 interface Value {
   value: number;
@@ -28,7 +28,7 @@ function CarbonValue({ value, setValue, min, max, result, idicon }: Value) {
           max={max}
         />
         <p className="value">
-          {value} {idicon === 3 ? "kWh" : "km"}
+          {value} {idicon === 3 ? 'kWh' : 'km'}
         </p>
       </div>
       <div className="flex flex-col mt-[30px]">

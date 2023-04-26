@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { TRANSPORTS_PARAMS } from "./utils";
-import { gql, useMutation } from "@apollo/client";
+import { useState } from 'react';
+import { TRANSPORTS_PARAMS } from './utils';
+import { gql, useMutation } from '@apollo/client';
 import {
   CreateSpendingMutation,
   CreateSpendingMutationVariables,
-} from "../../gql/graphql";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { getErrorMessage } from "utils";
-import CarbonValue from "./slider";
+} from '../../gql/graphql';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getErrorMessage } from 'utils';
+import CarbonValue from './slider';
 
 export const CREATE_SPENDING = gql`
   mutation CreateSpending(
@@ -39,9 +39,9 @@ export const CREATE_SPENDING = gql`
 function CarbonSpending() {
   const [selectedIcon, setSelectedIcon] = useState<number>(0);
   const [unit, setUnit] = useState<number>(0);
-  const [date, setDate] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [categoryName, setCategoryName] = useState<string>("");
+  const [date, setDate] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>('');
 
   const [createSpending] = useMutation<
     CreateSpendingMutation,
@@ -66,17 +66,17 @@ function CarbonSpending() {
         },
       });
       toast.success(`Votre dépense "${title}" a été créé avec succès.`);
-      setTitle("");
-      setDate("");
+      setTitle('');
+      setDate('');
       setUnit(0);
       setSelectedIcon(0);
-      setCategoryName("");
+      setCategoryName('');
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
   };
 
-  console.log(date, categoryName);
+  // console.log(date, categoryName);
 
   const weightCalculation =
     selectedIcon === 1
@@ -103,9 +103,9 @@ function CarbonSpending() {
         className="flex flex-col items-center"
       >
         <div className="flex flex-col w-3/4 mt-[30px]">
-          <label>
-            <div className="flex flex-col text-[#609f39] mb-5 ">
-              <label className="font-medium text-[18px]">Libéllé</label>
+          <div className="flex flex-col text-[#609f39] mb-5 ">
+            <label className="font-medium text-[18px]">
+              Libéllé
               <input
                 className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="text"
@@ -115,10 +115,13 @@ function CarbonSpending() {
                   setTitle(event.target.value);
                 }}
                 required
-              />
-            </div>
-            <div className="flex flex-col text-[#609f39]">
-              <label className="font-medium text-[18px]">Date</label>
+                data-testid="libelle"
+              />{' '}
+            </label>
+          </div>
+          <div className="flex flex-col text-[#609f39]">
+            <label className="font-medium text-[18px]">
+              Date
               <input
                 className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="date"
@@ -128,18 +131,19 @@ function CarbonSpending() {
                   setDate(event.target.value);
                 }}
                 required
+                data-testid="datePicker"
               />
-            </div>
-          </label>
+            </label>
+          </div>
         </div>
         <div className="w-9/12 flex flex-col mt-[30px]">
           <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
-            Catégories:
+            Catégories
           </h3>
           <div className="flex flex-row justify-center gap-[10px]">
             {TRANSPORTS_PARAMS.map((el) => {
               return (
-                <div>
+                <div data-testid="Categories">
                   <button
                     className="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
                     onClick={(event) => {
@@ -172,16 +176,20 @@ function CarbonSpending() {
                     max={el.max}
                     result={weight}
                     idicon={selectedIcon}
+                    data-testid="Unit"
                   />
                 );
               }
             )}
           </div>
         ) : (
-          ""
+          ''
         )}
 
-        <button className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">
+        <button
+          className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]"
+          data-testId="submitForm"
+        >
           Ajouter ma dépense
         </button>
       </form>
