@@ -1,21 +1,22 @@
-import { Repository } from "typeorm";
-import Spending from "./Spending.entity";
-import { getRepository } from "../../database/utils";
-import SpendingDb from "./Spending.db";
-import CategoryRepository from "../Category/Category.repository";
-import Category from "../Category/Category.entity";
+import { Repository } from 'typeorm';
+import Spending from './Spending.entity';
+import { getRepository } from '../../database/utils';
+import SpendingDb from './Spending.db';
+import CategoryRepository from '../Category/Category.repository';
+import Category from '../Category/Category.entity';
+import AppUser from '../AppUser/AppUser.entity';
 
 export default class SpendingRepository extends SpendingDb {
   static async initializeSpending(): Promise<void> {
     await this.clearRepository();
     const trainCategory = (await CategoryRepository.getCategoryByName(
-      "Train"
+      'Train'
     )) as Category;
 
-    const dateExemple = new Date("2022-06-12");
+    const dateExemple = new Date('2022-06-12');
 
     const spendingExemple = new Spending(
-      "Voyage Paris - Amsterdam",
+      'Voyage Paris - Amsterdam',
       dateExemple,
       1000,
       200,
@@ -26,7 +27,7 @@ export default class SpendingRepository extends SpendingDb {
   }
 
   static async getSpendings(): Promise<Spending[]> {
-    return this.repository.find();
+    return this.repository.find({ relations: { user: true } });
   }
 
   static async createSpending(
@@ -34,7 +35,8 @@ export default class SpendingRepository extends SpendingDb {
     date: Date,
     unit: number,
     weight: number,
-    categoryName: string
+    categoryName: string,
+    user: AppUser
   ): Promise<Spending> {
     const category = await CategoryRepository.getCategoryByName(categoryName);
     const newSpending = this.repository.create({
@@ -43,6 +45,7 @@ export default class SpendingRepository extends SpendingDb {
       unit,
       weight,
       category: category || undefined,
+      user,
     });
     await this.repository.save(newSpending);
     return newSpending;
@@ -64,7 +67,7 @@ export default class SpendingRepository extends SpendingDb {
   > {
     const existingSpending = await this.repository.findOneBy({ id });
     if (!existingSpending) {
-      throw Error("No existing spending matching ID.");
+      throw Error('No existing spending matching ID.');
     }
     return this.repository.save({
       id,
@@ -78,7 +81,7 @@ export default class SpendingRepository extends SpendingDb {
   static async deleteSpending(id: string): Promise<Spending> {
     const existingSpending = await this.findSpendingById(id);
     if (!existingSpending) {
-      throw Error("No existing spending matching ID.");
+      throw Error('No existing spending matching ID.');
     }
     await this.repository.remove(existingSpending);
     // resetting ID because existingSpending loses ID after calling remove
