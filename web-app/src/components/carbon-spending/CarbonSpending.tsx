@@ -55,6 +55,7 @@ function CarbonSpending() {
   };
 
   const submit = async () => {
+    console.log('oyé', { title, date, unit, weight, categoryName });
     try {
       await createSpending({
         variables: {
@@ -101,6 +102,7 @@ function CarbonSpending() {
           await submit();
         }}
         className="flex flex-col items-center"
+        data-testId="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px]">
           <div className="flex flex-col text-[#609f39] mb-5 ">
@@ -143,7 +145,7 @@ function CarbonSpending() {
           <div className="flex flex-row justify-center gap-[10px]">
             {TRANSPORTS_PARAMS.map((el) => {
               return (
-                <div data-testid="Categories">
+                <div>
                   <button
                     className="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
                     onClick={(event) => {
@@ -156,6 +158,7 @@ function CarbonSpending() {
                     }}
                     key={el.id}
                     value={selectedIcon}
+                    data-testid={`categories-button-${el.id}`}
                   >
                     {el.icon}
                   </button>
@@ -176,7 +179,6 @@ function CarbonSpending() {
                     max={el.max}
                     result={weight}
                     idicon={selectedIcon}
-                    data-testid="Unit"
                   />
                 );
               }
@@ -186,10 +188,7 @@ function CarbonSpending() {
           ''
         )}
 
-        <button
-          className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]"
-          data-testId="submitForm"
-        >
+        <button className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">
           Ajouter ma dépense
         </button>
       </form>

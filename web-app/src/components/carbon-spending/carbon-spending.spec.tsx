@@ -9,6 +9,7 @@ import CarbonSpending, { CREATE_SPENDING } from './CarbonSpending';
 import { CreateSpendingMutation } from '../../gql/graphql';
 
 jest.mock('react-toastify');
+global.ResizeObserver = require('resize-observer-polyfill');
 
 const renderCreateSpending = (
   mocks: MockedResponse<CreateSpendingMutation>[] = []
@@ -23,24 +24,15 @@ const renderCreateSpending = (
   );
 };
 
-// const originalDate = '02/05/2022';
-// const parts = originalDate.split('/');
-// const formattedDate = `${parts[2]}-${parts[0]}-${parts[1]}`;
-
 const fillFormAndSubmit = () => {
   fireEvent.change(screen.getByTestId('libelle'), {
     target: { value: 'Test voyage' },
   });
   fireEvent.change(screen.getByTestId('datePicker'), {
-    target: { value: '05/02/2022' },
+    target: { value: '2022-02-05' },
   });
-  // fireEvent.change(screen.getByRole('textbox', { name: 'Unit' }), {
-  //   target: { value: 10 },
-  // });
-  // fireEvent.change(screen.getByRole('textbox', { name: 'Catégories' }), {
-  //   target: { value: 'Avion' },
-  // });
-  fireEvent.submit(screen.getByRole('form'));
+  fireEvent.click(screen.getByTestId(`categories-button-${1}`));
+  fireEvent.submit(screen.getByTestId('formCreateSpending'));
 };
 
 describe('CreateSpending', () => {
@@ -52,6 +44,7 @@ describe('CreateSpending', () => {
 >
   <form
     class="flex flex-col items-center"
+    data-testid="formCreateSpending"
   >
     <div
       class="flex flex-col w-3/4 mt-[30px]"
@@ -103,11 +96,10 @@ describe('CreateSpending', () => {
       <div
         class="flex flex-row justify-center gap-[10px]"
       >
-        <div
-          data-testid="Categories"
-        >
+        <div>
           <button
             class="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
+            data-testid="categories-button-1"
             value="0"
           >
             <svg
@@ -130,11 +122,10 @@ describe('CreateSpending', () => {
             </svg>
           </button>
         </div>
-        <div
-          data-testid="Categories"
-        >
+        <div>
           <button
             class="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
+            data-testid="categories-button-2"
             value="0"
           >
             <svg
@@ -153,11 +144,10 @@ describe('CreateSpending', () => {
             </svg>
           </button>
         </div>
-        <div
-          data-testid="Categories"
-        >
+        <div>
           <button
             class="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
+            data-testid="categories-button-3"
             value="0"
           >
             <svg
@@ -180,11 +170,10 @@ describe('CreateSpending', () => {
             </svg>
           </button>
         </div>
-        <div
-          data-testid="Categories"
-        >
+        <div>
           <button
             class="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
+            data-testid="categories-button-4"
             value="0"
           >
             <svg
@@ -207,11 +196,10 @@ describe('CreateSpending', () => {
             </svg>
           </button>
         </div>
-        <div
-          data-testid="Categories"
-        >
+        <div>
           <button
             class="bg-[#c3e9ac] rounded p-0 w-[51px] h-[51px] cursor-pointer flex justify-center items-center border-transparent hover:bg-[#609f39]"
+            data-testid="categories-button-5"
             value="0"
           >
             <svg
@@ -234,7 +222,6 @@ describe('CreateSpending', () => {
     </div>
     <button
       class="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]"
-      data-testid="submitForm"
     >
       Ajouter ma dépense
     </button>
@@ -249,20 +236,20 @@ describe('when form submitted with fields filled-in', () => {
     request: {
       query: CREATE_SPENDING,
       variables: {
-        title: 'Test Spending',
-        date: new Date(),
-        unit: 10,
-        weight: 3,
+        title: 'Test voyage',
+        date: new Date('2022-02-05'),
+        unit: 0,
+        weight: 0,
         categoryName: 'Avion',
       },
     },
     result: {
       data: {
         createSpending: {
-          title: 'Test Spending',
+          title: 'Test voyage',
           date: new Date(),
-          unit: 10,
-          weight: 3,
+          unit: 0,
+          weight: 0,
           category: {
             categoryName: 'Avion',
           },
@@ -280,7 +267,7 @@ describe('when form submitted with fields filled-in', () => {
         expect(toastify.toast.success).toHaveBeenCalledTimes(1);
       });
       expect(toastify.toast.success).toHaveBeenCalledWith(
-        'Dépense créé avec succès.'
+        'Votre dépense "Test voyage" a été créé avec succès.'
       );
     });
   });
@@ -292,10 +279,10 @@ describe('when server responds with error', () => {
     request: {
       query: CREATE_SPENDING,
       variables: {
-        title: 'Test Spending',
-        date: new Date(),
-        unit: 10,
-        weight: 3,
+        title: 'Test voyage',
+        date: new Date('2022-02-05'),
+        unit: 0,
+        weight: 0,
         categoryName: 'Avion',
       },
     },
