@@ -17,9 +17,10 @@ import AppUser from '../../models/AppUser/AppUser.entity';
 
 @Resolver(Spending)
 export default class SpendingResolver {
+  @Authorized()
   @Query(() => [Spending])
-  spendings(): Promise<Spending[]> {
-    return SpendingRepository.getSpendings();
+  spendings(@Ctx() context: GlobalContext): Promise<Spending[]> {
+    return SpendingRepository.getSpendings(context.user as AppUser);
   }
 
   @Authorized()

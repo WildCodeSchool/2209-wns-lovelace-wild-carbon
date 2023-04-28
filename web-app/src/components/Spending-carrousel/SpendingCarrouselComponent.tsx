@@ -40,9 +40,12 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
         <Slider {...settings}>
           {spendingData?.spendings.map((spending) => {
             return (
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div
+                key={spending.id}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
                 <div className="p-6">
-                  <div className="flex justify-between ">
+                  <div className="flex justify-between">
                     <h2 className="text-gray-800 font-semibold text-lg mb-2">
                       {spending.title}
                     </h2>

@@ -1,6 +1,4 @@
-import { Repository } from 'typeorm';
 import Spending from './Spending.entity';
-import { getRepository } from '../../database/utils';
 import SpendingDb from './Spending.db';
 import CategoryRepository from '../Category/Category.repository';
 import Category from '../Category/Category.entity';
@@ -26,8 +24,11 @@ export default class SpendingRepository extends SpendingDb {
     await this.repository.save([spendingExemple]);
   }
 
-  static async getSpendings(): Promise<Spending[]> {
-    return this.repository.find({ relations: { user: true } });
+  static async getSpendings(user: AppUser): Promise<Spending[]> {
+    return this.repository.find({
+      where: { user: { id: user.id } },
+      relations: { user: true },
+    });
   }
 
   static async createSpending(
