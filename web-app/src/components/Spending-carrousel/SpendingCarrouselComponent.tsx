@@ -34,6 +34,15 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
 
   console.log(spendingData);
 
+  const [selectedSpending, setSelectedSpending] = useState<Spending | null>(
+    null
+  );
+
+  const getSpendingModal = (spending: Spending) => {
+    setSelectedSpending(spending);
+    setShowModal(true);
+  };
+
   return (
     <>
       <div className="mt-6  mb-8 px-8">
