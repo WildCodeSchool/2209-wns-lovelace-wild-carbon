@@ -1,9 +1,8 @@
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import Footer from "../../components/Footer/Footer";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import React from "react";
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import Footer from '../../components/Footer/Footer';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 interface FormData {
   name: string;
@@ -36,12 +35,12 @@ const Register = () => {
             <input
               className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
                 errors.name &&
-                "focus:border-red-500 focus:ring-red-500 border-red-500"
+                'focus:border-red-500 focus:ring-red-500 border-red-500'
               }`}
               type="text"
               placeholder="Nom"
-              {...register("name", {
-                required: "Le nom est requis",
+              {...register('name', {
+                required: 'Le nom est requis',
               })}
             ></input>
             {errors.name && (
@@ -55,11 +54,11 @@ const Register = () => {
             <input
               className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
                 errors.firstname &&
-                "focus:border-red-500 focus:ring-red-500 border-red-500"
+                'focus:border-red-500 focus:ring-red-500 border-red-500'
               }`}
               type="text"
               placeholder="Prénom"
-              {...register("firstname", { required: "Le Prénom est requis" })}
+              {...register('firstname', { required: 'Le Prénom est requis' })}
             ></input>
             {errors.firstname && (
               <p className="text-sm text-red-500 text-center">
@@ -73,11 +72,11 @@ const Register = () => {
             <input
               className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
                 errors.email &&
-                "focus:border-red-500 focus:ring-red-500 border-red-500"
+                'focus:border-red-500 focus:ring-red-500 border-red-500'
               }`}
               type="text"
               placeholder="dave.lopper@test.com"
-              {...register("email", {
+              {...register('email', {
                 required: "L'email est requis",
                 pattern: {
                   value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
@@ -100,25 +99,25 @@ const Register = () => {
             <input
               className={`bg-[#C3E9AC] rounded-[5px] p-[10px] cursor-pointer ${
                 errors.password &&
-                "focus:border-red-500 focus:ring-red-500 border-red-500"
+                'focus:border-red-500 focus:ring-red-500 border-red-500'
               }`}
-              type={showPassword === false ? "text" : "password"}
+              type={showPassword === false ? 'text' : 'password'}
               placeholder="Mot de passe"
-              {...register("password", {
-                required: "Le mot de passe est requis",
+              {...register('password', {
+                required: 'Le mot de passe est requis',
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
                   message:
-                    "Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et au moins 6 caractères",
+                    'Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et au moins 6 caractères',
                 },
                 minLength: {
                   value: 6,
                   message:
-                    "Le mot de passe doit contenir au moins 6 caractères",
+                    'Le mot de passe doit contenir au moins 6 caractères',
                 },
                 maxLength: {
                   value: 10,
-                  message: "Le mot de passe ne doit pas exceder 10 caracteres",
+                  message: 'Le mot de passe ne doit pas exceder 10 caracteres',
                 },
               })}
             ></input>

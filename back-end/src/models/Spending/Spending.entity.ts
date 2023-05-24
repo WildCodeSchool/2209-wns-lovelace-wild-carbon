@@ -1,8 +1,8 @@
-import dayjs from "dayjs";
-import { Field, ID, ObjectType } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-
-import Category from "../Category/Category.entity";
+import dayjs from 'dayjs';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import Category from '../Category/Category.entity';
+import AppUser from '../AppUser/AppUser.entity';
 
 @Entity()
 @ObjectType()
@@ -21,7 +21,7 @@ export default class Spending {
     this.category = category;
   }
 
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
   id: string;
 
@@ -35,7 +35,7 @@ export default class Spending {
 
   @Field(() => String)
   localizedDate() {
-    return dayjs(this.date).format("DD/MM/YYYY");
+    return dayjs(this.date).format('DD/MM/YYYY');
   }
 
   @Column()
@@ -48,20 +48,13 @@ export default class Spending {
 
   @ManyToOne(() => Category, (category) => category.spendings, {
     eager: true,
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   @Field(() => Category)
   category: Category;
 
-  @Field(() => String)
-  getCaracsSpending() {
-    if(this.category.categoryName === "Multimédia") {
-    return `${this.weight}kWh - ${this.unit}kg/CO2`} else return `${this.weight}km - ${this.unit}kg/CO2`
-  }
-
-  @Field(() => String)
-  getDisplaySpending() {
-    return `[${this.localizedDate()} - ${this.getCaracsSpending()}] ${this.title
-    } - ${this.category.categoryName}`;
-  }
+  @ManyToOne(() => AppUser, (user) => user.spendings, {
+    onDelete: 'CASCADE',
+  })
+  user: AppUser;
 }
