@@ -1,4 +1,19 @@
 import { useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
+import { getErrorMessage } from 'utils';
+import {
+  CreateDonationMutation,
+  CreateDonationMutationVariables,
+} from 'gql/graphql';
+
+const CREATE_DONATION = gql`
+  mutation createDonation($amount: Float!) {
+    createDonation(amount: $amount) {
+      amount
+    }
+  }
+`;
 
 const Donation = () => {
   const [total, setTotal] = useState<number>(0);
@@ -10,12 +25,24 @@ const Donation = () => {
     setSelectedAmount(amountToAdd.toString());
   };
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async () => {
     const amountToAdd = parseInt(selectedAmount);
     if (!isNaN(amountToAdd)) {
       setTotal(total + amountToAdd);
       setSelectedAmount('');
       setContributions([...contributions, amountToAdd.toString()]);
+      try {
+        await createDonation({
+          variables: {
+            amount: amountToAdd,
+          },
+        });
+        toast.success(
+          `Votre donation de "${amountToAdd}€" a été bien été validée.`
+        );
+      } catch (error) {
+        toast.error(getErrorMessage(error));
+      }
     }
   };
 
@@ -27,8 +54,13 @@ const Donation = () => {
     setShowModal(true);
   };
 
+  const [createDonation] = useMutation<
+    CreateDonationMutation,
+    CreateDonationMutationVariables
+  >(CREATE_DONATION);
+
   return (
-    <div>
+    <>
       <div>
         <h1>Donation</h1>
         <p>Soutenez Wild Carbon !</p>
@@ -84,7 +116,7 @@ const Donation = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
