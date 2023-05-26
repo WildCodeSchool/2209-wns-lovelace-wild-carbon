@@ -3,6 +3,10 @@ import DonationDb from './Donation.db';
 import Donation from './Donation.entity';
 
 export default class DonationRepository extends DonationDb {
+  static async initializeDonation(): Promise<void> {
+    await this.clearRepository();
+  }
+
   static async getDonations(): Promise<Donation[]> {
     return this.repository.find({ relations: { user: true } });
   }
