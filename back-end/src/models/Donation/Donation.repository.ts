@@ -8,7 +8,30 @@ export default class DonationRepository extends DonationDb {
   }
 
   static async getDonations(): Promise<Donation[]> {
-    return this.repository.find({ relations: { user: true } });
+    return this.repository.find({
+      relations: { user: true },
+    });
+  }
+
+  static async getDonationsByUserId(user: AppUser): Promise<Donation[]> {
+    return this.repository.find({
+      where: { user: { id: user.id } },
+      relations: { user: true },
+    });
+  }
+
+  // static async getListOfTotalDonations(user: AppUser): Promise<Donation[]> {
+  //   return this.repository.find({
+  //     where: { user: { id: user.id } },
+  //     relations: { user: true },
+  //   });
+  // }
+
+  static async getTotalDonations(): Promise<number | undefined> {
+    return this.repository
+      .createQueryBuilder('donation')
+      .select('SUM(donation.amount)', 'totalAmount')
+      .getRawOne();
   }
 
   static async createDonation(

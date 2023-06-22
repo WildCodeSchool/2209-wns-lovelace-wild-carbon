@@ -1,4 +1,12 @@
-import { Args, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql';
+import {
+  Args,
+  Authorized,
+  Ctx,
+  Float,
+  Mutation,
+  Query,
+  Resolver,
+} from 'type-graphql';
 
 import DonationRepository from '../../models/Donation/Donation.repository';
 import Donation from '../../models/Donation/Donation.entity';
@@ -12,6 +20,24 @@ export default class DonationResolver {
   donations(): Promise<Donation[]> {
     return DonationRepository.getDonations();
   }
+
+  @Authorized()
+  @Query(() => [Donation])
+  donationsByUserId(@Ctx() context: GlobalContext): Promise<Donation[]> {
+    return DonationRepository.getDonationsByUserId(context.user as AppUser);
+  }
+
+  @Authorized()
+  @Query(() => [Donation])
+  getTotalDonations(): Promise<number | undefined> {
+    return DonationRepository.getTotalDonations();
+  }
+
+  // @Authorized()
+  // @Query(() => [Donation])
+  // getListOfTotalDonations(@Ctx() context: GlobalContext): Promise<Donation[]> {
+  //   return DonationRepository.getListOfTotalDonations(context.user as AppUser);
+  // }
 
   @Authorized()
   @Mutation(() => Donation)
