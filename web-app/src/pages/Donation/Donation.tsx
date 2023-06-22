@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { getErrorMessage } from 'utils';
 import {
   CreateDonationMutation,
   CreateDonationMutationVariables,
+  DonationsQuery,
+  DonationsByUserIdQuery,
+  // GetTotalDonationsQuery,
 } from 'gql/graphql';
-import { BsPiggyBank } from 'react-icons/bs';
+// import { BsPiggyBank } from 'react-icons/bs';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
@@ -20,12 +23,37 @@ const CREATE_DONATION = gql`
   }
 `;
 
+// onlyMine
+
+const GET_DONATIONS = gql`
+  query Donations {
+    donations {
+      amount
+      date
+    }
+  }
+`;
+
+// const GET_TOTAL_DONATIONS = gql`
+//   query GetTotalDonations {
+//     getTotalDonations {
+//       amount
+//     }
+//   }
+// `;
+
+const GET_DONATIONS_BY_USER = gql`
+  query DonationsByUserId {
+    donationsByUserId {
+      amount
+    }
+  }
+`;
+
 const Donation = () => {
   const [total, setTotal] = useState<number>(0);
   const [selectedAmount, setSelectedAmount] = useState<string>('5');
-  const [contributions, setContributions] = useState<string[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
-
   const handleButtonClick = (amountToAdd: number) => {
     setSelectedAmount(amountToAdd.toString());
   };
@@ -35,7 +63,6 @@ const Donation = () => {
     if (!isNaN(amountToAdd)) {
       setTotal(total + amountToAdd);
       setSelectedAmount('');
-      setContributions([...contributions, amountToAdd.toString()]);
       try {
         await createDonation({
           variables: {
@@ -51,15 +78,6 @@ const Donation = () => {
     }
   };
 
-  const lastContributors = contributions
-    .slice(-4)
-    .map((contribution, index) => (
-      <div key={index} className="flex items-center text-black">
-        <BsPiggyBank className="mr-2" />
-        <p>{contribution}€</p>
-      </div>
-    ));
-
   const openModal = () => {
     setShowModal(true);
   };
@@ -68,9 +86,16 @@ const Donation = () => {
     CreateDonationMutation,
     CreateDonationMutationVariables
   >(CREATE_DONATION);
-  console.log('data', data);
 
   let responseDate = moment(data?.createDonation.date).format('DD/MM/YYYY');
+
+  const { data: donationData } = useQuery<DonationsQuery>(GET_DONATIONS);
+  const { data: donationDataId } = useQuery<DonationsByUserIdQuery>(
+    GET_DONATIONS_BY_USER
+  );
+  // const { data: totalDonation } =
+  //   useQuery<GetTotalDonationsQuery>(GET_TOTAL_DONATIONS);
+  // console.log(totalDonation);
 
   return (
     <div className="h-[110vh] overflow-y-scroll">
@@ -80,7 +105,7 @@ const Donation = () => {
       </div>
       <div className="flex items-center flex-col text-[#484B8A] font-bold mt-6 text-[20px]">
         <h3>Total de la cagnotte en cours : </h3>
-        <p>{total}€</p>
+        <p>{}€</p>
       </div>
       <div className="border mx-[40px] my-[37px]"></div>
       <div className="flex items-center flex-col text-[#609f39] font-bold">
@@ -132,7 +157,11 @@ const Donation = () => {
         <h4 className="ml-5 text-[#609f39] font-semibold mb-[5px]">
           Derniers contributeurs :
         </h4>
-        <p className="ml-5 flex flex-col flex-wrap">{lastContributors}</p>
+        <p className="ml-5 flex flex-col flex-wrap">
+          {donationData?.donations.slice(-5).map((donation, index) => (
+            <span key={index}>{donation.amount}€</span>
+          ))}
+        </p>
         <button
           type="button"
           onClick={openModal}
@@ -154,10 +183,10 @@ const Donation = () => {
             </div>
           </span>
           <div className="ml-5 text-[#609f39] font-semibold flex flex-col">
-            {contributions.map((contribution, index) => (
-              <p key={index}>
-                Donation de {contribution}€ le {responseDate}.
-              </p>
+            {donationDataId?.donationsByUserId.map((donationsId, index) => (
+              <span key={index}>
+                {donationsId.amount}€ le {responseDate}
+              </span>
             ))}
           </div>
         </div>
