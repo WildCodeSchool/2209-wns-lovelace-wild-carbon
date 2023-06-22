@@ -19,6 +19,9 @@ const documents = {
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
     "\n  query MyProfileQuery {\n    myProfile {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.MyProfileQueryDocument,
     "\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n": types.CreateDonationDocument,
+    "\n  query Donations {\n    donations {\n      amount\n      date\n    }\n  }\n": types.DonationsDocument,
+    "\n  query GetTotalDonations {\n    getTotalDonations {\n      amount\n    }\n  }\n": types.GetTotalDonationsDocument,
+    "\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n": types.DonationsByUserIdDocument,
     "\n  mutation CreateUser(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createUser(\n      firstName: $firstName\n      lastName: $lastName\n      email: $email\n      password: $password\n    ) {\n      lastName\n      id\n      firstName\n      email\n    }\n  }\n": types.CreateUserDocument,
     "\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n    }\n  }\n": types.SignInDocument,
 };
@@ -61,6 +64,18 @@ export function graphql(source: "\n  query MyProfileQuery {\n    myProfile {\n  
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n"): (typeof documents)["\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Donations {\n    donations {\n      amount\n      date\n    }\n  }\n"): (typeof documents)["\n  query Donations {\n    donations {\n      amount\n      date\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetTotalDonations {\n    getTotalDonations {\n      amount\n    }\n  }\n"): (typeof documents)["\n  query GetTotalDonations {\n    getTotalDonations {\n      amount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n"): (typeof documents)["\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
