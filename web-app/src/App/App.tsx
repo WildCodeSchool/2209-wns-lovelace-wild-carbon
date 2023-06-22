@@ -6,6 +6,7 @@ import {
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
   PROFILE_PATH,
+  COMPARE_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
@@ -25,6 +26,7 @@ import { useState } from 'react';
 import Protected from 'pages/alreadyLog/Protected';
 import Profile from 'pages/profile/Profile';
 import LogOutButton from 'components/logOutButton/LogOutButton';
+import { Compare } from 'pages/compare/Compare';
 
 function App() {
   const MY_PROFILE = gql`
@@ -97,6 +99,14 @@ function App() {
             element={
               <Protected isLoggedIn={isLogged} loading={loading}>
                 <CarbonSpending />
+              </Protected>
+            }
+          />
+                    <Route
+            path={COMPARE_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+               <Compare />
               </Protected>
             }
           />
