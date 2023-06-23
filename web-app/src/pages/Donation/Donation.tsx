@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { getErrorMessage } from 'utils';
@@ -7,9 +7,9 @@ import {
   CreateDonationMutationVariables,
   DonationsQuery,
   DonationsByUserIdQuery,
-  // GetTotalDonationsQuery,
+  GetTotalDonationsQuery,
 } from 'gql/graphql';
-// import { BsPiggyBank } from 'react-icons/bs';
+import { BsPiggyBank } from 'react-icons/bs';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
@@ -34,13 +34,11 @@ const GET_DONATIONS = gql`
   }
 `;
 
-// const GET_TOTAL_DONATIONS = gql`
-//   query GetTotalDonations {
-//     getTotalDonations {
-//       amount
-//     }
-//   }
-// `;
+const GET_TOTAL_DONATIONS = gql`
+  query GetTotalDonations {
+    getTotalDonations
+  }
+`;
 
 const GET_DONATIONS_BY_USER = gql`
   query DonationsByUserId {
@@ -51,7 +49,6 @@ const GET_DONATIONS_BY_USER = gql`
 `;
 
 const Donation = () => {
-  const [total, setTotal] = useState<number>(0);
   const [selectedAmount, setSelectedAmount] = useState<string>('5');
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleButtonClick = (amountToAdd: number) => {
@@ -61,7 +58,6 @@ const Donation = () => {
   const handleConfirmClick = async () => {
     const amountToAdd = parseInt(selectedAmount);
     if (!isNaN(amountToAdd)) {
-      setTotal(total + amountToAdd);
       setSelectedAmount('');
       try {
         await createDonation({
@@ -82,20 +78,29 @@ const Donation = () => {
     setShowModal(true);
   };
 
-  const [createDonation, { data }] = useMutation<
+  const [createDonation, { data: createDonationData }] = useMutation<
     CreateDonationMutation,
     CreateDonationMutationVariables
   >(CREATE_DONATION);
 
-  let responseDate = moment(data?.createDonation.date).format('DD/MM/YYYY');
+  let responseDate = moment(createDonationData?.createDonation.date).format(
+    'DD/MM/YYYY'
+  );
 
-  const { data: donationData } = useQuery<DonationsQuery>(GET_DONATIONS);
+  const { data: donationData, refetch: refetchLatestContributors } =
+    useQuery<DonationsQuery>(GET_DONATIONS);
   const { data: donationDataId } = useQuery<DonationsByUserIdQuery>(
     GET_DONATIONS_BY_USER
   );
-  // const { data: totalDonation } =
-  //   useQuery<GetTotalDonationsQuery>(GET_TOTAL_DONATIONS);
-  // console.log(totalDonation);
+  const { data: totalDonations, refetch: refetchTotalDonations } =
+    useQuery<GetTotalDonationsQuery>(GET_TOTAL_DONATIONS);
+
+  useEffect(() => {
+    if (createDonationData) {
+      refetchLatestContributors();
+      refetchTotalDonations();
+    }
+  }, [createDonationData, refetchLatestContributors, refetchTotalDonations]);
 
   return (
     <div className="h-[110vh] overflow-y-scroll">
@@ -105,7 +110,7 @@ const Donation = () => {
       </div>
       <div className="flex items-center flex-col text-[#484B8A] font-bold mt-6 text-[20px]">
         <h3>Total de la cagnotte en cours : </h3>
-        <p>{}€</p>
+        <p>{totalDonations?.getTotalDonations.toFixed(2)}€</p>
       </div>
       <div className="border mx-[40px] my-[37px]"></div>
       <div className="flex items-center flex-col text-[#609f39] font-bold">
@@ -182,11 +187,16 @@ const Donation = () => {
               />
             </div>
           </span>
-          <div className="ml-5 text-[#609f39] font-semibold flex flex-col">
+          <div className="ml-5 text-[#609f39] font-semibold flex flex-col leading-7">
             {donationDataId?.donationsByUserId.map((donationsId, index) => (
-              <span key={index}>
-                {donationsId.amount}€ le {responseDate}
-              </span>
+              <div key={index} className="flex items-center">
+                <BsPiggyBank
+                  style={{ marginRight: '10px', fontSize: '20px' }}
+                />
+                <span>
+                  {donationsId.amount}€ le {responseDate}
+                </span>
+              </div>
             ))}
           </div>
         </div>

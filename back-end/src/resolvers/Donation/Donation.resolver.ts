@@ -2,7 +2,7 @@ import {
   Args,
   Authorized,
   Ctx,
-  Float,
+  Int,
   Mutation,
   Query,
   Resolver,
@@ -27,8 +27,7 @@ export default class DonationResolver {
     return DonationRepository.getDonationsByUserId(context.user as AppUser);
   }
 
-  @Authorized()
-  @Query(() => [Donation])
+  @Query(() => Int)
   getTotalDonations(): Promise<number | undefined> {
     return DonationRepository.getTotalDonations();
   }

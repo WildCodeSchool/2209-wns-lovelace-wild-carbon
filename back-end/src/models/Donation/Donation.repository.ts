@@ -20,19 +20,20 @@ export default class DonationRepository extends DonationDb {
     });
   }
 
+  static async getTotalDonations(): Promise<number | undefined> {
+    const result = await this.repository
+      .createQueryBuilder('donation')
+      .select('SUM(donation.amount)')
+      .getRawOne();
+    return result.sum;
+  }
+
   // static async getListOfTotalDonations(user: AppUser): Promise<Donation[]> {
   //   return this.repository.find({
   //     where: { user: { id: user.id } },
   //     relations: { user: true },
   //   });
   // }
-
-  static async getTotalDonations(): Promise<number | undefined> {
-    return this.repository
-      .createQueryBuilder('donation')
-      .select('SUM(donation.amount)', 'totalAmount')
-      .getRawOne();
-  }
 
   static async createDonation(
     amount: number,
