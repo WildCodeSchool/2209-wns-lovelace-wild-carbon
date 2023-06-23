@@ -1,7 +1,7 @@
-import { HOME_PATH } from 'pages/paths';
+import { HOME_PATH } from '../../pages/paths';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { SignOutMutation, SignOutMutationVariables } from 'gql/graphql';
+import { SignOutMutation, SignOutMutationVariables } from '../../gql/graphql';
 import { toast } from 'react-toastify';
 
 const SIGN_OUT = gql`

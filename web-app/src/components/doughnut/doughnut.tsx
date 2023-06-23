@@ -1,29 +1,27 @@
 import { Chart as ChartJs, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useQuery, gql } from '@apollo/client';
-import { Get_SpendingQuery } from 'gql/graphql';
-import SpendingCarrouselComponent from 'components/Spending-carrousel/SpendingCarrouselComponent';
+import { SpendingsQuery } from '../../gql/graphql';
+import SpendingCarrouselComponent from '../../components/Spending-carrousel/SpendingCarrouselComponent';
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 
 const GET_SPENDING = gql`
-  query GET_SPENDING {
+  query Spendings {
     spendings {
+      weight
+      title
+      unit
       category {
         categoryName
       }
-      date
-      id
       localizedDate
-      title
-      unit
-      weight
     }
   }
 `;
 
 const DoughnutComponent = () => {
-  const { data } = useQuery<Get_SpendingQuery>(GET_SPENDING);
+  const { data } = useQuery<SpendingsQuery>(GET_SPENDING);
 
   let categoryWeights: number[] = [];
   let categoryLabels: string[] = [

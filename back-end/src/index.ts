@@ -14,6 +14,7 @@ import AppUserRepository from './models/AppUser/AppUser.repository';
 import { getSessionIdInCookie } from './http-utils';
 import AppUser from './models/AppUser/AppUser.entity';
 import { IS_PRODUCTION } from './config';
+import FriendshipResolver from './resolvers/FriendShip/FriendShip.resolver';
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
@@ -22,7 +23,12 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [SpendingResolver, ArticleResolver, AppUserResolver],
+      resolvers: [
+        SpendingResolver,
+        ArticleResolver,
+        AppUserResolver,
+        FriendshipResolver,
+      ],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },

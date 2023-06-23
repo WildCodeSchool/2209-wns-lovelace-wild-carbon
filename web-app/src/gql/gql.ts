@@ -14,8 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query MyProfile {\n      myProfile {\n        email\n        id\n      }\n    }\n  ": types.MyProfileDocument,
+    "\n  mutation SendFriendshipRequest($invitedUserEmail: String!) {\n    sendFriendshipRequest(invitedUserEmail: $invitedUserEmail) {\n      invitedUsers {\n        email\n      }\n    }\n  }\n": types.SendFriendshipRequestDocument,
+    "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n": types.GetFriendshipListDocument,
     "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n": types.CreateSpendingDocument,
-    "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n": types.Get_SpendingDocument,
+    "\n  query Spendings {\n    spendings {\n      weight\n      title\n      unit\n      category {\n        categoryName\n      }\n      localizedDate\n    }\n  }\n": types.SpendingsDocument,
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
     "\n  query MyProfileQuery {\n    myProfile {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.MyProfileQueryDocument,
     "\n  mutation CreateUser(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createUser(\n      firstName: $firstName\n      lastName: $lastName\n      email: $email\n      password: $password\n    ) {\n      lastName\n      id\n      firstName\n      email\n    }\n  }\n": types.CreateUserDocument,
@@ -43,11 +45,19 @@ export function graphql(source: "\n    query MyProfile {\n      myProfile {\n   
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation SendFriendshipRequest($invitedUserEmail: String!) {\n    sendFriendshipRequest(invitedUserEmail: $invitedUserEmail) {\n      invitedUsers {\n        email\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation SendFriendshipRequest($invitedUserEmail: String!) {\n    sendFriendshipRequest(invitedUserEmail: $invitedUserEmail) {\n      invitedUsers {\n        email\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n"): (typeof documents)["\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n"): (typeof documents)["\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n"];
+export function graphql(source: "\n  query Spendings {\n    spendings {\n      weight\n      title\n      unit\n      category {\n        categoryName\n      }\n      localizedDate\n    }\n  }\n"): (typeof documents)["\n  query Spendings {\n    spendings {\n      weight\n      title\n      unit\n      category {\n        categoryName\n      }\n      localizedDate\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

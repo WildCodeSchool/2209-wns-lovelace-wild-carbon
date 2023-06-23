@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import { Get_SpendingQuery } from 'gql/graphql';
+import { SpendingsQuery } from '../../gql/graphql';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoryIcon from './CategoryIcon';
@@ -8,10 +8,10 @@ import SpendingModalComponent from './SpendingModalComponent';
 import { FcPlus } from 'react-icons/fc';
 
 interface SpendingCarouselComponentProps {
-  spendingData?: Get_SpendingQuery;
+  spendingData?: SpendingsQuery;
 }
 
-export type Spending = Get_SpendingQuery['spendings'][number];
+export type Spending = SpendingsQuery['spendings'][number];
 
 const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
   spendingData,
@@ -34,27 +34,15 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
 
   console.log(spendingData);
 
-  const [selectedSpending, setSelectedSpending] = useState<Spending | null>(
-    null
-  );
-
-  const getSpendingModal = (spending: Spending) => {
-    setSelectedSpending(spending);
-    setShowModal(true);
-  };
-
   return (
     <>
       <div className="mt-6  mb-8 px-8">
         <Slider {...settings}>
           {spendingData?.spendings.map((spending) => {
             return (
-              <div
-                key={spending.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="p-6">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between ">
                     <h2 className="text-gray-800 font-semibold text-lg mb-2">
                       {spending.title}
                     </h2>

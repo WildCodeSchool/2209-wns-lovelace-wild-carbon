@@ -7,8 +7,6 @@ import {
   Query,
   Resolver,
 } from 'type-graphql';
-import Category from '../../models/Category/Category.entity';
-
 import Spending from '../../models/Spending/Spending.entity';
 import SpendingRepository from '../../models/Spending/Spending.repository';
 import { CreateSpendingArgs, UpdateSpendingArgs } from './Spending.input';
@@ -22,7 +20,6 @@ export default class SpendingResolver {
   spendings(@Ctx() context: GlobalContext): Promise<Spending[]> {
     return SpendingRepository.getSpendings(context.user as AppUser);
   }
-
   @Authorized()
   @Mutation(() => Spending)
   createSpending(
