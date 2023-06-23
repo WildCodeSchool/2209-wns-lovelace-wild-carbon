@@ -28,13 +28,6 @@ export default class DonationRepository extends DonationDb {
     return result.sum;
   }
 
-  // static async getListOfTotalDonations(user: AppUser): Promise<Donation[]> {
-  //   return this.repository.find({
-  //     where: { user: { id: user.id } },
-  //     relations: { user: true },
-  //   });
-  // }
-
   static async createDonation(
     amount: number,
     user: AppUser

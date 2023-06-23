@@ -32,12 +32,6 @@ export default class DonationResolver {
     return DonationRepository.getTotalDonations();
   }
 
-  // @Authorized()
-  // @Query(() => [Donation])
-  // getListOfTotalDonations(@Ctx() context: GlobalContext): Promise<Donation[]> {
-  //   return DonationRepository.getListOfTotalDonations(context.user as AppUser);
-  // }
-
   @Authorized()
   @Mutation(() => Donation)
   createDonation(
