@@ -14,8 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query MyProfile {\n      myProfile {\n        email\n        id\n      }\n    }\n  ": types.MyProfileDocument,
+    "\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n": types.DeleteSpendingDocument,
     "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n": types.CreateSpendingDocument,
-    "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n": types.Get_SpendingDocument,
+    "\n\tquery GET_SPENDING {\n\t\tspendings {\n\t\t\tcategory {\n\t\t\t\tcategoryName\n\t\t\t}\n\t\t\tdate\n\t\t\tid\n\t\t\tlocalizedDate\n\t\t\ttitle\n\t\t\tunit\n\t\t\tweight\n\t\t}\n\t}\n": types.Get_SpendingDocument,
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
     "\n  query MyProfileQuery {\n    myProfile {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.MyProfileQueryDocument,
     "\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n": types.CreateDonationDocument,
@@ -47,11 +48,15 @@ export function graphql(source: "\n    query MyProfile {\n      myProfile {\n   
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n"): (typeof documents)["\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n"];
+export function graphql(source: "\n\tquery GET_SPENDING {\n\t\tspendings {\n\t\t\tcategory {\n\t\t\t\tcategoryName\n\t\t\t}\n\t\t\tdate\n\t\t\tid\n\t\t\tlocalizedDate\n\t\t\ttitle\n\t\t\tunit\n\t\t\tweight\n\t\t}\n\t}\n"): (typeof documents)["\n\tquery GET_SPENDING {\n\t\tspendings {\n\t\t\tcategory {\n\t\t\t\tcategoryName\n\t\t\t}\n\t\t\tdate\n\t\t\tid\n\t\t\tlocalizedDate\n\t\t\ttitle\n\t\t\tunit\n\t\t\tweight\n\t\t}\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
