@@ -82,11 +82,6 @@ const Donation = () => {
     CreateDonationMutation,
     CreateDonationMutationVariables
   >(CREATE_DONATION);
-
-  let responseDate = moment(createDonationData?.createDonation.date).format(
-    'DD/MM/YYYY'
-  );
-
   const { data: donationData, refetch: refetchLatestContributors } =
     useQuery<DonationsQuery>(GET_DONATIONS);
   const { data: donationDataId } = useQuery<DonationsByUserIdQuery>(
@@ -101,6 +96,10 @@ const Donation = () => {
       refetchTotalDonations();
     }
   }, [createDonationData, refetchLatestContributors, refetchTotalDonations]);
+
+  let responseDate = moment(createDonationData?.createDonation.date).format(
+    'DD/MM/YYYY'
+  );
 
   return (
     <div className="h-[110vh] overflow-y-scroll">
