@@ -16,7 +16,7 @@ import SignIn from '../pages/signin/SignIn';
 import { useLocation } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
@@ -25,22 +25,24 @@ import { useState } from 'react';
 import Protected from 'pages/alreadyLog/Protected';
 import Profile from 'pages/profile/Profile';
 import LogOutButton from 'components/logOutButton/LogOutButton';
+import Interdit from '../Assets/interdit.png';
 
 function App() {
   const MY_PROFILE = gql`
-    query MyProfile {
-      myProfile {
-        email
-        id
-      }
-    }
-  `;
+		query MyProfile {
+			myProfile {
+				email
+				id
+			}
+		}
+	`;
   const [isLogged, setIsLogged] = useState(false);
 
   const { loading, refetch, data } = useQuery<MyProfileQuery>(MY_PROFILE, {
     onCompleted: (data) => {
       if (data.myProfile) {
         setIsLogged(true);
+        refetch();
       }
     },
     onError: () => {
@@ -48,10 +50,13 @@ function App() {
     },
   });
 
+  console.log(isLogged, 'data');
+
   const location = useLocation();
   return (
     <>
       <Header />
+
       <div className="flex justify-end text-[#fff] mt-[10px] text-sm ">
         {data?.myProfile ? (
           <i>{data?.myProfile.email}</i>
@@ -70,12 +75,19 @@ function App() {
           </nav>
         )}
       </div>
+      {(isLogged === false && location.pathname !== '/signin' && location.pathname !== '/register') && (
+        <div className="text-center flex flex-col items-center justify-center mt-[100px]">
+          <img alt='Interdit' src={Interdit} width={500} />
+          <h1 className='text-[40px] max-sm:text-[22px]'>Pour accèder au contenu de la page, veuillez vous connecter !</h1>
+
+        </div>
+      )}
       <Protected isLoggedIn={isLogged} loading={loading}>
-        <LogOutButton userData={data} />
+        <LogOutButton userData={data} setIsLogged={setIsLogged} />
       </Protected>
       <main>
         <Routes>
-          <Route path={HOME_PATH} element={<Home />} />
+          <Route path={DASHBOARD_PATH} element={<Home />} />
           <Route
             path={DASHBOARD_PATH}
             element={
