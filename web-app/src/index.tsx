@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-
+import { ContextProvider } from './context/AppContext';
 import './index.css';
 import App from './App/App';
 import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
-  uri: '/',
+  uri: '/api',
   cache: new InMemoryCache(),
 });
 
@@ -18,9 +18,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ContextProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

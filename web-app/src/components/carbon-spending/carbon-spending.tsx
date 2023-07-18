@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { TRANSPORTS_PARAMS } from "./utils";
-import SliderComponent from "./slider";
-import { gql, useMutation } from "@apollo/client";
+import { useState } from 'react';
+import { TRANSPORTS_PARAMS } from './utils';
+import { gql, useMutation } from '@apollo/client';
 import {
   CreateSpendingMutation,
   CreateSpendingMutationVariables,
-} from "../../gql/graphql";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { getErrorMessage } from "utils";
+} from '../../gql/graphql';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getErrorMessage } from 'utils';
+import CarbonValue from './slider';
 
 const CREATE_SPENDING = gql`
   mutation CreateSpending(
@@ -39,11 +39,11 @@ const CREATE_SPENDING = gql`
 function CarbonSpending() {
   const [selectedIcon, setSelectedIcon] = useState<number>(0);
   const [unit, setUnit] = useState<number>(0);
-  const [date, setDate] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [categoryName, setCategoryName] = useState<string>("");
+  const [date, setDate] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>('');
 
-  const [createSpending, { loading }] = useMutation<
+  const [createSpending] = useMutation<
     CreateSpendingMutation,
     CreateSpendingMutationVariables
   >(CREATE_SPENDING);
@@ -66,21 +66,21 @@ function CarbonSpending() {
         },
       });
       toast.success(`Votre dépense "${title}" a été créé avec succès.`);
-      setTitle("");
-      setDate("");
+      setTitle('');
+      setDate('');
       setUnit(0);
       setSelectedIcon(0);
-      setCategoryName("");
+      setCategoryName('');
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
   };
 
-  const roundedValue =
-    selectedIcon === 2
-      ? unit * 0.1482
-      : selectedIcon === 1
+  const weightCalculation =
+    selectedIcon === 1
       ? unit * 0.3
+      : selectedIcon === 2
+      ? unit * 0.1482
       : selectedIcon === 3
       ? unit * 0.014
       : selectedIcon === 4
@@ -89,7 +89,7 @@ function CarbonSpending() {
       ? unit * 0.185
       : 0;
 
-  const weight = parseInt(roundedValue.toFixed(0));
+  const weight = parseInt(weightCalculation.toFixed(0));
 
   return (
     <>
@@ -163,7 +163,7 @@ function CarbonSpending() {
             {TRANSPORTS_PARAMS.filter((item) => item.id === selectedIcon).map(
               (el) => {
                 return (
-                  <SliderComponent
+                  <CarbonValue
                     value={unit}
                     setValue={setUnit}
                     min={el.min}
@@ -176,7 +176,7 @@ function CarbonSpending() {
             )}
           </div>
         ) : (
-          ""
+          ''
         )}
 
         <button className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">

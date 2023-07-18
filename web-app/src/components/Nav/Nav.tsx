@@ -8,9 +8,10 @@ import {
 } from 'react-icons/ai';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 import {
-  HOME_PATH,
   DONATION_PATH,
   CARBON_SPENDING_PATH,
+  PROFILE_PATH,
+  HOME_PATH,
 } from '../../pages/paths';
 
 interface MenuItem {
@@ -22,7 +23,7 @@ interface MenuItem {
 const Navigation = () => {
   const Menus: MenuItem[] = [
     { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
-    { name: 'Profil', icon: <AiOutlineUser />, path: '/' },
+    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
     {
       name: 'Ajouter',
       icon: <IoMdAddCircleOutline />,

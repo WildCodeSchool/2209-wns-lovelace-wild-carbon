@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Slider from "react-slider";
+import Slider from 'react-slider';
 
 interface Value {
   value: number;
@@ -10,7 +9,7 @@ interface Value {
   idicon: number;
 }
 
-function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
+function CarbonValue({ value, setValue, min, max, result, idicon }: Value) {
   return (
     <>
       <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
@@ -29,7 +28,7 @@ function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
           max={max}
         />
         <p className="value">
-          {value} {idicon === 3 ? "kWh" : "km"}
+          {value} {idicon === 3 ? 'kWh' : 'km'}
         </p>
       </div>
       <div className="flex flex-col mt-[30px]">
@@ -45,4 +44,4 @@ function SliderComponent({ value, setValue, min, max, result, idicon }: Value) {
   );
 }
 
-export default SliderComponent;
+export default CarbonValue;
