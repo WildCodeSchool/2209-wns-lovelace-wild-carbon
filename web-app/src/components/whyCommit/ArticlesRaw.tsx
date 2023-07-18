@@ -1,5 +1,3 @@
-//Next Step - Need to call articles data
-
 import { gql, useQuery } from '@apollo/client';
 import Footer from 'components/Footer/Footer';
 import { QueryQuery } from 'gql/graphql';
@@ -31,7 +29,6 @@ interface IArticles {
 
 const ArticlesRaw = () => {
   const { data } = useQuery<QueryQuery>(GET_ARTICLES);
-  console.log(data);
   return (
     <>
       <div className="h-[95vh]">
