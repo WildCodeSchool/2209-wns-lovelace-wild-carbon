@@ -10,24 +10,31 @@ export default class FriendshipRepository {
     this.repository = await getRepository(Friendship);
   }
 
-  static async getFriendshipRequests(): Promise<Friendship[]> {
+  static async getFriendshipRequests(user: AppUser): Promise<Friendship[]> {
     const friendships = await this.repository.find({
+      where: [{ invitingUser: { id: user.id }, acceptInvitation: false }],
       relations: ['invitingUser', 'invitedUsers'],
     });
-    const friendshipRequests = friendships.filter(
-      (friendship) => friendship.acceptInvitation === false
-    );
-    return friendshipRequests;
+
+    return friendships;
   }
 
-  static async getFriendshipList(): Promise<Friendship[]> {
+  static async getFriendshipList(user: AppUser): Promise<Friendship[]> {
     const friendships = await this.repository.find({
+      where: [
+        {
+          invitedUsers: { id: user.id },
+          acceptInvitation: true,
+        },
+        {
+          invitingUser: { id: user.id },
+          acceptInvitation: true,
+        },
+      ],
       relations: ['invitingUser', 'invitedUsers'],
     });
-    const friendshipRequests = friendships.filter(
-      (friendship) => friendship.acceptInvitation === true
-    );
-    return friendshipRequests;
+
+    return friendships;
   }
 
   static async sendFriendshipRequestByEmail(

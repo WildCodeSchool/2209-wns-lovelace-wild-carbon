@@ -15,7 +15,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n    query MyProfile {\n      myProfile {\n        email\n        id\n      }\n    }\n  ": types.MyProfileDocument,
     "\n  mutation SendFriendshipRequest($invitedUserEmail: String!) {\n    sendFriendshipRequest(invitedUserEmail: $invitedUserEmail) {\n      invitedUsers {\n        email\n      }\n    }\n  }\n": types.SendFriendshipRequestDocument,
-    "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n": types.GetFriendshipListDocument,
+    "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitingUser {\n        lastName\n        firstName\n        email\n        id\n      }\n      invitedUsers {\n        lastName\n        firstName\n        email\n        id\n      }\n    }\n  }\n": types.GetFriendshipListDocument,
+    "\n  query GetFriendshipRequests {\n    getFriendshipRequests {\n      invitedUsers {\n        lastName\n        firstName\n      }\n      id\n    }\n  }\n": types.GetFriendshipRequestsDocument,
+    "\n  mutation AcceptFriendshipRequest($friendshipId: String!) {\n    acceptFriendshipRequest(friendshipId: $friendshipId) {\n      id\n      acceptInvitation\n    }\n  }\n": types.AcceptFriendshipRequestDocument,
+    "\n  mutation DeclineFriendshipRequest($friendshipId: String!) {\n    declineFriendshipRequest(friendshipId: $friendshipId)\n  }\n": types.DeclineFriendshipRequestDocument,
     "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n": types.CreateSpendingDocument,
     "\n  query Spendings {\n    spendings {\n      weight\n      title\n      unit\n      category {\n        categoryName\n      }\n      localizedDate\n    }\n  }\n": types.SpendingsDocument,
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
@@ -49,7 +52,19 @@ export function graphql(source: "\n  mutation SendFriendshipRequest($invitedUser
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n"): (typeof documents)["\n  query GetFriendshipList {\n    getFriendshipList {\n      invitedUsers {\n        lastName\n        firstName\n        email\n      }\n      id\n    }\n  }\n"];
+export function graphql(source: "\n  query GetFriendshipList {\n    getFriendshipList {\n      invitingUser {\n        lastName\n        firstName\n        email\n        id\n      }\n      invitedUsers {\n        lastName\n        firstName\n        email\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetFriendshipList {\n    getFriendshipList {\n      invitingUser {\n        lastName\n        firstName\n        email\n        id\n      }\n      invitedUsers {\n        lastName\n        firstName\n        email\n        id\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetFriendshipRequests {\n    getFriendshipRequests {\n      invitedUsers {\n        lastName\n        firstName\n      }\n      id\n    }\n  }\n"): (typeof documents)["\n  query GetFriendshipRequests {\n    getFriendshipRequests {\n      invitedUsers {\n        lastName\n        firstName\n      }\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation AcceptFriendshipRequest($friendshipId: String!) {\n    acceptFriendshipRequest(friendshipId: $friendshipId) {\n      id\n      acceptInvitation\n    }\n  }\n"): (typeof documents)["\n  mutation AcceptFriendshipRequest($friendshipId: String!) {\n    acceptFriendshipRequest(friendshipId: $friendshipId) {\n      id\n      acceptInvitation\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeclineFriendshipRequest($friendshipId: String!) {\n    declineFriendshipRequest(friendshipId: $friendshipId)\n  }\n"): (typeof documents)["\n  mutation DeclineFriendshipRequest($friendshipId: String!) {\n    declineFriendshipRequest(friendshipId: $friendshipId)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

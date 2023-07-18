@@ -7,20 +7,26 @@ import { GlobalContext } from '../..';
 @Resolver()
 export default class FriendshipResolver {
   private friendshipRepository = FriendshipRepository;
-
   @Query(() => [Friendship])
-  async getFriendshipRequests(): Promise<Friendship[]> {
-    const friendsRequestList =
-      this.friendshipRepository.getFriendshipRequests();
-    if ((await friendsRequestList).length === 0) {
-      throw new Error("Pas de demande d'ajout pour le moment");
+  async getFriendshipRequests(
+    @Ctx() context: GlobalContext
+  ): Promise<Friendship[]> {
+    const user = context.user as AppUser;
+    if (!user) {
+      throw new Error('Utilisateur non authentifié');
     }
-    return friendsRequestList;
+    const friendshipRequests =
+      await this.friendshipRepository.getFriendshipRequests(user);
+    return friendshipRequests;
   }
 
   @Query(() => [Friendship])
-  async getFriendshipList(): Promise<Friendship[]> {
-    const friendsRequestList = this.friendshipRepository.getFriendshipList();
+  async getFriendshipList(
+    @Ctx() context: GlobalContext
+  ): Promise<Friendship[]> {
+    const friendsRequestList = this.friendshipRepository.getFriendshipList(
+      context.user as AppUser
+    );
     if ((await friendsRequestList).length === 0) {
       throw new Error('Aucun amis dans la lsite');
     }
