@@ -19,6 +19,7 @@
     "bootstrap": "^5.2.3",
     "chart.js": "^4.2.0",
     "graphql": "^16.6.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -36,7 +37,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": " WATCHPACK_POLLING=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
