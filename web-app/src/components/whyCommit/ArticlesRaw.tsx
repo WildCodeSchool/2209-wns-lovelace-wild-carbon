@@ -1,49 +1,51 @@
 //Next Step - Need to call articles data
 
+import { gql, useQuery } from '@apollo/client';
 import Footer from 'components/Footer/Footer';
+import { QueryQuery } from 'gql/graphql';
 import { Link } from 'react-router-dom';
 
-type CardData = {
-  id: number;
+const GET_ARTICLES = gql`
+  query Query {
+    articles {
+      title
+      description
+      category {
+        categoryName
+      }
+    }
+  }
+`;
+interface ICategory {
+  __typename?: string; // Optional, as it's returned by the GraphQL query
+  categoryName: string;
+}
+
+interface IArticles {
+  __typename?: string; // Optional, as it's returned by the GraphQL query
+  id?: string;
   title: string;
-  content: string;
-};
-const data: CardData[] = [
-  {
-    id: 1,
-    title: 'Article 1',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-  },
-  {
-    id: 2,
-    title: 'Article 2',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-  },
-  {
-    id: 3,
-    title: 'Article 3',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-  },
-];
+  description: string;
+  category: ICategory; // Use the ICategory interface here
+}
 
 const ArticlesRaw = () => {
+  const { data } = useQuery<QueryQuery>(GET_ARTICLES);
+  console.log(data);
   return (
     <>
       <div className="h-[95vh]">
-        {data.map((c: CardData) => (
+        {data?.articles.map((c: IArticles) => (
           <div
             key={c.id}
-            className="bg-[#fff] hover:bg-[#f8efe2] duration-300 ease-in-out mb-5 mx-5 p-[30px] rounded-xl "
+            className="bg-[#fff] hover:bg-[#f8efe2] duration-300 ease-in-out mb-5 mx-5 p-[30px] rounded-xl cursor-pointer "
           >
-            <div className="flex justify-center">
-              <div className="font-bold text-center mb-5 text-[20px] mr-[15px]">
-                {c.title}
-              </div>
+            <div className="flex flex-col font-bold text-center mb-5">
+              <h2 className="text-[17px]">{c.title}</h2>
+              <br />
+              <p className="text-[13px]">{c.category.categoryName}</p>
             </div>
-            <div className="ml-5 ">{c.content}</div>
+            <div className="text-[12px]">{c.description}</div>
           </div>
         ))}
         <Link to={'/register'}>
