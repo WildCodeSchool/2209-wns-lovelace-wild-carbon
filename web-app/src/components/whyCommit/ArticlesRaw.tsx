@@ -17,16 +17,16 @@ const GET_ARTICLES = gql`
   }
 `;
 interface ICategory {
-  __typename?: string; // Optional, as it's returned by the GraphQL query
+  __typename?: string;
   categoryName: string;
 }
 
 interface IArticles {
-  __typename?: string; // Optional, as it's returned by the GraphQL query
+  __typename?: string;
   id?: string;
   title: string;
   description: string;
-  category: ICategory; // Use the ICategory interface here
+  category: ICategory;
 }
 
 const ArticlesRaw = () => {
