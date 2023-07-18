@@ -8,6 +8,8 @@ type PropType = Spending & {
 };
 
 const SpendingModalComponent = ({
+  id,
+  date,
   title,
   localizedDate,
   weight,

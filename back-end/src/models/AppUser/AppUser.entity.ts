@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import Spending from '../Spending/Spending.entity';
 import Friendship from '../Friendship/FriendShip.entity';
+import Donation from '../Donation/Donation.entity';
 
 @Entity()
 @ObjectType()
@@ -57,4 +58,7 @@ export default class AppUser {
   @OneToMany(() => Friendship, (friend) => friend.invitedUsers)
   @Field(() => [Friendship])
   invitedUsers: Friendship[];
+  @OneToMany(() => Donation, (donation) => donation.user)
+  @Field(() => [Donation])
+  donations: Donation[];
 }

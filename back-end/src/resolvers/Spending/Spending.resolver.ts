@@ -26,7 +26,6 @@ export default class SpendingResolver {
     @Args() { title, date, unit, weight, categoryName }: CreateSpendingArgs,
     @Ctx() context: GlobalContext
   ): Promise<Spending> {
-    console.log('dateee', date);
     return SpendingRepository.createSpending(
       title,
       date,
