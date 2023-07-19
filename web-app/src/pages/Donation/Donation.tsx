@@ -10,7 +10,7 @@ import {
   GetTotalDonationsQuery,
 } from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
-import { BsFillArrowUpCircleFill } from 'react-icons/bs';
+import { BsFillArrowUpCircleFill, BsFillArrowDownCircleFill } from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
 
@@ -159,17 +159,26 @@ const Donation = () => {
         <h4 className="ml-5 text-[#609f39] font-semibold mb-[5px]">
           Derniers contributeurs :
         </h4>
-        <p className="ml-5 flex flex-col flex-wrap">
+        <p className="ml-5 flex flex-wrap justify-around">
           {donationData?.donations.slice(-5).map((donation, index) => (
-            <span key={index}>{donation.amount}€</span>
+            <span key={index} className='bg-[#484B8A] text-white p-1 rounded'>{donation.amount}€</span>
           ))}
         </p>
         <button
           type="button"
           onClick={openModal}
-          className="ml-5 text-[#609f39] font-semibold mt-[8px]"
+          className="ml-5 text-[#609f39] font-semibold mt-[8px] flex"
         >
+
           Historique de vos donations :
+          {!showModal && <BsFillArrowDownCircleFill
+            style={{
+              fontSize: '22px',
+              color: '#609f39',
+              marginLeft: "10px",
+            }}
+          />}
+
         </button>
       </div>
       {showModal && (

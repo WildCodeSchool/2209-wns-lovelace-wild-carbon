@@ -75,7 +75,7 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </Slider>
       </div>
