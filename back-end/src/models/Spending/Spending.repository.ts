@@ -85,7 +85,6 @@ export default class SpendingRepository extends SpendingDb {
       throw Error('No existing spending matching ID.');
     }
     await this.repository.remove(existingSpending);
-    // resetting ID because existingSpending loses ID after calling remove
     existingSpending.id = id;
     return existingSpending;
   }
