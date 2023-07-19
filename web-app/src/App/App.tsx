@@ -5,7 +5,7 @@ import {
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
-  PROFILE_PATH,
+
   FRIENDSHIP_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
@@ -78,7 +78,14 @@ function App() {
       </Protected>
       <main>
         <Routes>
-          <Route path={HOME_PATH} element={<Home />} />
+          <Route
+            path={HOME_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Dashboard />
+              </Protected>
+            }
+          />
           <Route
             path={DASHBOARD_PATH}
             element={
@@ -104,10 +111,10 @@ function App() {
             }
           />
           <Route
-            path={PROFILE_PATH}
+            path={FRIENDSHIP_PATH}
             element={
               <Protected isLoggedIn={isLogged} loading={loading}>
-                <Profile />
+                <Friendhsip />
               </Protected>
             }
           />
