@@ -48,7 +48,6 @@ const FriendshipComponent = () => {
   const { userProfile } = useContext(AppContext) || {};
 
   const friendsList = data?.getFriendshipList.map((friend) => {
-    // Créer un tableau pour stocker les objets d'informations des amis
     const userObjects = [];
 
     // Ajouter l'objet invitedUser s'il existe
@@ -72,7 +71,6 @@ const FriendshipComponent = () => {
     // Combiner les objets en un seul objet à l'aide de l'opérateur de décomposition
     const combinedUserObject = Object.assign({}, ...userObjects);
 
-    // Retourner l'objet combiné avec les informations des amis
     return combinedUserObject;
   });
 
@@ -119,13 +117,11 @@ const FriendshipComponent = () => {
           Demandes d'amis
         </button>
       </div>
-      {/* Afficher la liste des amis de l'utilisateur */}
       {activeTab === 'friends' && (
         <FriendShipList friendsListData={friendsList || []} />
       )}
       {activeTab === 'friendRequests' && (
         <div className="bg-white p-4 shadow rounded">
-          {/* Affichez ici les demandes d'amis en cours avec les boutons accepter ou supprimer */}
           <FriendshipRequestList />
         </div>
       )}
