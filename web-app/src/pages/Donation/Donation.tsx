@@ -23,8 +23,6 @@ const CREATE_DONATION = gql`
   }
 `;
 
-// onlyMine
-
 const GET_DONATIONS = gql`
   query Donations {
     donations {
