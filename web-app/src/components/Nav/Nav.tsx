@@ -10,8 +10,8 @@ import { IoMdAddCircleOutline } from 'react-icons/io';
 import {
   DONATION_PATH,
   CARBON_SPENDING_PATH,
-  PROFILE_PATH,
-  HOME_PATH,
+  FRIENDSHIP_PATH,
+  DASHBOARD_PATH,
 } from '../../pages/paths';
 
 interface MenuItem {
@@ -22,13 +22,13 @@ interface MenuItem {
 
 const Navigation = () => {
   const Menus: MenuItem[] = [
-    { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
+    { name: 'Accueil', icon: <AiOutlineHome />, path: DASHBOARD_PATH },
     {
       name: 'Ajouter',
       icon: <IoMdAddCircleOutline />,
       path: CARBON_SPENDING_PATH,
     },
-    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
+    { name: 'Profil', icon: <AiOutlineUser />, path: FRIENDSHIP_PATH },
     { name: 'Donner', icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
   ];
   const [active, setActive] = useState(0);
@@ -53,18 +53,16 @@ const Navigation = () => {
                 onClick={() => setActive(i)}
               >
                 <span
-                  className={`text-[30px] cursor-pointer duration-500 flex justify-center ${
-                    i === active && '-mt-4 '
-                  }`}
+                  className={`text-[30px] cursor-pointer duration-500 flex justify-center ${i === active && '-mt-4 '
+                    }`}
                 >
                   {menu.icon}
                 </span>
                 <span
-                  className={` ${
-                    active === i
-                      ? 'translate-y-1 duration-700 opacity-100 text-white'
-                      : 'opacity-0 translate-y-10  '
-                  } `}
+                  className={` ${active === i
+                    ? 'translate-y-1 duration-700 opacity-100 text-white'
+                    : 'opacity-0 translate-y-10  '
+                    } `}
                 >
                   {menu.name}
                 </span>
