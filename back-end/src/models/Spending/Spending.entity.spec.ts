@@ -4,8 +4,8 @@ import Spending from './Spending.entity';
 import Category from '../Category/Category.entity';
 
 describe('Spending', () => {
-  describe('get a full spending', () => {
-    it('returns a full spending with date, unit and weigh in brackets', async () => {
+  describe('getDisplaySpending', () => {
+    it('returns a full spending with date, unit and weigh in brackets', () => {
       const dateExemple = new Date('2022-06-12');
       const category = new Category('Covoiturage');
       const spending = new Spending(
@@ -15,7 +15,6 @@ describe('Spending', () => {
         200,
         category
       );
-
       expect(spending.getDisplaySpending()).toEqual(
         '[12/06/2022 - 200km - 1000kg/CO2] Voyage Paris - Amsterdam - Covoiturage'
       );

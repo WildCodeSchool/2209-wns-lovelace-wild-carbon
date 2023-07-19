@@ -57,4 +57,11 @@ export default class Spending {
     onDelete: 'CASCADE',
   })
   user: AppUser;
+
+  @Field(() => String)
+  getDisplaySpending() {
+    return `[${this.localizedDate()} - ${this.weight}km - ${this.unit}kg/CO2] ${
+      this.title
+    } - ${this.category.categoryName}`;
+  }
 }
