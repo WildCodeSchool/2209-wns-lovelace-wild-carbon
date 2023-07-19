@@ -1,4 +1,4 @@
-import CarbonSpending from '../../components/carbon-spending/carbon-spending';
+import CarbonSpending from '../../components/carbon-spending/CarbonSpending';
 import Title from '../../components/Title';
 
 function carbonSpending() {

@@ -21,7 +21,7 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-import CarbonSpending from '../components/carbon-spending/carbon-spending';
+import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
 import Profile from '../pages/profile/Profile';

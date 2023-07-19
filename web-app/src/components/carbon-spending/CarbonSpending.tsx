@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import getErrorMessage from '../../utils';
 import CarbonValue from './slider';
 
-const CREATE_SPENDING = gql`
+export const CREATE_SPENDING = gql`
   mutation CreateSpending(
     $title: String!
     $date: DateTime!
@@ -55,6 +55,7 @@ function CarbonSpending() {
   };
 
   const submit = async () => {
+    console.log('oyé', { title, date, unit, weight, categoryName });
     try {
       await createSpending({
         variables: {
@@ -75,6 +76,8 @@ function CarbonSpending() {
       toast.error(getErrorMessage(error));
     }
   };
+
+  // console.log(date, categoryName);
 
   const weightCalculation =
     selectedIcon === 1
@@ -99,11 +102,12 @@ function CarbonSpending() {
           await submit();
         }}
         className="flex flex-col items-center"
+        data-testid="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px]">
-          <label>
-            <div className="flex flex-col text-[#609f39] mb-5 ">
-              <label className="font-medium text-[18px]">Libéllé</label>
+          <div className="flex flex-col text-[#609f39] mb-5 ">
+            <label className="font-medium text-[18px]">
+              Libéllé
               <input
                 className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="text"
@@ -113,10 +117,13 @@ function CarbonSpending() {
                   setTitle(event.target.value);
                 }}
                 required
-              />
-            </div>
-            <div className="flex flex-col text-[#609f39]">
-              <label className="font-medium text-[18px]">Date</label>
+                data-testid="libelle"
+              />{' '}
+            </label>
+          </div>
+          <div className="flex flex-col text-[#609f39]">
+            <label className="font-medium text-[18px]">
+              Date
               <input
                 className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="date"
@@ -126,13 +133,14 @@ function CarbonSpending() {
                   setDate(event.target.value);
                 }}
                 required
+                data-testid="datePicker"
               />
-            </div>
-          </label>
+            </label>
+          </div>
         </div>
         <div className="w-9/12 flex flex-col mt-[30px]">
           <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
-            Catégories:
+            Catégories
           </h3>
           <div className="flex flex-row justify-center gap-[10px]">
             {TRANSPORTS_PARAMS.map((el) => {
@@ -150,6 +158,7 @@ function CarbonSpending() {
                     }}
                     key={el.id}
                     value={selectedIcon}
+                    data-testid={`categories-button-${el.id}`}
                   >
                     {el.icon}
                   </button>

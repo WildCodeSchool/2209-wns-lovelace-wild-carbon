@@ -30,6 +30,7 @@
     "react-slider": "^2.0.4",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.5",
+    "resize-observer-polyfill": "^1.5.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "typescript": "^4.8.3",

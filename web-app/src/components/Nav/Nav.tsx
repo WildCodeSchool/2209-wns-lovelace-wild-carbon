@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
@@ -40,7 +41,7 @@ const Navigation = () => {
         setActive(i);
       }
     });
-  }, [location]);
+  }, [location, Menus]);
   return (
     <>
       <nav className="bg-[#484B8A] max-h-[5rem] pr-6 rounded-t-xl fixed bottom-0 w-full z-50">
