@@ -23,12 +23,12 @@ interface MenuItem {
 const Navigation = () => {
   const Menus: MenuItem[] = [
     { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
-    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
     {
       name: 'Ajouter',
       icon: <IoMdAddCircleOutline />,
       path: CARBON_SPENDING_PATH,
     },
+    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
     { name: 'Donner', icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
   ];
   const [active, setActive] = useState(0);

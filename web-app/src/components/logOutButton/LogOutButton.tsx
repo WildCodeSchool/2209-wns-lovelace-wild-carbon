@@ -43,12 +43,16 @@ const LogOutButton = ({ userData, setIsLogged }: { userData: any, setIsLogged: a
 
   return (
     <div>
-      <div>
-        <p>Connecté avec l'adresse email : {userData.myProfile.email}</p>
+      <div className=" text-[white] flex justify-between mx-5 text-[14px] mb-5">
+        <p className="bg-[#484B8A] p-[5px] rounded-[5px]">
+          Connecté : <br />
+          {userData.myProfile.email}
+        </p>
         <button
           onClick={() => {
             handleDisconnect(userData);
           }}
+          className="bg-[#484B8A] rounded-[5px] p-[5px]"
         >
           Déconnexion
         </button>
