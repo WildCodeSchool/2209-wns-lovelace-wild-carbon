@@ -29,13 +29,13 @@ import Interdit from '../Assets/interdit.png';
 
 function App() {
   const MY_PROFILE = gql`
-		query MyProfile {
-			myProfile {
-				email
-				id
-			}
-		}
-	`;
+    query MyProfile {
+      myProfile {
+        email
+        id
+      }
+    }
+  `;
   const [isLogged, setIsLogged] = useState(false);
 
   const { loading, refetch, data } = useQuery<MyProfileQuery>(MY_PROFILE, {
@@ -75,19 +75,22 @@ function App() {
           </nav>
         )}
       </div>
-      {(isLogged === false && location.pathname !== '/signin' && location.pathname !== '/register') && (
-        <div className="text-center flex flex-col items-center justify-center mt-[100px]">
-          <img alt='Interdit' src={Interdit} width={500} />
-          <h1 className='text-[40px] max-sm:text-[22px]'>Pour accèder au contenu de la page, veuillez vous connecter !</h1>
-
-        </div>
-      )}
+      {isLogged === false &&
+        location.pathname !== '/signin' &&
+        location.pathname !== '/register' && (
+          <div className="text-center flex flex-col items-center justify-center mt-[100px]">
+            <img alt="Interdit" src={Interdit} width={500} />
+            <h1 className="text-[40px] max-sm:text-[22px]">
+              Pour accèder au contenu de la page, veuillez vous connecter !
+            </h1>
+          </div>
+        )}
       <Protected isLoggedIn={isLogged} loading={loading}>
         <LogOutButton userData={data} setIsLogged={setIsLogged} />
       </Protected>
       <main>
         <Routes>
-          <Route path={DASHBOARD_PATH} element={<Home />} />
+          <Route path={DASHBOARD_PATH} element={<Dashboard />} />
           <Route
             path={DASHBOARD_PATH}
             element={
