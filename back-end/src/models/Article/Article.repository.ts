@@ -70,7 +70,6 @@ export default class ArticleRepository extends ArticleDb {
       throw Error("No existing article matching ID.");
     }
     await this.repository.remove(existingArticle);
-    // resetting ID because existingArticle loses ID after calling remove
     existingArticle.id = id;
     return existingArticle;
   }
