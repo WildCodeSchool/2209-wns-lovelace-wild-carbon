@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import { Get_SpendingQuery } from 'gql/graphql';
+import { Get_SpendingQuery } from '../../gql/graphql';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoryIcon from './CategoryIcon';

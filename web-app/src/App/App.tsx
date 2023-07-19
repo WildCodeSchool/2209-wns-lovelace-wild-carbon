@@ -17,7 +17,7 @@ import SignIn from '../pages/signin/SignIn';
 import { useLocation } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';

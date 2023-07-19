@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import {
@@ -6,11 +6,12 @@ import {
   SendFriendshipRequestMutation,
   SendFriendshipRequestMutationVariables,
 } from '../../gql/graphql';
-import addFriend, { SEND_FRIENDSHIP_REQUEST } from './AddFriendComponent';
+import { SEND_FRIENDSHIP_REQUEST } from './AddFriendComponent';
 import getErrorMessage from '../../utils';
 import AddFriend from './AddFriendComponent';
 import FriendshipRequestList from './FriendshipRequestList';
 import { AppContext } from '../../context/AppContext';
+import FriendShipList from './FriendShipListComponent';
 
 export const GET_FRIENDSHIP_LIST = gql`
   query GetFriendshipList {
@@ -95,70 +96,40 @@ const FriendshipComponent = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="space-y-4">
-        <div className="flex justify-center">
-          <button
-            className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
-              activeTab === 'friends'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700'
-            }`}
-            onClick={() => handleTabClick('friends')}
-          >
-            Liste des amis
-          </button>
-          <button
-            className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
-              activeTab === 'friendRequests'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700'
-            }`}
-            onClick={() => handleTabClick('friendRequests')}
-          >
-            Demandes d'amis
-          </button>
-        </div>
-        {activeTab === 'friends' && (
-          <div className="bg-white p-4 shadow rounded">
-            <div className="max-h-60 overflow-y-auto">
-              <table className="table-fixed w-full">
-                <thead>
-                  <tr className="border-2 bg-sky-400">
-                    <th className="border-2 text-white text-left p-2">Nom</th>
-                    <th className="border-2 text-white text-left p-2">
-                      Prénom
-                    </th>
-                    <th className="border-2 text-white text-left p-2">Mail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {friendsList?.map((friend) => (
-                    <tr key={friend.firstName} className="border-2">
-                      <td className="border-2 text-left p-2">
-                        {friend.firstName}
-                      </td>
-                      <td className="border-2 text-left p-2">
-                        {friend.lastName}
-                      </td>
-                      <td className="border-2 text-left p-2 max-w-[200px] truncate">
-                        {friend.email}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'friendRequests' && (
-          <div className="bg-white p-4 shadow rounded">
-            {/* Affichez ici les demandes d'amis en cours avec les boutons accepter ou supprimer */}
-            <FriendshipRequestList />
-          </div>
-        )}
+    <div className="p-4 mt-8">
+      <div className="flex justify-center">
+        <button
+          className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+            activeTab === 'friends'
+              ? 'bg-[#484b8a] text-white'
+              : 'bg-gray-200 text-gray-700'
+          }`}
+          onClick={() => handleTabClick('friends')}
+        >
+          Liste des amis
+        </button>
+        <button
+          className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+            activeTab === 'friendRequests'
+              ? 'bg-[#484b8a] text-white'
+              : 'bg-gray-200 text-gray-700'
+          }`}
+          onClick={() => handleTabClick('friendRequests')}
+        >
+          Demandes d'amis
+        </button>
       </div>
+      {/* Afficher la liste des amis de l'utilisateur */}
+      {activeTab === 'friends' && (
+        <FriendShipList friendsListData={friendsList || []} />
+      )}
+      {activeTab === 'friendRequests' && (
+        <div className="bg-white p-4 shadow rounded">
+          {/* Affichez ici les demandes d'amis en cours avec les boutons accepter ou supprimer */}
+          <FriendshipRequestList />
+        </div>
+      )}
+
       {/* Partie pour rechercher un ami */}
       <AddFriend
         friendInput={friendInput}
