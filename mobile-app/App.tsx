@@ -9,12 +9,14 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import React from 'react';
+require('moment/locale/fr.js');
 
 const GRAPHQL_API_URL = Constants?.expoConfig?.extra?.GRAPHQL_API_URL;
 
 const client = new ApolloClient({
   uri: GRAPHQL_API_URL,
   cache: new InMemoryCache(),
+  headers: { Cookie: 'sessionId=9b3de0f52dbcd117f4ee6c1a971537ed' },
 });
 
 export default function App() {

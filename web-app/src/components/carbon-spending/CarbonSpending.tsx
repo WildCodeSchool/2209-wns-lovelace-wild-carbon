@@ -7,7 +7,7 @@ import {
 } from '../../gql/graphql';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getErrorMessage } from 'utils';
+import getErrorMessage from '../../utils';
 import CarbonValue from './slider';
 
 export const CREATE_SPENDING = gql`

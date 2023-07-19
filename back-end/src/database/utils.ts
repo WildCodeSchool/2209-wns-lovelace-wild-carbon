@@ -5,6 +5,8 @@ import CategoryRepository from '../models/Category/Category.repository';
 import SpendingRepository from '../models/Spending/Spending.repository';
 import AppUserRepository from '../models/AppUser/AppUser.repository';
 import SessionRepository from '../models/AppUser/Session.repository';
+import FriendshipRepository from '../models/Friendship/Friendship.repository';
+import DonationRepository from '../models/Donation/Donation.repository';
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -36,6 +38,8 @@ async function initializeDatabaseRepositories() {
   await CategoryRepository.initializeRepository();
   await AppUserRepository.initializeRepository();
   await SessionRepository.initializeRepository();
+  await FriendshipRepository.initializeRepository();
+  await DonationRepository.initializeRepository();
 }
 
 async function closeConnection() {

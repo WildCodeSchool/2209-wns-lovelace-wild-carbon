@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
-import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import {
   AiOutlineHome,
   AiOutlineUser,
   AiOutlineEuroCircle,
-} from "react-icons/ai";
-import { IoMdAddCircleOutline } from "react-icons/io";
+} from 'react-icons/ai';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 import {
   DONATION_PATH,
   CARBON_SPENDING_PATH,
@@ -24,13 +24,13 @@ interface MenuItem {
 const Navigation = () => {
   const Menus: MenuItem[] = [
     { name: 'Accueil', icon: <AiOutlineHome />, path: HOME_PATH },
-    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
     {
-      name: "Ajouter",
+      name: 'Ajouter',
       icon: <IoMdAddCircleOutline />,
       path: CARBON_SPENDING_PATH,
     },
-    { name: "Donner", icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
+    { name: 'Profil', icon: <AiOutlineUser />, path: PROFILE_PATH },
+    { name: 'Donner', icon: <AiOutlineEuroCircle />, path: DONATION_PATH },
   ];
   const [active, setActive] = useState(0);
 
@@ -55,7 +55,7 @@ const Navigation = () => {
               >
                 <span
                   className={`text-[30px] cursor-pointer duration-500 flex justify-center ${
-                    i === active && "-mt-4 "
+                    i === active && '-mt-4 '
                   }`}
                 >
                   {menu.icon}
@@ -63,8 +63,8 @@ const Navigation = () => {
                 <span
                   className={` ${
                     active === i
-                      ? "translate-y-1 duration-700 opacity-100 text-white"
-                      : "opacity-0 translate-y-10  "
+                      ? 'translate-y-1 duration-700 opacity-100 text-white'
+                      : 'opacity-0 translate-y-10  '
                   } `}
                 >
                   {menu.name}

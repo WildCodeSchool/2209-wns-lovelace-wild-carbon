@@ -7,7 +7,7 @@ import {
   CreateUserMutation,
   CreateUserMutationVariables,
 } from '../../gql/graphql';
-import { getErrorMessage } from '../../utils';
+import getErrorMessage from '../../utils';
 import { SIGN_IN_PATH } from '../../pages/paths';
 import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';

@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import { Get_SpendingQuery } from 'gql/graphql';
+import { Get_SpendingQuery } from '../../gql/graphql';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CategoryIcon from './CategoryIcon';
 import SpendingModalComponent from './SpendingModalComponent';
 import { FcPlus } from 'react-icons/fc';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
+import DeleteMessage from './DeleteMessage';
 
 interface SpendingCarouselComponentProps {
   spendingData?: Get_SpendingQuery;
+  onRefetch: () => void;
 }
 
 export type Spending = Get_SpendingQuery['spendings'][number];
 
 const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
   spendingData,
+  onRefetch,
 }) => {
   const settings = {
     dots: true,
@@ -24,21 +28,24 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
     slidesToScroll: 1,
   };
 
+  const spendings = spendingData?.spendings;
+
   const [selectedSpending, setSelectedSpending] = useState<
     Spending | undefined
   >(undefined);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const selectSpending = (spending: Spending) => {
     setSelectedSpending(spending);
   };
 
-  console.log(spendingData);
+  const selectSpendingId = spendings?.map((spending) => spending.id)[0];
 
   return (
     <>
       <div className="mt-6  mb-8 px-8">
         <Slider {...settings}>
-          {spendingData?.spendings.map((spending) => {
+          {spendings?.map((spending) => {
             return (
               <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="p-6">
@@ -62,6 +69,9 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
                     <button onClick={() => selectSpending(spending)}>
                       <FcPlus />
                     </button>
+                    <button onClick={() => setDeleteModal(true)}>
+                      <RiDeleteBin2Fill color="red" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -73,6 +83,14 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
         <SpendingModalComponent
           {...selectedSpending}
           closeModal={() => setSelectedSpending(undefined)}
+        />
+      )}
+
+      {deleteModal && (
+        <DeleteMessage
+          id={selectSpendingId}
+          closeModal={() => setDeleteModal(false)}
+          onRefetch={onRefetch}
         />
       )}
     </>

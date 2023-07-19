@@ -1,8 +1,8 @@
 import { Chart as ChartJs, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useQuery, gql } from '@apollo/client';
-import { Get_SpendingQuery } from 'gql/graphql';
-import SpendingCarrouselComponent from 'components/Spending-carrousel/SpendingCarrouselComponent';
+import { Get_SpendingQuery } from '../../gql/graphql';
+import SpendingCarrouselComponent from '../../components/Spending-carrousel/SpendingCarrouselComponent';
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 
@@ -23,7 +23,7 @@ const GET_SPENDING = gql`
 `;
 
 const DoughnutComponent = () => {
-  const { data } = useQuery<Get_SpendingQuery>(GET_SPENDING);
+  const { data, refetch } = useQuery<Get_SpendingQuery>(GET_SPENDING);
 
   let categoryWeights: number[] = [];
   let categoryLabels: string[] = [
@@ -74,8 +74,7 @@ const DoughnutComponent = () => {
   return (
     <>
       <Doughnut data={dataGraph} />
-
-      <SpendingCarrouselComponent spendingData={data} />
+      <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />;
     </>
   );
 };

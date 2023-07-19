@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   back-end:
@@ -6,6 +6,7 @@ services:
       context: ./back-end
       target: dev
     environment:
+      NODE_ENV: development
       DATABASE_URL: postgres://postgres:password@database:5432/postgres
       TEST_DATABASE_URL: postgres://postgres:password@test-database:5432/postgres
     ports:
@@ -23,7 +24,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./web-app/src:/app/src
+      - ./web-app:/app
       - /app/node_modules
     depends_on:
       - back-end
@@ -46,9 +47,8 @@ services:
 
   adminer:
     image: adminer
-    restart: always
     ports:
-      - 8080:8080
+      - 8081:8080
 
 volumes:
   database-content:
