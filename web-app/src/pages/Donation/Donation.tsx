@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
-import { getErrorMessage } from 'utils';
+import getErrorMessage from '../../utils';
 import {
   CreateDonationMutation,
   CreateDonationMutationVariables,
   DonationsQuery,
   DonationsByUserIdQuery,
   GetTotalDonationsQuery,
-} from 'gql/graphql';
+} from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import 'moment/locale/fr';

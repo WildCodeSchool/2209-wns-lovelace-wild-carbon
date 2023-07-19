@@ -6,7 +6,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { SignInMutation, SignInMutationVariables } from '../../gql/graphql';
-import { getErrorMessage } from '../../utils';
+import getErrorMessage from '../../utils';
 import { DASHBOARD_PATH, REGISTER_PATH } from '../paths';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../components/Loader/Loader';

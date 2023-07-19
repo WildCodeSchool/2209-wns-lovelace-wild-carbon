@@ -1,11 +1,11 @@
 import {
-  HOME_PATH,
   REGISTER_PATH,
   DASHBOARD_PATH,
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
   PROFILE_PATH,
+  FRIENDSHIP_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
@@ -20,11 +20,12 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-import CarbonSpending from 'components/carbon-spending/carbon-spending';
+import CarbonSpending from '../components/carbon-spending/carbon-spending';
 import { useState } from 'react';
-import Protected from 'pages/alreadyLog/Protected';
-import Profile from 'pages/profile/Profile';
-import LogOutButton from 'components/logOutButton/LogOutButton';
+import Protected from '../pages/alreadyLog/Protected';
+import Profile from '../pages/profile/Profile';
+import LogOutButton from '../components/logOutButton/LogOutButton';
+import Friendhsip from '../pages/friendship/Friendship';
 import Interdit from '../Assets/interdit.png';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       }
     }
   `;
+
   const [isLogged, setIsLogged] = useState(false);
 
   const { loading, refetch, data } = useQuery<MyProfileQuery>(MY_PROFILE, {
@@ -127,6 +129,14 @@ function App() {
           <Route
             path={REGISTER_PATH}
             element={<Register onSuccess={refetch} />}
+          />
+          <Route
+            path={FRIENDSHIP_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Friendhsip />
+              </Protected>
+            }
           />
           <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
         </Routes>

@@ -27,6 +27,16 @@ export default class AppUserRepository extends AppUserDb {
     return user;
   }
 
+  static getUserByEmail(email: string): Promise<AppUser | null> {
+    const user = this.repository.findOneBy({ email });
+
+    if (!user) {
+      throw Error('Aucun utilisateur de correspond à cet email.');
+    }
+
+    return user;
+  }
+
   static async signIn(
     email: string,
     password: string

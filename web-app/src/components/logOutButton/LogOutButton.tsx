@@ -1,7 +1,7 @@
-import { HOME_PATH, SIGN_IN_PATH } from 'pages/paths';
+import { HOME_PATH, SIGN_IN_PATH } from '../../pages/paths';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { SignOutMutation, SignOutMutationVariables } from 'gql/graphql';
+import { SignOutMutation, SignOutMutationVariables } from '../../gql/graphql';
 import { toast } from 'react-toastify';
 
 const SIGN_OUT = gql`
@@ -12,7 +12,13 @@ const SIGN_OUT = gql`
   }
 `;
 
-const LogOutButton = ({ userData, setIsLogged }: { userData: any, setIsLogged: any }) => {
+const LogOutButton = ({
+  userData,
+  setIsLogged,
+}: {
+  userData: any;
+  setIsLogged: any;
+}) => {
   const navigate = useNavigate();
 
   const [signOut] = useMutation<SignOutMutation, SignOutMutationVariables>(
@@ -21,7 +27,6 @@ const LogOutButton = ({ userData, setIsLogged }: { userData: any, setIsLogged: a
       onCompleted: () => {
         toast.success('Vous êtes bien déconnecté.');
         navigate(SIGN_IN_PATH);
-
       },
       onError: (error) => {
         toast.error(error.message);
@@ -34,11 +39,8 @@ const LogOutButton = ({ userData, setIsLogged }: { userData: any, setIsLogged: a
       variables: {
         signOutId: userData.myProfile.id,
       },
-
     });
-    setIsLogged(false)
-
-
+    setIsLogged(false);
   };
 
   return (
