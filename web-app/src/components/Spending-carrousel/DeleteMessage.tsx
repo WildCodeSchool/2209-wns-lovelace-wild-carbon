@@ -24,7 +24,6 @@ const DeleteMessage = ({ id, closeModal, onRefetch }: PropType) => {
     DeleteSpendingMutation,
     DeleteSpendingMutationVariables
   >(DELETE_SPENDING);
-  console.log(id, 'id');
 
   const onDeleteConfirmation = async (deleteSpendingId: string) => {
     try {
