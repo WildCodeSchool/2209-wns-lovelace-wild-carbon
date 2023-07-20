@@ -98,12 +98,12 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="flex flex-col items-center"
+        className="flex flex-col w-full md:w-1/2 items-center md:mx-auto"
       >
         <div className="flex flex-col w-3/4 mt-[30px]">
           <label>
             <div className="flex flex-col text-[#609f39] mb-5 ">
-              <label className="font-medium text-[18px]">Libéllé</label>
+              <label className="font-medium text-[18px]">Libellé</label>
               <input
                 className="bg-[#c3e9ac] rounded border-transparent mt-1"
                 type="text"
@@ -179,7 +179,7 @@ function CarbonSpending() {
           ''
         )}
 
-        <button className="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">
+        <button className="mt-[30px] text-white self-center w-3/4 md:w-1/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]">
           Ajouter ma dépense
         </button>
       </form>
