@@ -22,7 +22,6 @@ const Register = () => {
 
   const onSubmit = (data: any) => {
     setUserInfo(data);
-    console.log(data);
   };
   return (
     <>
@@ -33,10 +32,9 @@ const Register = () => {
           <div className="flex flex-col text-center mb-5">
             <label>Nom</label>
             <input
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
-                errors.name &&
+              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${errors.name &&
                 'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
+                }`}
               type="text"
               placeholder="Nom"
               {...register('name', {
@@ -52,10 +50,9 @@ const Register = () => {
           <div className="flex flex-col text-center mb-5">
             <label>Prénom</label>
             <input
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
-                errors.firstname &&
+              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${errors.firstname &&
                 'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
+                }`}
               type="text"
               placeholder="Prénom"
               {...register('firstname', { required: 'Le Prénom est requis' })}
@@ -70,10 +67,9 @@ const Register = () => {
           <div className="flex flex-col text-center mb-5">
             <label>Email</label>
             <input
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${
-                errors.email &&
+              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] ${errors.email &&
                 'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
+                }`}
               type="text"
               placeholder="dave.lopper@test.com"
               {...register('email', {
@@ -97,10 +93,9 @@ const Register = () => {
           >
             <label>Mot de passe</label>
             <input
-              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] cursor-pointer ${
-                errors.password &&
+              className={`bg-[#C3E9AC] rounded-[5px] p-[10px] cursor-pointer ${errors.password &&
                 'focus:border-red-500 focus:ring-red-500 border-red-500'
-              }`}
+                }`}
               type={showPassword === false ? 'text' : 'password'}
               placeholder="Mot de passe"
               {...register('password', {

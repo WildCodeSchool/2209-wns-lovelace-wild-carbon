@@ -16,6 +16,7 @@ import {
 } from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
+import Title from '../../components/Title';
 
 const CREATE_DONATION = gql`
   mutation createDonation($amount: Float!) {
@@ -104,19 +105,16 @@ const Donation = () => {
 
   return (
     <div className="h-[110vh] overflow-y-scroll">
-      <div className="flex items-center flex-col text-[#609f39] mt-4">
-        <h1 className="font-bold text-[25px]">Donation</h1>
-        <p className="italic">Soutenez Wild Carbon !</p>
-      </div>
+      <Title title='Donation' subtitle='Soutenez Wild Carbon !' />
       <div className="flex items-center flex-col text-[#484B8A] font-bold mt-6 text-[20px]">
         <h3>Total de la cagnotte en cours : </h3>
         <p>{totalDonations?.getTotalDonations.toFixed(2)}€</p>
       </div>
       <div className="border mx-[40px] my-[37px]"></div>
-      <div className="w-full flex flex-col md:flex-row items-center justify-center">
+      <div className="w-full flex flex-col md:flex-row justify-center">
         <div className="flex flex-col w-full items-between">
           <div className="flex items-center flex-col text-[#609f39] font-bold">
-            <h2 className="text-[20px]">Je participe à hauteur de :</h2>
+            <h2 className="text-[20px] sm:text-[30px]">Je participe à hauteur de :</h2>
             <div className="flex justify-center text-[35px]">
               <input
                 type="text"
@@ -161,19 +159,19 @@ const Donation = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w1/2 items-start">
-          <h4 className="ml-5 text-[#609f39] font-semibold mb-[5px]">
+        <div className="flex flex-col w-full md:w1/2 md:items-center"><div>
+          <h4 className="ml-5 text-[#609f39] font-semibold mb-[10px] sm:text-[30px] sm:mb-[20px]">
             Derniers contributeurs :
           </h4>
-          <p className="ml-5 flex flex-col flex-wrap">
+          <p className="ml-5 flex justify-around text-white sm:text-[20px]">
             {donationData?.donations.slice(-5).map((donation, index) => (
-              <span key={index}>{donation.amount}€</span>
+              <span key={index} className='bg-[#484B8A] p-1 rounded-md'>{donation.amount}€</span>
             ))}
           </p>
           <button
             type="button"
             onClick={openModal}
-            className="ml-5 text-[#609f39] font-semibold mt-[8px] flex"
+            className="ml-5 text-[#609f39] font-semibold  flex items-center mt-[20px] sm:mt-[40px] sm:text-[20px]"
           >
             Historique de vos donations :
             {!showModal && (
@@ -205,7 +203,7 @@ const Donation = () => {
                     <BsPiggyBank
                       style={{ marginRight: '10px', fontSize: '20px' }}
                     />
-                    <span>
+                    <span >
                       {donationsId.amount}€ le {responseDate}
                     </span>
                   </div>
@@ -213,6 +211,7 @@ const Donation = () => {
               </div>
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>

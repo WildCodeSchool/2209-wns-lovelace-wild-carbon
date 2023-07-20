@@ -4,7 +4,7 @@ import Title from '../../components/Title';
 function carbonSpending() {
   return (
     <>
-      <div className="bg-[#fefaea] mt-[50px] mb-[100px]">
+      <div className="bg-[#fefaea]md:h-[100vh] mt-[50px]  mb-[100px]">
         <Title
           title={'Ma depense carbone'}
           subtitle={'Entrez une dépense (en deux clics)'}

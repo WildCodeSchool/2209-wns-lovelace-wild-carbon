@@ -59,7 +59,7 @@ function CarbonSpending() {
   };
 
   const submit = async () => {
-    console.log('oyé', { title, date, unit, weight, categoryName });
+
     try {
       await createSpending({
         variables: {
@@ -82,20 +82,18 @@ function CarbonSpending() {
     }
   };
 
-  // console.log(date, categoryName);
-
   const weightCalculation =
     selectedIcon === 1
       ? unit * 0.3
       : selectedIcon === 2
-      ? unit * 0.1482
-      : selectedIcon === 3
-      ? unit * 0.014
-      : selectedIcon === 4
-      ? unit * 0.05
-      : selectedIcon === 5
-      ? unit * 0.185
-      : 0;
+        ? unit * 0.1482
+        : selectedIcon === 3
+          ? unit * 0.014
+          : selectedIcon === 4
+            ? unit * 0.05
+            : selectedIcon === 5
+              ? unit * 0.185
+              : 0;
 
   const weight = parseInt(weightCalculation.toFixed(0));
 
@@ -106,7 +104,7 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="flex flex-col items-center md:h-[100vh]"
+        className="flex flex-col items-center "
         data-testid="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px] items-center">
