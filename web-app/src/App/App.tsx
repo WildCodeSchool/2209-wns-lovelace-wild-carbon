@@ -19,12 +19,12 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
 import LogOutButton from '../components/logOutButton/LogOutButton';
 import Friendhsip from '../pages/friendship/Friendship';
 import Interdit from '../Assets/interdit.png';
+import CarbonSpending from '../pages/carbon-spending/carbonSpending';
 
 function App() {
   const MY_PROFILE = gql`

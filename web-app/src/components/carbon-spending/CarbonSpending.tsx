@@ -38,7 +38,7 @@ export const CREATE_SPENDING = gql`
   }
 `;
 
-function CarbonSpending() {
+function CarbonSpendingComponents() {
   const [selectedIcon, setSelectedIcon] = useState<number>(0);
   const [unit, setUnit] = useState<number>(0);
   const [date, setDate] = useState<string>('');
@@ -195,4 +195,4 @@ function CarbonSpending() {
   );
 }
 
-export default CarbonSpending;
+export default CarbonSpendingComponents;
