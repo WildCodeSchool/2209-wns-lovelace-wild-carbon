@@ -4,6 +4,8 @@ import { useQuery, gql } from '@apollo/client';
 import { Get_SpendingQuery } from '../../gql/graphql';
 import SpendingCarrouselComponent from '../../components/Spending-carrousel/SpendingCarrouselComponent';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import warning from '../../media/avertissement.png';
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 
@@ -36,9 +38,8 @@ const DoughnutComponent = () => {
   ];
 
   useEffect(() => {
-    refetch()
-  }, [data, refetch])
-
+    refetch();
+  }, [data, refetch]);
 
   if (data) {
     const categories: { [key: string]: number } = {};
@@ -79,7 +80,25 @@ const DoughnutComponent = () => {
 
   return (
     <>
-      <Doughnut data={dataGraph} />
+      {dataGraph.labels.length === 0 ? (
+        <div className="flex flex-col text-center items-center mt-5">
+          <img
+            className="text-center"
+            src={warning}
+            alt="warningIcon"
+            height="150px"
+            width="150px"
+          ></img>
+          <p className="font-bold text-[#484B8A] mt-5">
+            Vous n'avez pas encore de dépense !
+          </p>
+          <button className="bg-[#484B8A] text-[#ffffff] rounded-[5px] mt-5 p-[5px] mx-[100px]">
+            <Link to={'/carbonSpending'}>Ajouter une dépense</Link>
+          </button>
+        </div>
+      ) : (
+        <Doughnut data={dataGraph} />
+      )}
       <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />;
     </>
   );
