@@ -61,7 +61,7 @@ const DoughnutComponent = () => {
     labels: categoryLabels,
     datasets: [
       {
-        label: 'consommation pour la catégorie sur la consomamtion total',
+        label: 'consommation pour la catégorie sur la consommation total',
         data: categoryWeights,
         backgroundColor: [
           'rgb(255, 99, 132)',
@@ -79,8 +79,12 @@ const DoughnutComponent = () => {
 
   return (
     <>
-      <Doughnut data={dataGraph} />
-      <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />;
+      <div className="w-full flex flex-col md:flex-row items-center justify-around pb-24 md:pt-5">
+        <div className="flex items-center justify-center w-full md:w-1/5 ">
+          <Doughnut data={dataGraph} />
+        </div>
+        <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />
+      </div>
     </>
   );
 };

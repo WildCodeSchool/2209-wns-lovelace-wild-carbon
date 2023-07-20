@@ -1,15 +1,13 @@
 import {
-  HOME_PATH,
   REGISTER_PATH,
   DASHBOARD_PATH,
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
-
   FRIENDSHIP_PATH,
+  HOME_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home/Home';
 import Register from '../pages/register/Register';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Donation from '../pages/Donation/Donation';
@@ -24,9 +22,9 @@ import { MyProfileQuery } from '../gql/graphql';
 import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
-import Profile from '../pages/profile/Profile';
 import LogOutButton from '../components/logOutButton/LogOutButton';
 import Friendhsip from '../pages/friendship/Friendship';
+import Interdit from '../Assets/interdit.png';
 
 function App() {
   const MY_PROFILE = gql`
@@ -44,6 +42,7 @@ function App() {
     onCompleted: (data) => {
       if (data.myProfile) {
         setIsLogged(true);
+        refetch();
       }
     },
     onError: () => {
@@ -55,6 +54,7 @@ function App() {
   return (
     <>
       <Header />
+
       <div className="flex justify-end text-[#fff] mt-[10px] text-sm ">
         {data?.myProfile ? (
           <i>{data?.myProfile.email}</i>
@@ -73,8 +73,18 @@ function App() {
           </nav>
         )}
       </div>
+      {isLogged === false &&
+        location.pathname !== '/signin' &&
+        location.pathname !== '/register' && (
+          <div className="text-center flex flex-col items-center justify-center mt-[100px]">
+            <img alt="Interdit" src={Interdit} width={500} />
+            <h1 className="text-[40px] max-sm:text-[22px]">
+              Pour accèder au contenu de la page, veuillez vous connecter !
+            </h1>
+          </div>
+        )}
       <Protected isLoggedIn={isLogged} loading={loading}>
-        <LogOutButton userData={data} />
+        <LogOutButton userData={data} setIsLogged={setIsLogged} />
       </Protected>
       <main>
         <Routes>
