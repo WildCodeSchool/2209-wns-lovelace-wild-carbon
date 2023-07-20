@@ -96,7 +96,7 @@ const FriendshipComponent = () => {
   };
 
   return (
-    <div className="p-4 mt-8">
+    <div className="p-4 mt-8 w-full md:w-1/2 md:mx-auto">
       <div className="flex justify-center">
         <button
           className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${

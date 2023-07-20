@@ -19,7 +19,7 @@ interface AddFriendProps {
 const AddFriend = ({ friendInput, setFriendInput, submit }: AddFriendProps) => {
   return (
     <>
-      <div className="flex flex-col items-center mt-8">
+      <div className="flex flex-col items-center mt-8 w-full md:w-1/2 md:mx-auto">
         <label className="font-medium text-lg">Ajouter un ami</label>
         <input
           className="bg-[#c3e9ac] rounded border-transparent mt-1 w-full px-4 py-2"
