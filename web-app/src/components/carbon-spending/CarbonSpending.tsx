@@ -106,12 +106,12 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="flex flex-col items-center md:h-[100vh] "
+        className="flex flex-col items-center md:h-[100vh]"
         data-testid="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px] items-center">
           <div className="flex flex-col text-[#609f39] mb-5 items-start w-full md:w-1/2">
-            <label className="font-medium text-[18px]">Libellé </label>
+            <label className="font-medium text-[18px]">Libellé</label>
             <input
               className="bg-[#c3e9ac] rounded border-transparent mt-1 w-full"
               type="text"
