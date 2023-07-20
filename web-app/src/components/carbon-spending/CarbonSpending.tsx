@@ -104,7 +104,7 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="flex flex-col items-center "
+        className="flex flex-col items-center"
         data-testid="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px] items-center">
