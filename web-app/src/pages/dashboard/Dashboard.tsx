@@ -27,7 +27,7 @@ const Dashboard = () => {
     GET_DONATIONS_BY_USER
   );
 
-  const { data: profilData, refetch: refresh } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
+  const { data: profilData } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
 
 
   const [totalAmount, setTotalAmount] = useState(0);

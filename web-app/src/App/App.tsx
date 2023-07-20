@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
 import CarbonSpending from '../components/carbon-spending/CarbonSpending';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
 import LogOutButton from '../components/logOutButton/LogOutButton';
 import Friendhsip from '../pages/friendship/Friendship';
