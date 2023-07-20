@@ -43,7 +43,7 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
 
   return (
     <>
-      <div className="mt-6  mb-8 px-8">
+      <div className="mt-6 mb-8 px-8 w-full md:w-1/4">
         <Slider {...settings}>
           {spendings?.map((spending) => {
             return (

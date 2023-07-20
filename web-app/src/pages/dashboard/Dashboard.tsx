@@ -13,7 +13,7 @@ const Dashboard = () => {
         <p className="font-bold">Jean Clenche</p>
         <p className="font-bold">Donation: 1000€</p>
       </div>
-      <div className="flex justify-center mt-px">
+      <div className="flex justify-center">
         <div className="h-0.5 w-3/4 bg-[#CAC5C5]"></div>
       </div>
       <DoughnutComponent />
