@@ -46,6 +46,11 @@ const Dashboard = () => {
     }
   }, [donationById, refetch]);
 
+  function capitalizeFirstNameLetter(firstName: any) {
+    if (!firstName) return '';
+    return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  }
+
   return (
     <>
       <Title
@@ -55,7 +60,8 @@ const Dashboard = () => {
 
       <div className="flex justify-around mt-6 ">
         <p className="font-bold">
-          {profilData?.myProfile.firstName} {profilData?.myProfile.lastName}
+          {capitalizeFirstNameLetter(profilData?.myProfile.firstName)}{' '}
+          {profilData?.myProfile.lastName.toUpperCase()}{' '}
         </p>
         <p className="font-bold">Donation: {totalAmount.toFixed(2)}€</p>
       </div>
