@@ -94,22 +94,24 @@ const FriendshipComponent = () => {
   };
 
   return (
-    <div className="p-4 mt-8">
-      <div className="flex justify-between">
+    <div className="p-4 mt-8 w-full h-[70vh] md:w-1/2 md:mx-auto">
+      <div className="flex justify-center">
         <button
-          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${activeTab === 'friends'
-            ? 'bg-[#484b8a] text-white'
-            : 'bg-gray-200 text-gray-700'
-            }`}
+          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+            activeTab === 'friends'
+              ? 'bg-[#484b8a] text-white'
+              : 'bg-gray-200 text-gray-700'
+          }`}
           onClick={() => handleTabClick('friends')}
         >
           Liste des amis
         </button>
         <button
-          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${activeTab === 'friendRequests'
-            ? 'bg-[#484b8a] text-white'
-            : 'bg-gray-200 text-gray-700'
-            }`}
+          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+            activeTab === 'friendRequests'
+              ? 'bg-[#484b8a] text-white'
+              : 'bg-gray-200 text-gray-700'
+          }`}
           onClick={() => handleTabClick('friendRequests')}
         >
           Demandes d'amis

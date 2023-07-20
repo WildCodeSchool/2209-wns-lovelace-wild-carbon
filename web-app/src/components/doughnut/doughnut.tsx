@@ -62,7 +62,7 @@ const DoughnutComponent = () => {
     labels: categoryLabels,
     datasets: [
       {
-        label: 'consommation pour la catégorie sur la consomamtion total',
+        label: 'consommation pour la catégorie sur la consommation total',
         data: categoryWeights,
         backgroundColor: [
           'rgb(255, 99, 132)',
@@ -79,9 +79,9 @@ const DoughnutComponent = () => {
   };
 
   return (
-    <>
+    <div className="w-full flex flex-col md:items-center justify-center pb-24 md:pt-5">
       {dataGraph.labels.length === 0 ? (
-        <div className="flex flex-col text-center items-center mt-5">
+        <div className="w-full flex flex-col text-center items-center mt-5">
           <img
             className="text-center"
             src={warning}
@@ -97,10 +97,12 @@ const DoughnutComponent = () => {
           </button>
         </div>
       ) : (
-        <Doughnut data={dataGraph} />
+        <div className="flex items-center justify-center w-full md:w-1/5 ">
+          <Doughnut data={dataGraph} />
+        </div>
       )}
-      <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />;
-    </>
+      <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />
+    </div>
   );
 };
 

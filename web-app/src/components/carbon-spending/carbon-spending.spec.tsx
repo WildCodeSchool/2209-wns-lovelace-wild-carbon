@@ -43,50 +43,49 @@ describe('CreateSpending', () => {
   data-testid="wrapper"
 >
   <form
-    class="flex flex-col items-center"
+    class="flex flex-col items-center md:h-[100vh]"
     data-testid="formCreateSpending"
   >
     <div
-      class="flex flex-col w-3/4 mt-[30px]"
+      class="flex flex-col w-3/4 mt-[30px] items-center"
     >
       <div
-        class="flex flex-col text-[#609f39] mb-5 "
+        class="flex flex-col text-[#609f39] mb-5 items-start w-full md:w-1/2"
       >
         <label
           class="font-medium text-[18px]"
         >
-          Libéllé
-          <input
-            class="bg-[#c3e9ac] rounded border-transparent mt-1"
-            data-testid="libelle"
-            name="name"
-            required=""
-            type="text"
-            value=""
-          />
-           
+          Libellé
         </label>
+        <input
+          class="bg-[#c3e9ac] rounded border-transparent mt-1 w-full"
+          data-testid="libelle"
+          name="name"
+          required=""
+          type="text"
+          value=""
+        />
       </div>
       <div
-        class="flex flex-col text-[#609f39]"
+        class="flex flex-col text-[#609f39] items-start w-full md:w-1/2"
       >
         <label
           class="font-medium text-[18px]"
         >
           Date
-          <input
-            class="bg-[#c3e9ac] rounded border-transparent mt-1"
-            data-testid="datePicker"
-            name="date"
-            required=""
-            type="date"
-            value=""
-          />
         </label>
+        <input
+          class="bg-[#c3e9ac] rounded border-transparent mt-1 w-full"
+          data-testid="datePicker"
+          name="date"
+          required=""
+          type="date"
+          value=""
+        />
       </div>
     </div>
     <div
-      class="w-9/12 flex flex-col mt-[30px]"
+      class="w-9/12 flex flex-col mt-[30px] items-center"
     >
       <h3
         class="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]"
@@ -221,7 +220,7 @@ describe('CreateSpending', () => {
       </div>
     </div>
     <button
-      class="mt-[30px] text-white self-center w-3/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]"
+      class="mt-[30px] text-white self-center w-3/4 md:w-1/4 h-12 bg-[#484b8a] rounded font-semibold text-[20px] leading-[24px]"
     >
       Ajouter ma dépense
     </button>
