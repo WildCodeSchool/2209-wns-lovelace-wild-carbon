@@ -50,8 +50,6 @@ function App() {
     },
   });
 
-  console.log(isLogged, 'data');
-
   const location = useLocation();
   return (
     <>
