@@ -29,9 +29,15 @@ const Dashboard = () => {
 
   const { data: profilData } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
 
-  console.log(profilData, 'dataprofil');
 
   const [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    refetch()
+
+
+  }, [profilData, refetch])
+
 
   useEffect(() => {
     if (donationById) {

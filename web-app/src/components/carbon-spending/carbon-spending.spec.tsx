@@ -43,7 +43,7 @@ describe('CreateSpending', () => {
   data-testid="wrapper"
 >
   <form
-    class="flex flex-col items-center md:h-[100vh]"
+    class="flex flex-col items-center"
     data-testid="formCreateSpending"
   >
     <div

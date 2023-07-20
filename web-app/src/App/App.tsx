@@ -50,7 +50,10 @@ function App() {
     },
   });
 
+
+
   const location = useLocation();
+
   return (
     <>
       <Header />
@@ -73,7 +76,7 @@ function App() {
           </nav>
         )}
       </div>
-      {isLogged === false &&
+      {!isLogged &&
         location.pathname !== '/signin' &&
         location.pathname !== '/register' && (
           <div className="text-center flex flex-col items-center justify-center mt-[100px]">
@@ -141,7 +144,7 @@ function App() {
               </Protected>
             }
           />
-          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
+          <Route path={SIGN_IN_PATH} element={<SignIn setIsLogged={setIsLogged} onSuccess={refetch} />} />
         </Routes>
       </main>
       {location.pathname !== REGISTER_PATH &&
