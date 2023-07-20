@@ -48,7 +48,6 @@ const FriendshipComponent = () => {
   const { userProfile } = useContext(AppContext) || {};
 
   const friendsList = data?.getFriendshipList.map((friend) => {
-    // Créer un tableau pour stocker les objets d'informations des amis
     const userObjects = [];
 
     // Ajouter l'objet invitedUser s'il existe
@@ -72,7 +71,6 @@ const FriendshipComponent = () => {
     // Combiner les objets en un seul objet à l'aide de l'opérateur de décomposition
     const combinedUserObject = Object.assign({}, ...userObjects);
 
-    // Retourner l'objet combiné avec les informations des amis
     return combinedUserObject;
   });
 
@@ -96,10 +94,10 @@ const FriendshipComponent = () => {
   };
 
   return (
-    <div className="p-4 mt-8 w-full md:w-1/2 md:mx-auto">
+    <div className="p-4 mt-8 w-full h-[70vh] md:w-1/2 md:mx-auto">
       <div className="flex justify-center">
         <button
-          className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
             activeTab === 'friends'
               ? 'bg-[#484b8a] text-white'
               : 'bg-gray-200 text-gray-700'
@@ -109,7 +107,7 @@ const FriendshipComponent = () => {
           Liste des amis
         </button>
         <button
-          className={`py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
+          className={`w-full py-2 px-3 sm:px-4 text-base sm:text-lg font-medium rounded-t-lg focus:outline-none ${
             activeTab === 'friendRequests'
               ? 'bg-[#484b8a] text-white'
               : 'bg-gray-200 text-gray-700'
@@ -119,13 +117,11 @@ const FriendshipComponent = () => {
           Demandes d'amis
         </button>
       </div>
-      {/* Afficher la liste des amis de l'utilisateur */}
       {activeTab === 'friends' && (
         <FriendShipList friendsListData={friendsList || []} />
       )}
       {activeTab === 'friendRequests' && (
         <div className="bg-white p-4 shadow rounded">
-          {/* Affichez ici les demandes d'amis en cours avec les boutons accepter ou supprimer */}
           <FriendshipRequestList />
         </div>
       )}

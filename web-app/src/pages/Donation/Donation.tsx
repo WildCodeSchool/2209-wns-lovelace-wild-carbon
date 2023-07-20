@@ -10,7 +10,10 @@ import {
   GetTotalDonationsQuery,
 } from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
-import { BsFillArrowUpCircleFill } from 'react-icons/bs';
+import {
+  BsFillArrowUpCircleFill,
+  BsFillArrowDownCircleFill,
+} from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
 
@@ -22,8 +25,6 @@ const CREATE_DONATION = gql`
     }
   }
 `;
-
-// onlyMine
 
 const GET_DONATIONS = gql`
   query Donations {

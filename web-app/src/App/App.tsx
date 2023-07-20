@@ -4,8 +4,8 @@ import {
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
-  PROFILE_PATH,
   FRIENDSHIP_PATH,
+  HOME_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home/Home';
@@ -20,7 +20,7 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-import CarbonSpending from '../components/carbon-spending/carbon-spending';
+import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
 import Profile from '../pages/profile/Profile';
@@ -92,7 +92,14 @@ function App() {
       </Protected>
       <main>
         <Routes>
-          <Route path={DASHBOARD_PATH} element={<Dashboard />} />
+          <Route
+            path={HOME_PATH}
+            element={
+              <Protected isLoggedIn={isLogged} loading={loading}>
+                <Dashboard />
+              </Protected>
+            }
+          />
           <Route
             path={DASHBOARD_PATH}
             element={
@@ -118,10 +125,10 @@ function App() {
             }
           />
           <Route
-            path={PROFILE_PATH}
+            path={FRIENDSHIP_PATH}
             element={
               <Protected isLoggedIn={isLogged} loading={loading}>
-                <Profile />
+                <Friendhsip />
               </Protected>
             }
           />

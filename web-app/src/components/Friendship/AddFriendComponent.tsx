@@ -30,7 +30,7 @@ const AddFriend = ({ friendInput, setFriendInput, submit }: AddFriendProps) => {
         />
       </div>
       <button
-        className="mt-8 text-white self-center w-full sm:w-auto h-12 bg-[#484b8a] rounded font-semibold text-lg leading-[24px] px-4 py-2"
+        className="mt-8 text-white self-center w-full h-12 bg-[#484b8a] rounded font-semibold text-lg leading-[24px] px-4 py-2"
         onClick={submit}
       >
         Envoyer l'invitation

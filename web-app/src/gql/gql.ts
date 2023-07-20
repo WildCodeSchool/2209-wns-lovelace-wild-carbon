@@ -19,7 +19,7 @@ const documents = {
     "\n  query GetFriendshipRequests {\n    getFriendshipRequests {\n      invitedUsers {\n        lastName\n        firstName\n      }\n      id\n    }\n  }\n": types.GetFriendshipRequestsDocument,
     "\n  mutation AcceptFriendshipRequest($friendshipId: String!) {\n    acceptFriendshipRequest(friendshipId: $friendshipId) {\n      id\n      acceptInvitation\n    }\n  }\n": types.AcceptFriendshipRequestDocument,
     "\n  mutation DeclineFriendshipRequest($friendshipId: String!) {\n    declineFriendshipRequest(friendshipId: $friendshipId)\n  }\n": types.DeclineFriendshipRequestDocument,
-    "\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n": types.DeleteSpendingDocument,
+    "\n  mutation DeleteSpending($deleteSpendingId: String!) {\n    deleteSpending(id: $deleteSpendingId) {\n      id\n    }\n  }\n": types.DeleteSpendingDocument,
     "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n": types.CreateSpendingDocument,
     "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n": types.Get_SpendingDocument,
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
@@ -73,7 +73,7 @@ export function graphql(source: "\n  mutation DeclineFriendshipRequest($friendsh
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n"): (typeof documents)["\n\tmutation DeleteSpending($deleteSpendingId: String!) {\n\t\tdeleteSpending(id: $deleteSpendingId) {\n\t\t\tid\n\t\t}\n\t}\n"];
+export function graphql(source: "\n  mutation DeleteSpending($deleteSpendingId: String!) {\n    deleteSpending(id: $deleteSpendingId) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteSpending($deleteSpendingId: String!) {\n    deleteSpending(id: $deleteSpendingId) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

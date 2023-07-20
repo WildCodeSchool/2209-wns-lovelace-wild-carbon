@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { useQuery, gql } from '@apollo/client';
 import { Get_SpendingQuery } from '../../gql/graphql';
 import SpendingCarrouselComponent from '../../components/Spending-carrousel/SpendingCarrouselComponent';
+import { useEffect } from 'react';
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 
@@ -33,6 +34,11 @@ const DoughnutComponent = () => {
     'Transports',
     'Train',
   ];
+
+  useEffect(() => {
+    refetch()
+  }, [data, refetch])
+
 
   if (data) {
     const categories: { [key: string]: number } = {};
