@@ -10,7 +10,10 @@ import {
   GetTotalDonationsQuery,
 } from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
-import { BsFillArrowUpCircleFill, BsFillArrowDownCircleFill } from 'react-icons/bs';
+import {
+  BsFillArrowUpCircleFill,
+  BsFillArrowDownCircleFill,
+} from 'react-icons/bs';
 import 'moment/locale/fr';
 import moment from 'moment';
 
@@ -110,103 +113,108 @@ const Donation = () => {
         <p>{totalDonations?.getTotalDonations.toFixed(2)}€</p>
       </div>
       <div className="border mx-[40px] my-[37px]"></div>
-      <div className="flex items-center flex-col text-[#609f39] font-bold">
-        <h2 className="text-[20px]">Je participe à hauteur de :</h2>
-        <div className="flex justify-center text-[35px]">
-          <input
-            type="text"
-            value={selectedAmount}
-            placeholder="5"
-            onChange={(e) => setSelectedAmount(e.target.value)}
-            className="border-none bg-transparent w-[70px] text-center"
-          />
-          <span>€</span>
+      <div className="w-full flex flex-col md:flex-row items-center justify-center">
+        <div className="flex flex-col w-full items-between">
+          <div className="flex items-center flex-col text-[#609f39] font-bold">
+            <h2 className="text-[20px]">Je participe à hauteur de :</h2>
+            <div className="flex justify-center text-[35px]">
+              <input
+                type="text"
+                value={selectedAmount}
+                placeholder="5"
+                onChange={(e) => setSelectedAmount(e.target.value)}
+                className="border-none bg-transparent w-[70px] text-center"
+              />
+              <span>€</span>
+            </div>
+          </div>
+          <div className="flex justify-around mt-6 font-bold w-full md:w-1/3 md:mx-auto">
+            <button
+              type="submit"
+              onClick={() => handleButtonClick(10)}
+              className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
+            >
+              10€
+            </button>
+            <button
+              type="submit"
+              onClick={() => handleButtonClick(15)}
+              className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
+            >
+              15€
+            </button>
+            <button
+              type="submit"
+              onClick={() => handleButtonClick(20)}
+              className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
+            >
+              20€
+            </button>
+          </div>
+          <div className="flex justify-center text-[#ffffff] my-7 font-bold">
+            <button
+              type="submit"
+              onClick={handleConfirmClick}
+              className="bg-[#484B8A] py-[10px] px-[90px] rounded-lg"
+            >
+              Confirmer
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-around mt-6 font-bold">
-        <button
-          type="submit"
-          onClick={() => handleButtonClick(10)}
-          className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
-        >
-          10€
-        </button>
-        <button
-          type="submit"
-          onClick={() => handleButtonClick(15)}
-          className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
-        >
-          15€
-        </button>
-        <button
-          type="submit"
-          onClick={() => handleButtonClick(20)}
-          className="rounded-lg bg-[#ffffff] shadow-lg py-5 px-5"
-        >
-          20€
-        </button>
-      </div>
-      <div className="flex justify-center text-[#ffffff] my-7 font-bold">
-        <button
-          type="submit"
-          onClick={handleConfirmClick}
-          className="bg-[#484B8A] py-[10px] px-[90px] rounded-lg"
-        >
-          Confirmer
-        </button>
-      </div>
-      <div>
-        <h4 className="ml-5 text-[#609f39] font-semibold mb-[5px]">
-          Derniers contributeurs :
-        </h4>
-        <p className="ml-5 flex flex-wrap justify-around">
-          {donationData?.donations.slice(-5).map((donation, index) => (
-            <span key={index} className='bg-[#484B8A] text-white p-1 rounded'>{donation.amount}€</span>
-          ))}
-        </p>
-        <button
-          type="button"
-          onClick={openModal}
-          className="ml-5 text-[#609f39] font-semibold mt-[8px] flex"
-        >
-
-          Historique de vos donations :
-          {!showModal && <BsFillArrowDownCircleFill
-            style={{
-              fontSize: '22px',
-              color: '#609f39',
-              marginLeft: "10px",
-            }}
-          />}
-
-        </button>
-      </div>
-      {showModal && (
-        <div>
-          <span onClick={() => setShowModal(false)}>
-            <div className=" ml-5 mt-[5px] mb-[10px]">
-              <BsFillArrowUpCircleFill
+        <div className="flex flex-col w-full md:w1/2 items-start">
+          <h4 className="ml-5 text-[#609f39] font-semibold mb-[5px]">
+            Derniers contributeurs :
+          </h4>
+          <p className="ml-5 flex flex-col flex-wrap">
+            {donationData?.donations.slice(-5).map((donation, index) => (
+              <span key={index}>{donation.amount}€</span>
+            ))}
+          </p>
+          <button
+            type="button"
+            onClick={openModal}
+            className="ml-5 text-[#609f39] font-semibold mt-[8px] flex"
+          >
+            Historique de vos donations :
+            {!showModal && (
+              <BsFillArrowDownCircleFill
                 style={{
                   fontSize: '22px',
                   color: '#609f39',
+                  marginLeft: '10px',
                 }}
               />
-            </div>
-          </span>
-          <div className="ml-5 text-[#609f39] font-semibold flex flex-col leading-7">
-            {donationDataId?.donationsByUserId.map((donationsId, index) => (
-              <div key={index} className="flex items-center">
-                <BsPiggyBank
-                  style={{ marginRight: '10px', fontSize: '20px' }}
-                />
-                <span>
-                  {donationsId.amount}€ le {responseDate}
-                </span>
+            )}
+          </button>
+
+          {showModal && (
+            <div>
+              <span onClick={() => setShowModal(false)}>
+                <div className=" ml-5 mt-[5px] mb-[10px]">
+                  <BsFillArrowUpCircleFill
+                    style={{
+                      fontSize: '22px',
+                      color: '#609f39',
+                    }}
+                  />
+                </div>
+              </span>
+              <div className="ml-5 text-[#609f39] font-semibold flex flex-col leading-7">
+                {donationDataId?.donationsByUserId.map((donationsId, index) => (
+                  <div key={index} className="flex items-center">
+                    <BsPiggyBank
+                      style={{ marginRight: '10px', fontSize: '20px' }}
+                    />
+                    <span>
+                      {donationsId.amount}€ le {responseDate}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
