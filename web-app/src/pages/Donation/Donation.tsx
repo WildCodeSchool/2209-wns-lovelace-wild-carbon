@@ -173,10 +173,20 @@ const Donation = () => {
           <button
             type="button"
             onClick={openModal}
-            className="ml-5 text-[#609f39] font-semibold mt-[8px]"
+            className="ml-5 text-[#609f39] font-semibold mt-[8px] flex"
           >
             Historique de vos donations :
+            {!showModal && (
+              <BsFillArrowDownCircleFill
+                style={{
+                  fontSize: '22px',
+                  color: '#609f39',
+                  marginLeft: '10px',
+                }}
+              />
+            )}
           </button>
+
           {showModal && (
             <div>
               <span onClick={() => setShowModal(false)}>

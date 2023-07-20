@@ -8,7 +8,6 @@ import {
   HOME_PATH,
 } from '../pages/paths';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home/Home';
 import Register from '../pages/register/Register';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Donation from '../pages/Donation/Donation';
@@ -23,7 +22,6 @@ import { MyProfileQuery } from '../gql/graphql';
 import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
-import Profile from '../pages/profile/Profile';
 import LogOutButton from '../components/logOutButton/LogOutButton';
 import Friendhsip from '../pages/friendship/Friendship';
 import Interdit from '../Assets/interdit.png';

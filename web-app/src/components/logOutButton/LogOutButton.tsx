@@ -1,4 +1,4 @@
-import { HOME_PATH, SIGN_IN_PATH } from '../../pages/paths';
+import { SIGN_IN_PATH } from '../../pages/paths';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { SignOutMutation, SignOutMutationVariables } from '../../gql/graphql';

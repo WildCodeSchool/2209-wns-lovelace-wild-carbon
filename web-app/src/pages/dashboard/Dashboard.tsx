@@ -1,27 +1,26 @@
 import { gql, useQuery } from '@apollo/client';
 import Title from '../../components/Title';
 import DoughnutComponent from '../../components/doughnut/doughnut';
-import { DonationsByUserIdQuery, MyProfileQuery, MyProfileQueryQuery } from '../../gql/graphql';
+import { DonationsByUserIdQuery, MyProfileQueryQuery } from '../../gql/graphql';
 import { useEffect, useState } from 'react';
 
 const GET_DONATIONS_BY_USER = gql`
-	query DonationsByUserId {
-		donationsByUserId {
-			amount
-		}
-	}
+  query DonationsByUserId {
+    donationsByUserId {
+      amount
+    }
+  }
 `;
 
 const MY_PROFILE = gql`
-    query MyProfile {
-      myProfile {
-        firstName
-        lastName
-        id
-      }
+  query MyProfile {
+    myProfile {
+      firstName
+      lastName
+      id
     }
-  `;
-
+  }
+`;
 
 const Dashboard = () => {
   const { data: donationById, refetch } = useQuery<DonationsByUserIdQuery>(
@@ -30,8 +29,7 @@ const Dashboard = () => {
 
   const { data: profilData } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
 
-  console.log(profilData, "dataprofil")
-
+  console.log(profilData, 'dataprofil');
 
   const [totalAmount, setTotalAmount] = useState(0);
 
@@ -56,7 +54,9 @@ const Dashboard = () => {
       />
 
       <div className="flex justify-around mt-6 ">
-        <p className="font-bold">{profilData?.myProfile.firstName} {profilData?.myProfile.lastName}</p>
+        <p className="font-bold">
+          {profilData?.myProfile.firstName} {profilData?.myProfile.lastName}
+        </p>
         <p className="font-bold">Donation: {totalAmount.toFixed(2)}€</p>
       </div>
       <div className="flex justify-center">
