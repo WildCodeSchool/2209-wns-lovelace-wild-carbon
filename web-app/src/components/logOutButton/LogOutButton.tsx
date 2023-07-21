@@ -48,7 +48,7 @@ const LogOutButton = ({
       <div className=" text-[white] flex justify-between mx-5 text-[14px] mb-5">
         <p className="bg-[#484B8A] p-[5px] rounded-[5px]">
           Connecté : <br />
-          {userData.myProfile.email}
+          {userData?.myProfile.email}
         </p>
         <button
           onClick={() => {
