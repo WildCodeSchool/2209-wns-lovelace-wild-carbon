@@ -23,6 +23,7 @@ const documents = {
     "\n  mutation CreateSpending(\n    $title: String!\n    $date: DateTime!\n    $unit: Float!\n    $weight: Float!\n    $categoryName: String!\n  ) {\n    createSpending(\n      title: $title\n      date: $date\n      unit: $unit\n      weight: $weight\n      categoryName: $categoryName\n    ) {\n      title\n      date\n      unit\n      weight\n      category {\n        categoryName\n      }\n    }\n  }\n": types.CreateSpendingDocument,
     "\n  query GET_SPENDING {\n    spendings {\n      category {\n        categoryName\n      }\n      date\n      id\n      localizedDate\n      title\n      unit\n      weight\n    }\n  }\n": types.Get_SpendingDocument,
     "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n": types.SignOutDocument,
+    "\n  query Query {\n    articles {\n      title\n      description\n      category {\n        categoryName\n      }\n    }\n  }\n": types.QueryDocument,
     "\n  query MyProfileQuery {\n    myProfile {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.MyProfileQueryDocument,
     "\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n": types.CreateDonationDocument,
     "\n  query Donations {\n    donations {\n      amount\n      date\n    }\n  }\n": types.DonationsDocument,
@@ -86,6 +87,10 @@ export function graphql(source: "\n  query GET_SPENDING {\n    spendings {\n    
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation SignOut($signOutId: String!) {\n    signOut(id: $signOutId) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Query {\n    articles {\n      title\n      description\n      category {\n        categoryName\n      }\n    }\n  }\n"): (typeof documents)["\n  query Query {\n    articles {\n      title\n      description\n      category {\n        categoryName\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

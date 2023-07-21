@@ -4,6 +4,7 @@ import {
   DONATION_PATH,
   SIGN_IN_PATH,
   CARBON_SPENDING_PATH,
+  WHYCOMMIT_PATH,
   FRIENDSHIP_PATH,
   HOME_PATH,
 } from '../pages/paths';
@@ -11,6 +12,7 @@ import { Routes, Route } from 'react-router-dom';
 import Register from '../pages/register/Register';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Donation from '../pages/Donation/Donation';
+import WhyCommit from '../pages/WhyCommit/WhyCommit';
 import SignIn from '../pages/signin/SignIn';
 import { useLocation } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
@@ -50,14 +52,11 @@ function App() {
     },
   });
 
-
-
   const location = useLocation();
 
   return (
     <>
       <Header />
-
       <div className="flex justify-end text-[#fff] mt-[10px] text-sm ">
         {data?.myProfile ? (
           <i>{data?.myProfile.email}</i>
@@ -115,6 +114,9 @@ function App() {
               </Protected>
             }
           />
+
+          <Route path={WHYCOMMIT_PATH} element={<WhyCommit />} />
+
           <Route
             path={CARBON_SPENDING_PATH}
             element={
@@ -144,7 +146,10 @@ function App() {
               </Protected>
             }
           />
-          <Route path={SIGN_IN_PATH} element={<SignIn setIsLogged={setIsLogged} onSuccess={refetch} />} />
+          <Route
+            path={SIGN_IN_PATH}
+            element={<SignIn setIsLogged={setIsLogged} onSuccess={refetch} />}
+          />
         </Routes>
       </main>
       {location.pathname !== REGISTER_PATH &&
@@ -161,6 +166,8 @@ function App() {
         pauseOnHover
         style={{ marginBottom: '80px' }}
       />
+      {location.pathname !== REGISTER_PATH &&
+        location.pathname !== WHYCOMMIT_PATH && <Nav />}{' '}
     </>
   );
 }

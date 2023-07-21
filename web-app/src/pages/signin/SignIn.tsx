@@ -106,10 +106,6 @@ const SignIn = ({ onSuccess, setIsLogged }: { onSuccess: () => {}, setIsLogged: 
             >
               {loading ? <Loader /> : 'Se connecter'}
             </button>
-
-            <div className="mt-5 font-bold  text-[#609F39]">
-              <button>Mot de passe oublié ?</button>
-            </div>
           </div>
           <div className="border mx-[10px] mt-5"></div>
           <div className="flex justify-center mt-5">
@@ -122,7 +118,7 @@ const SignIn = ({ onSuccess, setIsLogged }: { onSuccess: () => {}, setIsLogged: 
           </div>
         </form>
       </div>
-      <Link to="/articles">
+      <Link to="/whyCommit">
         <p className="text-center mt-5 underline text-[#609F39] font-bold text-[20px]">
           Pourquoi s'engager ?
         </p>
