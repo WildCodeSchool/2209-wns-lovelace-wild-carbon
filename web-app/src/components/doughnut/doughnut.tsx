@@ -1,8 +1,11 @@
 import { Chart as ChartJs, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useQuery, gql } from '@apollo/client';
-import { Get_SpendingQuery } from 'gql/graphql';
-import SpendingCarrouselComponent from 'components/Spending-carrousel/SpendingCarrouselComponent';
+import { Get_SpendingQuery } from '../../gql/graphql';
+import SpendingCarrouselComponent from '../../components/Spending-carrousel/SpendingCarrouselComponent';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import warning from '../../media/avertissement.png';
 
 ChartJs.register(ArcElement, Tooltip, Legend);
 
@@ -23,7 +26,7 @@ const GET_SPENDING = gql`
 `;
 
 const DoughnutComponent = () => {
-  const { data } = useQuery<Get_SpendingQuery>(GET_SPENDING);
+  const { data, refetch } = useQuery<Get_SpendingQuery>(GET_SPENDING);
 
   let categoryWeights: number[] = [];
   let categoryLabels: string[] = [
@@ -33,6 +36,10 @@ const DoughnutComponent = () => {
     'Transports',
     'Train',
   ];
+
+  useEffect(() => {
+    refetch();
+  }, [data, refetch]);
 
   if (data) {
     const categories: { [key: string]: number } = {};
@@ -55,7 +62,7 @@ const DoughnutComponent = () => {
     labels: categoryLabels,
     datasets: [
       {
-        label: 'consommation pour la catégorie sur la consomamtion total',
+        label: 'consommation pour la catégorie sur la consommation total',
         data: categoryWeights,
         backgroundColor: [
           'rgb(255, 99, 132)',
@@ -72,11 +79,30 @@ const DoughnutComponent = () => {
   };
 
   return (
-    <>
-      <Doughnut data={dataGraph} />
-
-      <SpendingCarrouselComponent spendingData={data} />
-    </>
+    <div className="w-full flex flex-col md:items-center justify-center pb-24 md:pt-5">
+      {dataGraph.labels.length === 0 ? (
+        <div className="w-full flex flex-col text-center items-center mt-5">
+          <img
+            className="text-center"
+            src={warning}
+            alt="warningIcon"
+            height="150px"
+            width="150px"
+          ></img>
+          <p className="font-bold text-[#484B8A] mt-5">
+            Vous n'avez pas encore de dépense !
+          </p>
+          <button className="bg-[#484B8A] text-[#ffffff] rounded-[5px] mt-5 p-[5px] mx-[100px]">
+            <Link to={'/carbonSpending'}>Ajouter une dépense</Link>
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center w-full md:w-1/5 ">
+          <Doughnut data={dataGraph} />
+        </div>
+      )}
+      <SpendingCarrouselComponent spendingData={data} onRefetch={refetch} />
+    </div>
   );
 };
 

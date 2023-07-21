@@ -1,7 +1,7 @@
-import { HOME_PATH } from 'pages/paths';
+import { SIGN_IN_PATH } from '../../pages/paths';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { SignOutMutation, SignOutMutationVariables } from 'gql/graphql';
+import { SignOutMutation, SignOutMutationVariables } from '../../gql/graphql';
 import { toast } from 'react-toastify';
 
 const SIGN_OUT = gql`
@@ -12,7 +12,13 @@ const SIGN_OUT = gql`
   }
 `;
 
-const LogOutButton = ({ userData }: { userData: any }) => {
+const LogOutButton = ({
+  userData,
+  setIsLogged,
+}: {
+  userData: any;
+  setIsLogged: any;
+}) => {
   const navigate = useNavigate();
 
   const [signOut] = useMutation<SignOutMutation, SignOutMutationVariables>(
@@ -20,7 +26,7 @@ const LogOutButton = ({ userData }: { userData: any }) => {
     {
       onCompleted: () => {
         toast.success('Vous êtes bien déconnecté.');
-        navigate(HOME_PATH);
+        navigate(SIGN_IN_PATH);
       },
       onError: (error) => {
         toast.error(error.message);
@@ -29,21 +35,26 @@ const LogOutButton = ({ userData }: { userData: any }) => {
   );
 
   const handleDisconnect = async (user: any) => {
-    signOut({
+    await signOut({
       variables: {
         signOutId: userData.myProfile.id,
       },
     });
+    setIsLogged(false);
   };
 
   return (
     <div>
-      <div>
-        <p>Connecté avec l'adresse email : {userData.myProfile.email}</p>
+      <div className=" text-[white] flex justify-between mx-5 text-[14px] mb-5">
+        <p className="bg-[#484B8A] p-[5px] rounded-[5px]">
+          Connecté : <br />
+          {userData.myProfile.email}
+        </p>
         <button
           onClick={() => {
             handleDisconnect(userData);
           }}
+          className="bg-[#484B8A] rounded-[5px] p-[5px]"
         >
           Déconnexion
         </button>

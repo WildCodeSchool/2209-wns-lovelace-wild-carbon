@@ -1,5 +1,5 @@
-import Title from 'components/Title';
-import ArticlesRaw from 'components/whyCommit/ArticlesRaw';
+import Title from '../../components/Title';
+import ArticlesRaw from '../../components/whyCommit/ArticlesRaw';
 
 const WhyCommit = () => {
   return (

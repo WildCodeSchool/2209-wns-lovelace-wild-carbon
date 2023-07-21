@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
-import Footer from 'components/Footer/Footer';
-import { QueryQuery } from 'gql/graphql';
+import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import { QueryQuery } from '../../gql/graphql';
 
 const GET_ARTICLES = gql`
   query Query {

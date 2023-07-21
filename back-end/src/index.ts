@@ -2,18 +2,17 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
-import SpendingRepository from './models/Spending/Spending.repository';
 import { ExpressContext } from 'apollo-server-express';
 import SpendingResolver from './resolvers/Spending/Spending.resolver';
 import { initializeDatabaseRepositories } from './database/utils';
 import CategoryRepository from './models/Category/Category.repository';
-import ArticleRepository from './models/Article/Article.repository';
 import ArticleResolver from './resolvers/Article/Article.resolver';
 import AppUserResolver from './resolvers/AppUser/AppUser.resolver';
 import AppUserRepository from './models/AppUser/AppUser.repository';
 import { getSessionIdInCookie } from './http-utils';
 import AppUser from './models/AppUser/AppUser.entity';
-import { IS_PRODUCTION } from './config';
+import FriendshipResolver from './resolvers/FriendShip/FriendShip.resolver';
+import DonationResolver from './resolvers/Donation/Donation.resolver';
 
 export type GlobalContext = ExpressContext & {
   user: AppUser | null;
@@ -22,7 +21,14 @@ export type GlobalContext = ExpressContext & {
 const startServer = async () => {
   const server = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [SpendingResolver, ArticleResolver, AppUserResolver],
+      resolvers: [
+        SpendingResolver,
+        ArticleResolver,
+        AppUserResolver,
+        FriendshipResolver,
+        DonationResolver,
+        AppUserResolver,
+      ],
       authChecker: async ({ context }) => {
         return Boolean(context.user);
       },
@@ -51,7 +57,6 @@ const startServer = async () => {
   const { url } = await server.listen();
   await initializeDatabaseRepositories();
   await CategoryRepository.initializeCategories();
-
   console.log(`🚀  Server ready at ${url}`);
 };
 

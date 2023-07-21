@@ -6,10 +6,11 @@ import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { SignInMutation, SignInMutationVariables } from '../../gql/graphql';
-import { getErrorMessage } from '../../utils';
-import { DASHBOARD_PATH, REGISTER_PATH } from '../paths';
+import getErrorMessage from '../../utils';
+import { HOME_PATH, REGISTER_PATH } from '../paths';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../components/Loader/Loader';
+import Title from '../../components/Title';
 
 const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
@@ -19,7 +20,7 @@ const SIGN_IN = gql`
     }
   }
 `;
-const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
+const SignIn = ({ onSuccess, setIsLogged }: { onSuccess: () => {}, setIsLogged: any }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordEye, setPasswordEye] = useState(false);
@@ -41,7 +42,8 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
       });
       toast.success('Vous êtes bien connecté!');
       onSuccess();
-      navigate(DASHBOARD_PATH);
+      setIsLogged(true)
+      navigate(HOME_PATH);
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -50,12 +52,7 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
   return (
     <>
       <div>
-        <h1 className="text-center mt-[12%] font-bold text-[30px] text-[#609F39]">
-          Wild Carbon
-        </h1>
-        <p className="text-center mb-5 italic text-[#609F39]">
-          pour facilement suivre son empreinte carbone.
-        </p>
+        <Title title=' Wild Carbon' subtitle=' pour facilement suivre son empreinte carbone.' />
       </div>
       <div className="flex justify-center items-center  h-[55vh] mx-[5%] bg-[#fff] rounded-xl shadow-2xl mt-[7%]">
         <form
@@ -79,7 +76,7 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
               }}
             ></input>
           </div>
-          <div className="flex flex-col  mb-5">
+          <div className="flex items-center bg-[#C3E9AC]  mb-5  rounded-[5px]">
             <input
               type={passwordEye === false ? 'password' : 'text'}
               placeholder="Mot de passe"
@@ -91,16 +88,16 @@ const SignIn = ({ onSuccess }: { onSuccess: () => {} }) => {
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
-              className="bg-[#C3E9AC] rounded-[5px] p-[10px]"
+              className="bg-[#C3E9AC] p-[10px] rounded-[5px]"
             ></input>
-
-            <div className=" cursor-pointer text-xl absolute right-16 top-[345px]">
+            <div className=" cursor-pointer text-xl mx-1">
               {passwordEye === false ? (
                 <FaEyeSlash onClick={handlePassword} />
               ) : (
                 <FaEye onClick={handlePassword} />
               )}
             </div>
+
           </div>
           <div className="flex flex-col items-center mt-5">
             <button

@@ -12,7 +12,7 @@ interface Value {
 function CarbonValue({ value, setValue, min, max, result, idicon }: Value) {
   return (
     <>
-      <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
+      <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px] mx-auto">
         Unités:
       </h3>
       <div className="flex flex-col items-center">
@@ -32,7 +32,7 @@ function CarbonValue({ value, setValue, min, max, result, idicon }: Value) {
         </p>
       </div>
       <div className="flex flex-col mt-[30px]">
-        <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px]">
+        <h3 className="flex flex-col text-[#609f39] mb-3 font-medium text-[18px] mx-auto">
           Consommation:
         </h3>
         <p className="text-center text-[22px] font-black text-red-600">

@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import { Field, ID, ObjectType } from 'type-graphql';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-
 import Category from '../Category/Category.entity';
 import AppUser from '../AppUser/AppUser.entity';
 
@@ -57,6 +56,12 @@ export default class Spending {
   @ManyToOne(() => AppUser, (user) => user.spendings, {
     onDelete: 'CASCADE',
   })
-  @Field(() => AppUser)
   user: AppUser;
+
+  @Field(() => String)
+  getDisplaySpending() {
+    return `[${this.localizedDate()} - ${this.weight}km - ${this.unit}kg/CO2] ${
+      this.title
+    } - ${this.category.categoryName}`;
+  }
 }
