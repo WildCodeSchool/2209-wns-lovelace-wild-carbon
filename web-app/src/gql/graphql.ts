@@ -5,57 +5,59 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
-  DateTime: any;
+  DateTime: { input: any; output: any; }
 };
 
 export type AppUser = {
   __typename?: 'AppUser';
   donations: Array<Donation>;
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  id: Scalars['ID'];
+  email: Scalars['String']['output'];
+  firstName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   invitedUsers: Array<Friendship>;
   invitingUser: Array<Friendship>;
-  lastName: Scalars['String'];
+  lastName: Scalars['String']['output'];
   spendings: Array<Spending>;
 };
 
 export type Article = {
   __typename?: 'Article';
   category: Category;
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  title: Scalars['String'];
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type Category = {
   __typename?: 'Category';
   articles: Array<Article>;
-  categoryName: Scalars['String'];
-  id: Scalars['ID'];
+  categoryName: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
   spendings: Array<Spending>;
 };
 
 export type Donation = {
   __typename?: 'Donation';
-  amount: Scalars['Float'];
-  date: Scalars['DateTime'];
-  id: Scalars['ID'];
+  amount: Scalars['Float']['output'];
+  date: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
   user: AppUser;
 };
 
 export type Friendship = {
   __typename?: 'Friendship';
-  acceptInvitation: Scalars['Boolean'];
-  id: Scalars['ID'];
+  acceptInvitation: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
   invitedUsers: AppUser;
   invitingUser: AppUser;
 };
@@ -67,7 +69,7 @@ export type Mutation = {
   createDonation: Donation;
   createSpending: Spending;
   createUser: AppUser;
-  declineFriendshipRequest: Scalars['Boolean'];
+  declineFriendshipRequest: Scalars['Boolean']['output'];
   deleteArticle: Article;
   deleteSpending: Spending;
   sendFriendshipRequest: Friendship;
@@ -79,85 +81,85 @@ export type Mutation = {
 
 
 export type MutationAcceptFriendshipRequestArgs = {
-  friendshipId: Scalars['String'];
+  friendshipId: Scalars['String']['input'];
 };
 
 
 export type MutationCreateArticleArgs = {
-  categoryName: Scalars['String'];
-  description: Scalars['String'];
-  title: Scalars['String'];
+  categoryName: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  title: Scalars['String']['input'];
 };
 
 
 export type MutationCreateDonationArgs = {
-  amount: Scalars['Float'];
+  amount: Scalars['Float']['input'];
 };
 
 
 export type MutationCreateSpendingArgs = {
-  categoryName: Scalars['String'];
-  date: Scalars['DateTime'];
-  title: Scalars['String'];
-  unit: Scalars['Float'];
-  weight: Scalars['Float'];
+  categoryName: Scalars['String']['input'];
+  date: Scalars['DateTime']['input'];
+  title: Scalars['String']['input'];
+  unit: Scalars['Float']['input'];
+  weight: Scalars['Float']['input'];
 };
 
 
 export type MutationCreateUserArgs = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  firstName: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 
 export type MutationDeclineFriendshipRequestArgs = {
-  friendshipId: Scalars['String'];
+  friendshipId: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteArticleArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type MutationDeleteSpendingArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type MutationSendFriendshipRequestArgs = {
-  invitedUserEmail: Scalars['String'];
+  invitedUserEmail: Scalars['String']['input'];
 };
 
 
 export type MutationSignInArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 
 export type MutationSignOutArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 
 export type MutationUpdateArticleArgs = {
-  categoryName: Scalars['String'];
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  title: Scalars['String'];
+  categoryName: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
+  title: Scalars['String']['input'];
 };
 
 
 export type MutationUpdateSpendingArgs = {
-  categoryName: Scalars['String'];
-  date: Scalars['DateTime'];
-  id: Scalars['ID'];
-  title: Scalars['String'];
-  unit: Scalars['Float'];
-  weight: Scalars['Float'];
+  categoryName: Scalars['String']['input'];
+  date: Scalars['DateTime']['input'];
+  id: Scalars['ID']['input'];
+  title: Scalars['String']['input'];
+  unit: Scalars['Float']['input'];
+  weight: Scalars['Float']['input'];
 };
 
 export type Query = {
@@ -167,7 +169,7 @@ export type Query = {
   donationsByUserId: Array<Donation>;
   getFriendshipList: Array<Friendship>;
   getFriendshipRequests: Array<Friendship>;
-  getTotalDonations: Scalars['Int'];
+  getTotalDonations: Scalars['Int']['output'];
   getUserById: AppUser;
   getUsers: Array<AppUser>;
   myProfile: AppUser;
@@ -176,19 +178,19 @@ export type Query = {
 
 
 export type QueryGetUserByIdArgs = {
-  id: Scalars['String'];
+  id: Scalars['String']['input'];
 };
 
 export type Spending = {
   __typename?: 'Spending';
   category: Category;
-  date: Scalars['DateTime'];
-  id: Scalars['ID'];
-  localizedDate: Scalars['String'];
-  title: Scalars['String'];
-  unit: Scalars['Float'];
-  user: AppUser;
-  weight: Scalars['Float'];
+  date: Scalars['DateTime']['output'];
+  getDisplaySpending: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  localizedDate: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  unit: Scalars['Float']['output'];
+  weight: Scalars['Float']['output'];
 };
 
 export type MyProfileQueryVariables = Exact<{ [key: string]: never; }>;
@@ -197,7 +199,7 @@ export type MyProfileQueryVariables = Exact<{ [key: string]: never; }>;
 export type MyProfileQuery = { __typename?: 'Query', myProfile: { __typename?: 'AppUser', email: string, id: string } };
 
 export type SendFriendshipRequestMutationVariables = Exact<{
-  invitedUserEmail: Scalars['String'];
+  invitedUserEmail: Scalars['String']['input'];
 }>;
 
 
@@ -214,32 +216,32 @@ export type GetFriendshipRequestsQueryVariables = Exact<{ [key: string]: never; 
 export type GetFriendshipRequestsQuery = { __typename?: 'Query', getFriendshipRequests: Array<{ __typename?: 'Friendship', id: string, invitedUsers: { __typename?: 'AppUser', lastName: string, firstName: string } }> };
 
 export type AcceptFriendshipRequestMutationVariables = Exact<{
-  friendshipId: Scalars['String'];
+  friendshipId: Scalars['String']['input'];
 }>;
 
 
 export type AcceptFriendshipRequestMutation = { __typename?: 'Mutation', acceptFriendshipRequest: { __typename?: 'Friendship', id: string, acceptInvitation: boolean } };
 
 export type DeclineFriendshipRequestMutationVariables = Exact<{
-  friendshipId: Scalars['String'];
+  friendshipId: Scalars['String']['input'];
 }>;
 
 
 export type DeclineFriendshipRequestMutation = { __typename?: 'Mutation', declineFriendshipRequest: boolean };
 
 export type DeleteSpendingMutationVariables = Exact<{
-  deleteSpendingId: Scalars['String'];
+  deleteSpendingId: Scalars['String']['input'];
 }>;
 
 
 export type DeleteSpendingMutation = { __typename?: 'Mutation', deleteSpending: { __typename?: 'Spending', id: string } };
 
 export type CreateSpendingMutationVariables = Exact<{
-  title: Scalars['String'];
-  date: Scalars['DateTime'];
-  unit: Scalars['Float'];
-  weight: Scalars['Float'];
-  categoryName: Scalars['String'];
+  title: Scalars['String']['input'];
+  date: Scalars['DateTime']['input'];
+  unit: Scalars['Float']['input'];
+  weight: Scalars['Float']['input'];
+  categoryName: Scalars['String']['input'];
 }>;
 
 
@@ -251,7 +253,7 @@ export type Get_SpendingQueryVariables = Exact<{ [key: string]: never; }>;
 export type Get_SpendingQuery = { __typename?: 'Query', spendings: Array<{ __typename?: 'Spending', date: any, id: string, localizedDate: string, title: string, unit: number, weight: number, category: { __typename?: 'Category', categoryName: string } }> };
 
 export type SignOutMutationVariables = Exact<{
-  signOutId: Scalars['String'];
+  signOutId: Scalars['String']['input'];
 }>;
 
 
@@ -263,7 +265,7 @@ export type MyProfileQueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type MyProfileQueryQuery = { __typename?: 'Query', myProfile: { __typename?: 'AppUser', id: string, email: string, firstName: string, lastName: string } };
 
 export type CreateDonationMutationVariables = Exact<{
-  amount: Scalars['Float'];
+  amount: Scalars['Float']['input'];
 }>;
 
 
@@ -279,24 +281,34 @@ export type GetTotalDonationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetTotalDonationsQuery = { __typename?: 'Query', getTotalDonations: number };
 
+export type DonationsByUserIdDonationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DonationsByUserIdDonationQuery = { __typename?: 'Query', donationsByUserId: Array<{ __typename?: 'Donation', amount: number, date: any }> };
+
 export type DonationsByUserIdQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type DonationsByUserIdQuery = { __typename?: 'Query', donationsByUserId: Array<{ __typename?: 'Donation', amount: number }> };
 
+export type MyProfileDashboardQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyProfileDashboardQuery = { __typename?: 'Query', myProfile: { __typename?: 'AppUser', firstName: string, lastName: string, id: string } };
+
 export type CreateUserMutationVariables = Exact<{
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
+  firstName: Scalars['String']['input'];
+  lastName: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 }>;
 
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'AppUser', lastName: string, id: string, firstName: string, email: string } };
 
 export type SignInMutationVariables = Exact<{
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 }>;
 
 
@@ -317,6 +329,8 @@ export const MyProfileQueryDocument = {"kind":"Document","definitions":[{"kind":
 export const CreateDonationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createDonation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"amount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createDonation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"amount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"amount"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<CreateDonationMutation, CreateDonationMutationVariables>;
 export const DonationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Donations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"donations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<DonationsQuery, DonationsQueryVariables>;
 export const GetTotalDonationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTotalDonations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getTotalDonations"}}]}}]} as unknown as DocumentNode<GetTotalDonationsQuery, GetTotalDonationsQueryVariables>;
+export const DonationsByUserIdDonationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DonationsByUserIdDonation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"donationsByUserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"date"}}]}}]}}]} as unknown as DocumentNode<DonationsByUserIdDonationQuery, DonationsByUserIdDonationQueryVariables>;
 export const DonationsByUserIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DonationsByUserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"donationsByUserId"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"amount"}}]}}]}}]} as unknown as DocumentNode<DonationsByUserIdQuery, DonationsByUserIdQueryVariables>;
+export const MyProfileDashboardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MyProfileDashboard"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"myProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<MyProfileDashboardQuery, MyProfileDashboardQueryVariables>;
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"Argument","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signIn"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;

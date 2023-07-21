@@ -10,7 +10,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 2. It is not minifiable, so the string of a GraphQL query will be multiple times inside the bundle.
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
- * Therefore it is highly recommended to use the babel-plugin for production.
+ * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
     "\n    query MyProfile {\n      myProfile {\n        email\n        id\n      }\n    }\n  ": types.MyProfileDocument,
@@ -27,7 +27,9 @@ const documents = {
     "\n  mutation createDonation($amount: Float!) {\n    createDonation(amount: $amount) {\n      amount\n      date\n    }\n  }\n": types.CreateDonationDocument,
     "\n  query Donations {\n    donations {\n      amount\n      date\n    }\n  }\n": types.DonationsDocument,
     "\n  query GetTotalDonations {\n    getTotalDonations\n  }\n": types.GetTotalDonationsDocument,
+    "\n  query DonationsByUserIdDonation {\n    donationsByUserId {\n      amount\n      date\n    }\n  }\n": types.DonationsByUserIdDonationDocument,
     "\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n": types.DonationsByUserIdDocument,
+    "\n  query MyProfileDashboard {\n    myProfile {\n      firstName\n      lastName\n      id\n    }\n  }\n": types.MyProfileDashboardDocument,
     "\n  mutation CreateUser(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createUser(\n      firstName: $firstName\n      lastName: $lastName\n      email: $email\n      password: $password\n    ) {\n      lastName\n      id\n      firstName\n      email\n    }\n  }\n": types.CreateUserDocument,
     "\n  mutation SignIn($email: String!, $password: String!) {\n    signIn(email: $email, password: $password) {\n      id\n      email\n    }\n  }\n": types.SignInDocument,
 };
@@ -38,7 +40,7 @@ const documents = {
  *
  * @example
  * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * const query = graphql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
  * ```
  *
  * The query argument is unknown!
@@ -105,7 +107,15 @@ export function graphql(source: "\n  query GetTotalDonations {\n    getTotalDona
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  query DonationsByUserIdDonation {\n    donationsByUserId {\n      amount\n      date\n    }\n  }\n"): (typeof documents)["\n  query DonationsByUserIdDonation {\n    donationsByUserId {\n      amount\n      date\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n"): (typeof documents)["\n  query DonationsByUserId {\n    donationsByUserId {\n      amount\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query MyProfileDashboard {\n    myProfile {\n      firstName\n      lastName\n      id\n    }\n  }\n"): (typeof documents)["\n  query MyProfileDashboard {\n    myProfile {\n      firstName\n      lastName\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

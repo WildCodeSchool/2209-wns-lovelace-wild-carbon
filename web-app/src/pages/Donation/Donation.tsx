@@ -6,8 +6,8 @@ import {
   CreateDonationMutation,
   CreateDonationMutationVariables,
   DonationsQuery,
-  DonationsByUserIdQuery,
   GetTotalDonationsQuery,
+  DonationsByUserIdDonationQuery,
 } from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
 import {
@@ -42,9 +42,10 @@ const GET_TOTAL_DONATIONS = gql`
 `;
 
 const GET_DONATIONS_BY_USER = gql`
-  query DonationsByUserId {
+  query DonationsByUserIdDonation {
     donationsByUserId {
       amount
+      date
     }
   }
 `;
@@ -83,9 +84,11 @@ const Donation = () => {
     CreateDonationMutation,
     CreateDonationMutationVariables
   >(CREATE_DONATION);
+
   const { data: donationData, refetch: refetchLatestContributors } =
     useQuery<DonationsQuery>(GET_DONATIONS);
-  const { data: donationDataId } = useQuery<DonationsByUserIdQuery>(
+
+  const { data: donationDataId } = useQuery<DonationsByUserIdDonationQuery>(
     GET_DONATIONS_BY_USER
   );
   const { data: totalDonations, refetch: refetchTotalDonations } =
@@ -97,10 +100,6 @@ const Donation = () => {
       refetchTotalDonations();
     }
   }, [createDonationData, refetchLatestContributors, refetchTotalDonations]);
-
-  let responseDate = moment(createDonationData?.createDonation.date).format(
-    'DD/MM/YYYY'
-  );
 
   return (
     <div className="h-[110vh] overflow-y-scroll">
@@ -206,7 +205,8 @@ const Donation = () => {
                       style={{ marginRight: '10px', fontSize: '20px' }}
                     />
                     <span>
-                      {donationsId.amount}€ le {responseDate}
+                      {donationsId.amount}€ le{' '}
+                      {moment(donationsId.date).format('DD/MM/YYYY')}
                     </span>
                   </div>
                 ))}

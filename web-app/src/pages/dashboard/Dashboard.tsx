@@ -13,7 +13,7 @@ const GET_DONATIONS_BY_USER = gql`
 `;
 
 const MY_PROFILE = gql`
-  query MyProfile {
+  query MyProfileDashboard {
     myProfile {
       firstName
       lastName
@@ -29,8 +29,6 @@ const Dashboard = () => {
 
   const { data: profilData } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
 
-  console.log(profilData, 'dataprofil');
-
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -41,8 +39,6 @@ const Dashboard = () => {
       );
       setTotalAmount(totalAmounts);
       refetch();
-    } else {
-      console.log('No data available.');
     }
   }, [donationById, refetch]);
 

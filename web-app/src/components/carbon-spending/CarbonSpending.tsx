@@ -59,7 +59,6 @@ function CarbonSpending() {
   };
 
   const submit = async () => {
-    console.log('oyé', { title, date, unit, weight, categoryName });
     try {
       await createSpending({
         variables: {

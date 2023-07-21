@@ -47,7 +47,10 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
         <Slider {...settings}>
           {spendings?.map((spending) => {
             return (
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+                key={spending.id}
+              >
                 <div className="p-6">
                   <div className="flex justify-between ">
                     <h2 className="text-gray-800 font-semibold text-lg mb-2">
@@ -75,7 +78,7 @@ const SpendingCarouselComponent: React.FC<SpendingCarouselComponentProps> = ({
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
         </Slider>
       </div>
