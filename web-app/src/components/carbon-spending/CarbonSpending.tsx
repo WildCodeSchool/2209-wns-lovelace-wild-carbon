@@ -59,7 +59,6 @@ function CarbonSpendingComponents() {
   };
 
   const submit = async () => {
-
     try {
       await createSpending({
         variables: {
@@ -86,14 +85,14 @@ function CarbonSpendingComponents() {
     selectedIcon === 1
       ? unit * 0.3
       : selectedIcon === 2
-        ? unit * 0.1482
-        : selectedIcon === 3
-          ? unit * 0.014
-          : selectedIcon === 4
-            ? unit * 0.05
-            : selectedIcon === 5
-              ? unit * 0.185
-              : 0;
+      ? unit * 0.1482
+      : selectedIcon === 3
+      ? unit * 0.014
+      : selectedIcon === 4
+      ? unit * 0.05
+      : selectedIcon === 5
+      ? unit * 0.185
+      : 0;
 
   const weight = parseInt(weightCalculation.toFixed(0));
 

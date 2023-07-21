@@ -6,8 +6,8 @@ import {
   CreateDonationMutation,
   CreateDonationMutationVariables,
   DonationsQuery,
-  DonationsByUserIdQuery,
   GetTotalDonationsQuery,
+  DonationsByUserIdDonationQuery,
 } from '../../gql/graphql';
 import { BsPiggyBank } from 'react-icons/bs';
 import {
@@ -43,9 +43,10 @@ const GET_TOTAL_DONATIONS = gql`
 `;
 
 const GET_DONATIONS_BY_USER = gql`
-  query DonationsByUserId {
+  query DonationsByUserIdDonation {
     donationsByUserId {
       amount
+      date
     }
   }
 `;
@@ -84,9 +85,11 @@ const Donation = () => {
     CreateDonationMutation,
     CreateDonationMutationVariables
   >(CREATE_DONATION);
+
   const { data: donationData, refetch: refetchLatestContributors } =
     useQuery<DonationsQuery>(GET_DONATIONS);
-  const { data: donationDataId } = useQuery<DonationsByUserIdQuery>(
+
+  const { data: donationDataId } = useQuery<DonationsByUserIdDonationQuery>(
     GET_DONATIONS_BY_USER
   );
   const { data: totalDonations, refetch: refetchTotalDonations } =
@@ -99,13 +102,9 @@ const Donation = () => {
     }
   }, [createDonationData, refetchLatestContributors, refetchTotalDonations]);
 
-  let responseDate = moment(createDonationData?.createDonation.date).format(
-    'DD/MM/YYYY'
-  );
-
   return (
     <div className="h-[110vh] overflow-y-scroll">
-      <Title title='Donation' subtitle='Soutenez Wild Carbon !' />
+      <Title title="Donation" subtitle="Soutenez Wild Carbon !" />
       <div className="flex items-center flex-col text-[#484B8A] font-bold mt-6 text-[20px]">
         <h3>Total de la cagnotte en cours : </h3>
         <p>{totalDonations?.getTotalDonations.toFixed(2)}€</p>
@@ -114,7 +113,9 @@ const Donation = () => {
       <div className="w-full flex flex-col md:flex-row justify-center">
         <div className="flex flex-col w-full items-between">
           <div className="flex items-center flex-col text-[#609f39] font-bold">
-            <h2 className="text-[20px] sm:text-[30px]">Je participe à hauteur de :</h2>
+            <h2 className="text-[20px] sm:text-[30px]">
+              Je participe à hauteur de :
+            </h2>
             <div className="flex justify-center text-[35px]">
               <input
                 type="text"
@@ -159,59 +160,65 @@ const Donation = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w1/2 md:items-center"><div>
-          <h4 className="ml-5 text-[#609f39] font-semibold mb-[10px] sm:text-[30px] sm:mb-[20px]">
-            Derniers contributeurs :
-          </h4>
-          <p className="ml-5 flex justify-around text-white sm:text-[20px]">
-            {donationData?.donations.slice(-5).map((donation, index) => (
-              <span key={index} className='bg-[#484B8A] p-1 rounded-md'>{donation.amount}€</span>
-            ))}
-          </p>
-          <button
-            type="button"
-            onClick={openModal}
-            className="ml-5 text-[#609f39] font-semibold  flex items-center mt-[20px] sm:mt-[40px] sm:text-[20px]"
-          >
-            Historique de vos donations :
-            {!showModal && (
-              <BsFillArrowDownCircleFill
-                style={{
-                  fontSize: '22px',
-                  color: '#609f39',
-                  marginLeft: '10px',
-                }}
-              />
-            )}
-          </button>
+        <div className="flex flex-col w-full md:w1/2 md:items-center">
+          <div>
+            <h4 className="ml-5 text-[#609f39] font-semibold mb-[10px] sm:text-[30px] sm:mb-[20px]">
+              Derniers contributeurs :
+            </h4>
+            <p className="ml-5 flex justify-around text-white sm:text-[20px]">
+              {donationData?.donations.slice(-5).map((donation, index) => (
+                <span key={index} className="bg-[#484B8A] p-1 rounded-md">
+                  {donation.amount}€
+                </span>
+              ))}
+            </p>
+            <button
+              type="button"
+              onClick={openModal}
+              className="ml-5 text-[#609f39] font-semibold  flex items-center mt-[20px] sm:mt-[40px] sm:text-[20px]"
+            >
+              Historique de vos donations :
+              {!showModal && (
+                <BsFillArrowDownCircleFill
+                  style={{
+                    fontSize: '22px',
+                    color: '#609f39',
+                    marginLeft: '10px',
+                  }}
+                />
+              )}
+            </button>
 
-          {showModal && (
-            <div>
-              <span onClick={() => setShowModal(false)}>
-                <div className=" ml-5 mt-[5px] mb-[10px]">
-                  <BsFillArrowUpCircleFill
-                    style={{
-                      fontSize: '22px',
-                      color: '#609f39',
-                    }}
-                  />
-                </div>
-              </span>
-              <div className="ml-5 text-[#609f39] font-semibold flex flex-col leading-7">
-                {donationDataId?.donationsByUserId.map((donationsId, index) => (
-                  <div key={index} className="flex items-center">
-                    <BsPiggyBank
-                      style={{ marginRight: '10px', fontSize: '20px' }}
+            {showModal && (
+              <div>
+                <span onClick={() => setShowModal(false)}>
+                  <div className=" ml-5 mt-[5px] mb-[10px]">
+                    <BsFillArrowUpCircleFill
+                      style={{
+                        fontSize: '22px',
+                        color: '#609f39',
+                      }}
                     />
-                    <span >
-                      {donationsId.amount}€ le {responseDate}
-                    </span>
                   </div>
-                ))}
+                </span>
+                <div className="ml-5 text-[#609f39] font-semibold flex flex-col leading-7">
+                  {donationDataId?.donationsByUserId.map(
+                    (donationsId, index) => (
+                      <div key={index} className="flex items-center">
+                        <BsPiggyBank
+                          style={{ marginRight: '10px', fontSize: '20px' }}
+                        />
+                        <span>
+                          {donationsId.amount}€ le{' '}
+                          {moment(donationsId.date).format('DD/MM/YYYY')}
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ const GET_DONATIONS_BY_USER = gql`
 `;
 
 const MY_PROFILE = gql`
-  query MyProfile {
+  query MyProfileDashboard {
     myProfile {
       firstName
       lastName
@@ -29,15 +29,11 @@ const Dashboard = () => {
 
   const { data: profilData } = useQuery<MyProfileQueryQuery>(MY_PROFILE);
 
-
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    refetch()
-
-
-  }, [profilData, refetch])
-
+    refetch();
+  }, [profilData, refetch]);
 
   useEffect(() => {
     if (donationById) {
@@ -47,10 +43,13 @@ const Dashboard = () => {
       );
       setTotalAmount(totalAmounts);
       refetch();
-    } else {
-      console.log('No data available.');
     }
   }, [donationById, refetch]);
+
+  function capitalizeFirstNameLetter(firstName: any) {
+    if (!firstName) return '';
+    return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  }
 
   return (
     <>
@@ -61,7 +60,8 @@ const Dashboard = () => {
 
       <div className="flex justify-around mt-6 ">
         <p className="font-bold">
-          {profilData?.myProfile.firstName} {profilData?.myProfile.lastName}
+          {capitalizeFirstNameLetter(profilData?.myProfile.firstName)}{' '}
+          {profilData?.myProfile.lastName.toUpperCase()}{' '}
         </p>
         <p className="font-bold">Donation: {totalAmount.toFixed(2)}€</p>
       </div>

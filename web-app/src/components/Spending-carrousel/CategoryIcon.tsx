@@ -5,39 +5,19 @@ import { IoMdBus } from 'react-icons/io';
 
 const CategoryIcon = ({ categoryName }: { categoryName: string }) => {
   if (categoryName === 'Train') {
-    return (
-      <p>
-        <MdTrain className="w-8 h-8" />
-      </p>
-    );
+    return <MdTrain className="w-8 h-8" />;
   }
   if (categoryName === 'Voiture') {
-    return (
-      <p>
-        <AiFillCar className="w-8 h-8" />
-      </p>
-    );
+    return <AiFillCar className="w-8 h-8" />;
   }
   if (categoryName === 'Avion') {
-    return (
-      <p>
-        <MdAirplanemodeActive className="w-8 h-8" />
-      </p>
-    );
+    return <MdAirplanemodeActive className="w-8 h-8" />;
   }
   if (categoryName === 'Bus') {
-    return (
-      <p>
-        <IoMdBus className="w-8 h-8" />
-      </p>
-    );
+    return <IoMdBus className="w-8 h-8" />;
   }
   if (categoryName === 'Multimédia') {
-    return (
-      <p>
-        <MdConnectedTv className="w-8 h-8" />
-      </p>
-    );
+    return <MdConnectedTv className="w-8 h-8" />;
   }
   return null;
 };
