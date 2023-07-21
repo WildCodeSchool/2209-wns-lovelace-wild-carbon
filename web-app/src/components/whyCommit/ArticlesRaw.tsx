@@ -47,19 +47,19 @@ const ArticlesRaw = () => {
               <div className="text-[12px]">{c.description}</div>
             </div>
           ))}
-          <Link to={'/register'}>
-            <div className="flex justify-center ">
-              <button className="bg-[#484B8A] hover:bg-[#31335e] duration-300 ease-in-out	 text-[#fff] text-[22px] font-bold rounded-lg w-[75%] py-[10px] mt-5">
-                S'engager
-              </button>
-            </div>
-          </Link>
         </div>
       ) : (
-        <div className="flex justify-center font-bold text-[#484B8A]">
+        <div className="flex justify-center font-bold text-[#484B8A] md:text-[20px]">
           Il n'y a pas d'article pour le moment !
         </div>
       )}
+      <Link to={'/register'}>
+        <div className="flex justify-center ">
+          <button className="bg-[#484B8A] hover:bg-[#31335e] duration-300 ease-in-out	 text-[#fff] text-[22px] font-bold rounded-lg w-[75%] py-[10px] mt-5 md:w-1/4 md:mt-[70px]">
+            S'engager
+          </button>
+        </div>
+      </Link>
 
       <Footer />
     </>

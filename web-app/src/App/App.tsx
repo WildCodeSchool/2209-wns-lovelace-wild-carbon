@@ -153,8 +153,10 @@ function App() {
           />
         </Routes>
       </main>
-      {location.pathname !== REGISTER_PATH &&
-        location.pathname !== SIGN_IN_PATH && <Nav />}
+      {isLogged &&
+        location.pathname !== REGISTER_PATH &&
+        location.pathname !== SIGN_IN_PATH &&
+        location.pathname !== WHYCOMMIT_PATH && <Nav />}
       <ToastContainer
         position="bottom-right"
         autoClose={3000}
@@ -167,8 +169,6 @@ function App() {
         pauseOnHover
         style={{ marginBottom: '80px' }}
       />
-      {location.pathname !== REGISTER_PATH &&
-        location.pathname !== WHYCOMMIT_PATH && <Nav />}{' '}
     </>
   );
 }

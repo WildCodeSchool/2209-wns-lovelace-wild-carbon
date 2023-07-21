@@ -54,16 +54,18 @@ const Navigation = () => {
                 onClick={() => setActive(i)}
               >
                 <span
-                  className={`text-[30px] cursor-pointer duration-500 flex justify-center ${i === active && '-mt-4 '
-                    }`}
+                  className={`text-[30px] cursor-pointer duration-500 flex justify-center ${
+                    i === active && '-mt-4 '
+                  }`}
                 >
                   {menu.icon}
                 </span>
                 <span
-                  className={` ${active === i
-                    ? 'translate-y-1 duration-700 opacity-100 text-white'
-                    : 'opacity-0 translate-y-10  '
-                    } `}
+                  className={` ${
+                    active === i
+                      ? 'translate-y-1 duration-700 opacity-100 text-white'
+                      : 'opacity-0 translate-y-10  '
+                  } `}
                 >
                   {menu.name}
                 </span>
