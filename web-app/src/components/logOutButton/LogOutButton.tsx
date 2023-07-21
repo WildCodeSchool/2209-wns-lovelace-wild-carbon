@@ -37,7 +37,7 @@ const LogOutButton = ({
   const handleDisconnect = async (user: any) => {
     await signOut({
       variables: {
-        signOutId: userData.myProfile.id,
+        signOutId: userData?.myProfile.id,
       },
     });
     setIsLogged(false);

@@ -77,6 +77,7 @@ function App() {
       </div>
       {!isLogged &&
         location.pathname !== '/signin' &&
+        location.pathname !== '/whyCommit' &&
         location.pathname !== '/register' && (
           <div className="text-center flex flex-col items-center justify-center mt-[100px]">
             <img alt="Interdit" src={Interdit} width={500} />
