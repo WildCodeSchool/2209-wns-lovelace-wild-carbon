@@ -32,6 +32,10 @@ const Dashboard = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
+    refetch();
+  }, [profilData, refetch]);
+
+  useEffect(() => {
     if (donationById) {
       const totalAmounts = donationById.donationsByUserId.reduce(
         (acc, donation) => acc + donation.amount,

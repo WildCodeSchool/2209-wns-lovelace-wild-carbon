@@ -1,18 +1,21 @@
-import CarbonSpending from '../../components/carbon-spending/CarbonSpending';
+import CarbonSpendingComponents from '../../components/carbon-spending/CarbonSpending';
+
 import Title from '../../components/Title';
 
-function carbonSpending() {
+function CarbonSpending() {
   return (
     <>
-      <div className="bg-[#fefaea] mt-[50px] mb-[100px]">
-        <Title
-          title={'Ma depense carbone'}
-          subtitle={'Entrez une dépense (en deux clics)'}
-        />
-        <CarbonSpending />
+      <Title
+        title={'Ma depense carbone'}
+        subtitle={'Entrez une dépense (en deux clics)'}
+      />
+      <div className="bg-[#fefaea]md:h-[100vh] mt-[50px]  mb-[100px]">
+
+        <CarbonSpendingComponents />
+
       </div>
     </>
   );
 }
 
-export default carbonSpending;
+export default CarbonSpending;

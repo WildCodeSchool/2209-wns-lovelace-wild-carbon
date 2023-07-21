@@ -19,12 +19,12 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 import { MyProfileQuery } from '../gql/graphql';
-import CarbonSpending from '../components/carbon-spending/CarbonSpending';
 import { useState } from 'react';
 import Protected from '../pages/alreadyLog/Protected';
 import LogOutButton from '../components/logOutButton/LogOutButton';
 import Friendhsip from '../pages/friendship/Friendship';
 import Interdit from '../Assets/interdit.png';
+import CarbonSpending from '../pages/carbon-spending/carbonSpending';
 
 function App() {
   const MY_PROFILE = gql`
@@ -50,7 +50,10 @@ function App() {
     },
   });
 
+
+
   const location = useLocation();
+
   return (
     <>
       <Header />
@@ -73,7 +76,7 @@ function App() {
           </nav>
         )}
       </div>
-      {isLogged === false &&
+      {!isLogged &&
         location.pathname !== '/signin' &&
         location.pathname !== '/register' && (
           <div className="text-center flex flex-col items-center justify-center mt-[100px]">
@@ -141,7 +144,7 @@ function App() {
               </Protected>
             }
           />
-          <Route path={SIGN_IN_PATH} element={<SignIn onSuccess={refetch} />} />
+          <Route path={SIGN_IN_PATH} element={<SignIn setIsLogged={setIsLogged} onSuccess={refetch} />} />
         </Routes>
       </main>
       {location.pathname !== REGISTER_PATH &&

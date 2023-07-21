@@ -38,7 +38,7 @@ export const CREATE_SPENDING = gql`
   }
 `;
 
-function CarbonSpending() {
+function CarbonSpendingComponents() {
   const [selectedIcon, setSelectedIcon] = useState<number>(0);
   const [unit, setUnit] = useState<number>(0);
   const [date, setDate] = useState<string>('');
@@ -81,8 +81,6 @@ function CarbonSpending() {
     }
   };
 
-  // console.log(date, categoryName);
-
   const weightCalculation =
     selectedIcon === 1
       ? unit * 0.3
@@ -105,7 +103,7 @@ function CarbonSpending() {
           event.preventDefault();
           await submit();
         }}
-        className="flex flex-col items-center md:h-[100vh]"
+        className="flex flex-col items-center"
         data-testid="formCreateSpending"
       >
         <div className="flex flex-col w-3/4 mt-[30px] items-center">
@@ -196,4 +194,4 @@ function CarbonSpending() {
   );
 }
 
-export default CarbonSpending;
+export default CarbonSpendingComponents;
