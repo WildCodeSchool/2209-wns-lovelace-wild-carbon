@@ -54,6 +54,7 @@ const GET_DONATIONS_BY_USER = gql`
 const Donation = () => {
   const [selectedAmount, setSelectedAmount] = useState<string>('5');
   const [showModal, setShowModal] = useState<boolean>(false);
+
   const handleButtonClick = (amountToAdd: number) => {
     setSelectedAmount(amountToAdd.toString());
   };
@@ -79,6 +80,15 @@ const Donation = () => {
 
   const openModal = () => {
     setShowModal(true);
+  };
+
+  const handleInputChange = (e: { target: { value: any } }) => {
+    const inputRegex = /^[1-9]+$/;
+    const inputValue = e.target.value;
+
+    if (inputRegex.test(inputValue) || inputValue === '') {
+      setSelectedAmount(inputValue);
+    }
   };
 
   const [createDonation, { data: createDonationData }] = useMutation<
@@ -121,7 +131,7 @@ const Donation = () => {
                 type="text"
                 value={selectedAmount}
                 placeholder="5"
-                onChange={(e) => setSelectedAmount(e.target.value)}
+                onChange={handleInputChange}
                 className="border-none bg-transparent w-[70px] text-center"
               />
               <span>€</span>
