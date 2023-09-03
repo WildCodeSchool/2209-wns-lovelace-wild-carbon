@@ -16,7 +16,9 @@ const GRAPHQL_API_URL = Constants?.expoConfig?.extra?.GRAPHQL_API_URL;
 const client = new ApolloClient({
   uri: GRAPHQL_API_URL,
   cache: new InMemoryCache(),
-  headers: { Cookie: 'sessionId=9b3de0f52dbcd117f4ee6c1a971537ed' },
+  headers: {
+    Cookie: 'sessionId=c4595343a98904785a9e98c4990698c7',
+  },
 });
 
 export default function App() {
